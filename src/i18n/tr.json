@@ -7,24 +7,24 @@
     "privacy": "Gizlilik"
   },
   "footer": {
-  "tagline": "Regüle edilmiş sektörler için araştırma temelli yapay zekâ yönetişimi.",
+  "tagline": "Regüle edilmiş sektörler için araştırma temelli yapay zeka yönetişimi.",
   "rights": "Tüm Hakları Saklıdır"
   },
   "cta": {
-  "title": "Yapay Zekâ Yönetişimi Çerçevenizi Güçlendirmeye Hazır mısınız?",
-  "description": "İster düzenleyici denetimlere hazırlanıyor olun ister yüksek riskli yapay zekâ sistemleri tasarlıyor olun, TrustAI ortamınıza özel, yapılandırılmış ve araştırma odaklı çözümler sunar.",
+  "title": "Yapay Zeka Yönetişimi Çerçevenizi Güçlendirmeye Hazır mısınız?",
+  "description": "İster düzenleyici denetimlere hazırlanıyor olun ister yüksek riskli yapay zeka sistemleri tasarlıyor olun, TrustAI ortamınıza özel, yapılandırılmış ve araştırma odaklı çözümler sunar.",
   "contact": "Bizimle İletişime Geçin",
   "research": "Araştırmalarımızı Keşfedin"
   },
   "researchHero": {
-  "label": "Araştırma Odaklı Yapay Zekâ Yönetişimi",
-  "title": "Yüksek Riskli Modeller için Yapay Zekâ Yönetişimi ve Açıklanabilirlik",
+  "label": "Araştırma Odaklı Yapay Zeka Yönetişimi",
+  "title": "Yüksek Riskli Modeller için Yapay Zeka Yönetişimi ve Açıklanabilirlik",
   "description": "Regüle edilmiş sektörlerde model şeffaflığını, izlenebilirliğini ve denetim hazırlığını artıran araştırma temelli çözümler geliştiriyoruz.",
   "button": "Araştırmalarımızı Keşfedin"
   },
   "whatWeDo": {
     "label": "Ne Yapıyoruz?",
-    "title": "Regüle edilmiş sektörler için yapılandırılmış yapay zekâ yönetişimi ve açıklanabilirlik çözümleri sunuyoruz.",
+    "title": "Regüle edilmiş sektörler için yapılandırılmış yapay zeka yönetişimi ve açıklanabilirlik çözümleri sunuyoruz.",
     "explainability": {
       "title": "Açıklanabilirlik",
       "description": "Denetim ve düzenleyici incelemeler için model kararlarına yönelik yorumlanabilir içgörüler üretir."
@@ -35,7 +35,7 @@
     },
     "workflows": {
       "title": "Yönetişim İş Akışları",
-      "description": "Yüksek riskli yapay zekâ sistemleri için yapılandırılmış onay süreçleri ve dokümantasyon sağlar."
+      "description": "Yüksek riskli yapay zeka sistemleri için yapılandırılmış onay süreçleri ve dokümantasyon sağlar."
     },
     "audit": {
       "title": "Denetim Hazırlığı",
@@ -44,22 +44,22 @@
   },
   "about": {
     "label": "Hakkımızda",
-    "title": "Regüle Edilmiş Sektörler için Araştırma Temelli Yapay Zekâ Yönetişimi",
-    "intro": "TrustAI, Türkiye merkezli, yapay zekâ sistemlerinin açıklanabilirliği, güvenilirliği ve yönetişimine odaklanan araştırma temelli bir girişimdir.",
+    "title": "Regüle Edilmiş Sektörler için Araştırma Temelli Yapay Zeka Yönetişimi",
+    "intro": "TrustAI, Türkiye merkezli, yapay zeka sistemlerinin açıklanabilirliği, güvenilirliği ve yönetişimine odaklanan araştırma temelli bir girişimdir.",
     "sectorFocus": "Mevcut çözümlerimiz, düzenleyici denetimin, şeffaflığın ve risk yönetiminin kritik öneme sahip olduğu finans sektörüne yöneliktir. Yakın gelecekte sağlık, üretim ve kamu hizmetleri gibi yüksek etki alanlarına açılmayı planlıyoruz.",
     "approach": "En güncel araştırmaları; kredi riski skorlama, dolandırıcılık tespiti ve uyum izleme gibi yüksek riskli finansal uygulamalar için şeffaf, adil ve denetime hazır pratik çözümlere dönüştürüyoruz.",
-    "team": "Ekibimiz, açıklanabilir yapay zekâ (XAI), optimizasyon, model riski ve MLOps alanlarında uzmanlardan oluşur; akademik derinliği sektör deneyimiyle birleştiriyoruz. Güven, uyum ve dayanıklılığı önemseyen finans kuruluşlarıyla iş birliği yapıyoruz."
+    "team": "Ekibimiz, açıklanabilir yapay zeka (XAI), optimizasyon, model riski ve MLOps alanlarında uzmanlardan oluşur; akademik derinliği sektör deneyimiyle birleştiriyoruz. Güven, uyum ve dayanıklılığı önemseyen finans kuruluşlarıyla iş birliği yapıyoruz."
   },
     "why": {
     "label": "Neden TrustAI?",
-    "title": "Yüksek riskli yapay zekâ sistemleri için akademik titizliği pratik yönetişim çözümleriyle birleştiriyoruz.",
+    "title": "Yüksek riskli yapay zeka sistemleri için akademik titizliği pratik yönetişim çözümleriyle birleştiriyoruz.",
     "foundation": {
       "title": "Araştırma Temelli Altyapı",
-      "description": "Açıklanabilir ve güvenilir yapay zekâ alanında hakemli akademik araştırmalara ve uzmanlığa dayanır."
+      "description": "Açıklanabilir ve güvenilir yapay zeka alanında hakemli akademik araştırmalara ve uzmanlığa dayanır."
     },
     "sector": {
       "title": "Finans Sektörüne Odaklılık",
-      "description": "Regüle edilmiş finansal ortamlar ve yüksek etki alanlı yapay zekâ uygulamaları için özel olarak tasarlanmıştır."
+      "description": "Regüle edilmiş finansal ortamlar ve yüksek etki alanlı yapay zeka uygulamaları için özel olarak tasarlanmıştır."
     },
     "governance": {
       "title": "Tasarımdan İtibaren Yönetişim",
@@ -72,46 +72,46 @@
   },
   "researchSection": {
     "title": "Araştırmalar ve Yayınlar",
-    "subtitle": "Güvenilir ve Açıklanabilir Yapay Zekâ Alanında İleri Araştırmalar",
+    "subtitle": "Güvenilir ve Açıklanabilir Yapay Zeka Alanında İleri Araştırmalar",
     "publicationBtn":"Araştırmayi gör"
   },
     "researchReferences": {
     "title": "Araştırmalar ve Referanslar",
-    "description": "TrustAI, akademik titizliği pratik yönetişim çözümleriyle birleştirir. Aşağıda, güvenilir ve açıklanabilir yapay zekâ alanındaki katkılarımızı yansıtan yayınlar ve referanslar yer almaktadır.",
+    "description": "TrustAI, akademik titizliği pratik yönetişim çözümleriyle birleştirir. Aşağıda, güvenilir ve açıklanabilir yapay zeka alanındaki katkılarımızı yansıtan yayınlar ve referanslar yer almaktadır.",
     "subtitle":"Yayınlarımız"
   },
     "aboutPage": {
     "hero": {
       "title": "TrustAI Hakkında",
-      "subtitle": "TrustAI, yüksek riskli ortamlarda şeffaf, denetlenebilir ve regülasyona hazır yapay zekâ sistemleri geliştirmek amacıyla kurulmuş araştırma odaklı bir yapay zekâ yönetişimi ve güvenilir yapay zekâ girişimidir."
+      "subtitle": "TrustAI, yüksek riskli ortamlarda şeffaf, denetlenebilir ve regülasyona hazır yapay zeka sistemleri geliştirmek amacıyla kurulmuş araştırma odaklı bir yapay zeka yönetişimi ve güvenilir yapay zeka girişimidir."
     },
     "whoWeAre": {
       "title": "Biz Kimiz",
-      "p1": "TrustAI, Türkiye merkezli, akademik kurumlar ve sektör paydaşlarıyla iş birliği içinde geliştirilmiş araştırma temelli bir yapay zekâ yönetişimi girişimidir.",
-      "p2": "Özellikle finans gibi regüle edilmiş sektörlerde yüksek riskli yapay zekâ sistemleri için açıklanabilirlik, adillik, dayanıklılık ve düzenleyici uyuma odaklanıyoruz.",
-      "p3": "TrustAI, akademik titizliği üretime hazır mühendislikle birleştirerek tasarımdan itibaren şeffaf, denetlenebilir ve uyumlu yapay zekâ sistemleri sunar."
+      "p1": "TrustAI, Türkiye merkezli, akademik kurumlar ve sektör paydaşlarıyla iş birliği içinde geliştirilmiş araştırma temelli bir yapay zeka yönetişimi girişimidir.",
+      "p2": "Özellikle finans gibi regüle edilmiş sektörlerde yüksek riskli yapay zeka sistemleri için açıklanabilirlik, adillik, dayanıklılık ve düzenleyici uyuma odaklanıyoruz.",
+      "p3": "TrustAI, akademik titizliği üretime hazır mühendislikle birleştirerek tasarımdan itibaren şeffaf, denetlenebilir ve uyumlu yapay zeka sistemleri sunar."
     },
     "vision": {
       "title": "Vizyonumuz",
-      "description": "Kuruluşların yüksek riskli yapay zekâ sistemlerini güven, şeffaflık ve düzenleyici uyum çerçevesinde devreye alabilmelerini sağlayan güvenilir ve denetlenebilir bir yapay zekâ platformu olmak."
+      "description": "Kuruluşların yüksek riskli yapay zeka sistemlerini güven, şeffaflık ve düzenleyici uyum çerçevesinde devreye alabilmelerini sağlayan güvenilir ve denetlenebilir bir yapay zeka platformu olmak."
     },
     "mission": {
       "title": "Misyonumuz",
       "items": [
-        "Yapay zekâ sistemlerini açıklanabilir ve hesap verebilir hale getirmek",
+        "Yapay zeka sistemlerini açıklanabilir ve hesap verebilir hale getirmek",
         "Regüle edilmiş ortamlarda model riskini azaltmak",
-        "EU AI Act, ISO/IEC 42001 ve ulusal yapay zekâ düzenlemeleriyle uyumu desteklemek",
-        "Güçlü bilimsel temellere dayalı yerli yapay zekâ teknolojileri geliştirmek"
+        "EU AI Act, ISO/IEC 42001 ve ulusal yapay zeka düzenlemeleriyle uyumu desteklemek",
+        "Güçlü bilimsel temellere dayalı yerli yapay zeka teknolojileri geliştirmek"
       ]
     },
     "difference": {
       "title": "TrustAI’ı Farklı Kılan Nedir",
       "p1": "TrustAI yalnızca bir araç seti değildir. Entegre bir yönetişim çerçevesidir. Parçalı çözümlerin aksine; açıklanabilirlik, adillik analizi, dayanıklılık izleme, otomatik uyum raporlama ve MLOps uyumlu mimariyi tek bir yapı altında birleştirir.",
-      "p2": "Bu bütünleşik yaklaşım, yapay zekâ sistemlerinin başlangıçtan itibaren uyumlu, şeffaf ve operasyonel olarak dayanıklı şekilde tasarlanmasını sağlar."
+      "p2": "Bu bütünleşik yaklaşım, yapay zeka sistemlerinin başlangıçtan itibaren uyumlu, şeffaf ve operasyonel olarak dayanıklı şekilde tasarlanmasını sağlar."
     },
     "platform": {
       "title": "TrustAI-X Platformu",
-      "description": "TrustAI-X, yüksek riskli ortamlar için tasarlanmış güvenilir ve denetlenebilir bir yapay zekâ altyapısıdır."
+      "description": "TrustAI-X, yüksek riskli ortamlar için tasarlanmış güvenilir ve denetlenebilir bir yapay zeka altyapısıdır."
     },
     "coreCapabilities": {
       "title": "Temel Yetenekler"
@@ -122,47 +122,47 @@
     "scientific": {
       "title": "Bilimsel Temel",
       "p1": "TrustAI hakemli akademik araştırmalar üzerine inşa edilmiştir. Çalışmalarımız arasında MCO 2025’te sunulan ve Springer tarafından yayımlanan DiCE-Extended yer almaktadır.",
-      "p2": "Araştırmalarımız karşı-olgusal açıklamaların istikrarı, çok kriterli optimizasyon ve dayanıklı ve adil yapay zekâ karar sistemleri üzerine odaklanmaktadır.",
+      "p2": "Araştırmalarımız karşı-olgusal açıklamaların istikrarı, çok kriterli optimizasyon ve dayanıklı ve adil yapay zeka karar sistemleri üzerine odaklanmaktadır.",
       "p3": "TrustAI, SCI/SSCI indeksli yayınlar, patent başvuruları, lisansüstü araştırma çıktıları ve açık kaynak katkıları üretmeyi hedefler."
     },
     "regulatory": {
       "title": "Düzenleyici Uyum",
       "p1": "TrustAI, başlangıçtan itibaren düzenleyici uyum gözetilerek tasarlanmıştır. Çerçevemiz aşağıdaki düzenlemelerle uyumludur:",
-      "p2": "Yaklaşımımız, yapay zekâ sistemlerinin dokümante edilmiş, izlenebilir, denetlenebilir ve sürekli izlenen bir yapıda olmasını sağlar."
+      "p2": "Yaklaşımımız, yapay zeka sistemlerinin dokümante edilmiş, izlenebilir, denetlenebilir ve sürekli izlenen bir yapıda olmasını sağlar."
     },
     "sectors": {
       "title": "Hedef Sektörler",
-      "p1": "TrustAI; bankacılık, kredi skorlama, dolandırıcılık tespiti, finansal risk modelleme ve regüle edilmiş kurumsal yapay zekâ ortamlarında yüksek riskli sistemlere odaklanır.",
+      "p1": "TrustAI; bankacılık, kredi skorlama, dolandırıcılık tespiti, finansal risk modelleme ve regüle edilmiş kurumsal yapay zeka ortamlarında yüksek riskli sistemlere odaklanır.",
       "p2": "Platform; üretim, kamu ve sağlık gibi yapılandırılmış yönetişim çerçeveleri gerektiren alanlara da uyarlanabilir."
     },
     "team": {
       "title": "Ekibimiz",
-      "p1": "TrustAI; akademik liderlik, yapay zekâ ve veri bilimi araştırmacıları, yazılım mühendisleri, MLOps uzmanları, düzenleyici uzmanlar ve sektör danışmanlarını bir araya getiren çok disiplinli bir yapıya sahiptir.",
+      "p1": "TrustAI; akademik liderlik, yapay zeka ve veri bilimi araştırmacıları, yazılım mühendisleri, MLOps uzmanları, düzenleyici uzmanlar ve sektör danışmanlarını bir araya getiren çok disiplinli bir yapıya sahiptir.",
       "p2": "Çalışmalarımız üniversite Ar-Ge altyapısı ve araştırma ağları tarafından desteklenmekte olup bilimsel derinlik ve uygulamalı inovasyon sağlamaktadır."
     },
     "closing": {
-      "statement": "Yapay zekâ açıklanabilir olmalıdır. Ölçülebilir olmalıdır. Hesap verebilir olmalıdır. Bilimsel temellere dayanmalı ve regülasyona hazır olmalıdır.",
+      "statement": "Yapay zeka açıklanabilir olmalıdır. Ölçülebilir olmalıdır. Hesap verebilir olmalıdır. Bilimsel temellere dayanmalı ve regülasyona hazır olmalıdır.",
       "highlight": "TrustAI bunu mümkün kılmak için vardır."
     }
   },
   "aiGovernancePage": {
     "hero": {
-      "title": "Yapay Zekâ Yönetişimi: Önemi ve Etkisi",
-      "subtitle": "Yapay zekâ sistemleri; finans, sağlık, kamu hizmetleri ve kritik altyapı gibi alanlarda yüksek etkili kararları giderek daha fazla şekillendirmektedir. Yapay zekâ verimlilik, ölçeklenebilirlik ve öngörü gücü sağlarken; önyargı, şeffaflık eksikliği, hesap verebilirlik boşlukları ve düzenleyici riskler gibi sorunları da beraberinde getirebilir."
+      "title": "Yapay Zeka Yönetişimi: Önemi ve Etkisi",
+      "subtitle": "Yapay zeka sistemleri; finans, sağlık, kamu hizmetleri ve kritik altyapı gibi alanlarda yüksek etkili kararları giderek daha fazla şekillendirmektedir. Yapay zeka verimlilik, ölçeklenebilirlik ve öngörü gücü sağlarken; önyargı, şeffaflık eksikliği, hesap verebilirlik boşlukları ve düzenleyici riskler gibi sorunları da beraberinde getirebilir."
     },
 
     "whatIs": {
-      "title": "Yapay Zekâ Yönetişimi Nedir?",
-      "p1": "Yapay zekâ yönetişimi; yapay zekâ sistemlerinin tasarımı, devreye alınması, izlenmesi ve gerektiğinde düzeltilmesini yönlendiren ilke, politika, operasyonel kontrol ve hesap verebilirlik mekanizmalarından oluşan yapılandırılmış bir çerçevedir.",
-      "p2": "Bu yaklaşım, yapay zekâ sistemlerinin hukuki standartlara, etik normlara, kurumsal hedeflere ve uzun vadeli toplumsal çıkarlara uygun şekilde çalışmasını sağlar. Yönetişim tek seferlik bir uyum kontrolü değil, yaşam döngüsü boyunca devam eden bir disiplindir."
+      "title": "Yapay Zeka Yönetişimi Nedir?",
+      "p1": "Yapay zeka yönetişimi; yapay zeka sistemlerinin tasarımı, devreye alınması, izlenmesi ve gerektiğinde düzeltilmesini yönlendiren ilke, politika, operasyonel kontrol ve hesap verebilirlik mekanizmalarından oluşan yapılandırılmış bir çerçevedir.",
+      "p2": "Bu yaklaşım, yapay zeka sistemlerinin hukuki standartlara, etik normlara, kurumsal hedeflere ve uzun vadeli toplumsal çıkarlara uygun şekilde çalışmasını sağlar. Yönetişim tek seferlik bir uyum kontrolü değil, yaşam döngüsü boyunca devam eden bir disiplindir."
     },
 
     "whyItMatters": {
-      "title": "Neden Yapay Zekâ Yönetişimi Önemlidir?",
+      "title": "Neden Yapay Zeka Yönetişimi Önemlidir?",
       "cards": {
         "bias": {
           "title": "Önyargı ve Ayrımcılık Riskleri",
-          "description": "Yönetişim olmadan yapay zekâ modelleri tarihsel önyargıları pekiştirebilir; bu da adil olmayan kredi kararlarına, dışlayıcı sonuçlara veya sistematik ayrımcılığa yol açabilir."
+          "description": "Yönetişim olmadan yapay zeka modelleri tarihsel önyargıları pekiştirebilir; bu da adil olmayan kredi kararlarına, dışlayıcı sonuçlara veya sistematik ayrımcılığa yol açabilir."
         },
         "opacity": {
           "title": "Şeffaflık ve Açıklanabilirlik Eksiklikleri",
@@ -170,7 +170,7 @@
         },
         "regulatory": {
           "title": "Düzenleyici ve Hukuki Riskler",
-          "description": "Düzenleyici ortamlar, yapay zekâ sistemleri için izlenebilirlik, denetlenebilirlik ve belgelenmiş risk kontrolleri talep etmektedir."
+          "description": "Düzenleyici ortamlar, yapay zeka sistemleri için izlenebilirlik, denetlenebilirlik ve belgelenmiş risk kontrolleri talep etmektedir."
         }
       }
     },
@@ -192,14 +192,14 @@
     },
 
     "financialSector": {
-      "title": "Finans Sektöründe Yapay Zekâ Yönetişimi",
-      "p1": "Regüle edilmiş finansal ortamlarda yapay zekâ sistemleri; kredi risk skorlama, dolandırıcılık tespiti, kara para aklama ile mücadele süreçleri ve uyum izleme alanlarında kullanılmaktadır. Bu uygulamalar bireyleri, kurumları ve piyasaları doğrudan etkiler.",
+      "title": "Finans Sektöründe Yapay Zeka Yönetişimi",
+      "p1": "Regüle edilmiş finansal ortamlarda yapay zeka sistemleri; kredi risk skorlama, dolandırıcılık tespiti, kara para aklama ile mücadele süreçleri ve uyum izleme alanlarında kullanılmaktadır. Bu uygulamalar bireyleri, kurumları ve piyasaları doğrudan etkiler.",
       "p2": "Finansal düzenleyiciler; kanıtlanabilir şeffaflık, adillik ve model doğrulama standartları talep etmektedir. Yönetişim çerçeveleri, modellerin savunulabilir ve denetime hazır kalmasını sağlayan yapılandırılmış iş akışları, dokümantasyon ve raporlama mekanizmaları sunar."
     },
 
     "closing": {
       "title": "Yapılandırılmış Yönetişim ile Güven İnşa Etmek",
-      "description": "Etkili yapay zekâ yönetişimi, gelişmiş makine öğrenimi sistemlerini şeffaf, hesap verebilir ve dayanıklı karar altyapılarına dönüştürür. Akademik araştırma ile düzenleyici uygulamayı birleştirerek inovasyonun adalet, hukuk ve kamu güvenini zedelememesini sağlar.",
+      "description": "Etkili yapay zeka yönetişimi, gelişmiş makine öğrenimi sistemlerini şeffaf, hesap verebilir ve dayanıklı karar altyapılarına dönüştürür. Akademik araştırma ile düzenleyici uygulamayı birleştirerek inovasyonun adalet, hukuk ve kamu güvenini zedelememesini sağlar.",
       "cta": "TrustAI ile İletişime Geçin"
     }
   },

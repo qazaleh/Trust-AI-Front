@@ -25,18 +25,24 @@ watch(
 </script>
 
 <template>
-  <Navbar v-if="showNavbar" />
+  <Navbar v-if="showNavbar" class="nunito"/>
 
-  <main class="page">
+  <main class="page nunito">
     <router-view />
   </main>
 
-  <Footer v-if="showFooter" />
+  <Footer v-if="showFooter" class="nunito"/>
 </template>
 
 <style>
 .page {
   padding-top: 100px;
   background: #f8f9fc;
+}
+.nunito {
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
 }
 </style>
