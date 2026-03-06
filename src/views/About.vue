@@ -150,7 +150,8 @@
       </p>
     </section>
 
-    
+
+  
     <!-- TEAM -->
     <!-- <section class="about-section">
       <h2> {{ $t('aboutPage.team.title') }}</h2>
