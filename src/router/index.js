@@ -7,6 +7,7 @@ import Privacy from '../views/Privacy.vue'
 import Research from '../views/Research.vue'
 import About from '../views/About.vue'
 import LocaleLayout from '../views/LocaleLayout.vue'
+import OurTeams from '../views/OurTeams.vue'
 
 const supportedLocales = ['en', 'tr']
 
@@ -38,6 +39,11 @@ const routes = [
       { 
         path: 'aboutUs', 
         component: About, 
+        meta: { hideNavbar: false, hideFooter: true } 
+      },
+       { 
+        path: 'our-teams', 
+        component: OurTeams, 
         meta: { hideNavbar: false, hideFooter: true } 
       }
     ]

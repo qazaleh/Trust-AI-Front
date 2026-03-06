@@ -151,7 +151,7 @@
     </section>
 
     <!-- TEAM -->
-    <section class="about-section">
+    <!-- <section class="about-section">
       <h2> {{ $t('aboutPage.team.title') }}</h2>
 
       <p>
@@ -161,7 +161,7 @@
       <p>
         {{ $t('aboutPage.team.p2') }}
       </p>
-    </section>
+    </section> -->
 
     <!-- CLOSING -->
     <section class="about-section center closing-block">

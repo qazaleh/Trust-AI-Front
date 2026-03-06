@@ -101,7 +101,9 @@ const switchLanguage = () => {
         <router-link :to="`/${locale}/privacy`">
             {{ $t('navbar.privacy') }}
         </router-link>
-
+        <router-link :to="`/${locale}/our-teams`">
+            {{ $t('navbar.ourTeams') }}
+        </router-link>
        
       </nav>
       <div class="menu-toggle" @click="isOpen = !isOpen">
@@ -133,6 +135,9 @@ const switchLanguage = () => {
 
         <router-link :to="`/${locale}/privacy`" @click="isOpen = false">
              {{ $t('navbar.privacy') }}
+        </router-link>
+        <router-link :to="`/${locale}/our-teams`" @click="isOpen = false">
+             {{ $t('navbar.ourTeams') }}
         </router-link>
     </div>
     </transition> 

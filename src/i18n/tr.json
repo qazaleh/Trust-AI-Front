@@ -4,7 +4,8 @@
     "about": "Hakkımızda",
     "governance": "Yapay Zeka Yönetişimi",
     "research": "Araştırma",
-    "privacy": "Gizlilik"
+    "privacy": "Gizlilik",
+    "ourTeams": "Ekibimiz"
   },
   "footer": {
   "tagline": "Regüle edilmiş sektörler için araştırma temelli yapay zeka yönetişimi.",
@@ -253,7 +254,7 @@
         "İşleme faaliyetleri için verdiğiniz onayı geri çekmek",
         "Verilerinizin silinmesini talep etmek"
       ],
-        "contact": "Bu haklardan herhangi birini kullanmak için info@trustai.com.tr adresinden bizimle iletişime geçebilirsiniz."
+        "contact": "Bu haklardan herhangi birini kullanmak için info{'@'}trustai.com.tr adresinden bizimle iletişime geçebilirsiniz."
     },
 
     "cookies": {
@@ -264,6 +265,12 @@
     "updates": {
       "title": "7. Politika Güncellemeleri",
       "description": "Bu politika; hukuki, teknolojik veya ticari değişiklikleri yansıtmak amacıyla güncellenebilir. Güncellenmiş sürümler, revize edilmiş yürürlük tarihi ile birlikte bu sayfada yayımlanacaktır."
+    }
+  },
+  "ourTeamsPage": {
+    "hero": {
+      "title": "Ekibimiz",
+      "subtitle": "TrustAI’ın arkasındaki çok disiplinli ekibi tanıyın; akademik titizliği yapay zeka yönetişimi ve güvenilir yapay zeka konusundaki pratik uzmanlıkla birleştiriyoruz."
     }
   }
 }
