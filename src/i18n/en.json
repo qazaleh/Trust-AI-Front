@@ -5,7 +5,7 @@
     "governance": "AI Governance",
     "research": "Research",
     "privacy": "Privacy",
-    "ourTeams": "Our Teams"
+    "ourTeams": "Our Team"
   },
   "footer": {
   "tagline": "Research-based AI governance for regulated environments.",
@@ -292,7 +292,7 @@
   },
     "ourTeamsPage": {
       "hero": {
-        "title": "Our Teams",
+        "title": "Team",
         "subtitle": "Meet the multidisciplinary team behind TrustAI, combining academic rigor with practical expertise in AI governance and trustworthy artificial intelligence."
       }
     }
