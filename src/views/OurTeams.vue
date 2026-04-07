@@ -8,15 +8,27 @@ const teamMembers = [
   },
    {
     name: "Qazaleh Afrough",
-    role: "AI & Software Engineer | UI/Web Developer",
+    role: "Researcher, AI & Software Engineer | UI/Web Developer",
     bio: "Designing and building intelligent, reliable, and user-friendly web and software solutions",
     image: "/QA.JPG"
   },
   {
     name: "Faramarz Mehrnami",
-    role: "AI & Software Engineer | Backend Developer",
+    role: "Researcher, AI & Software Engineer | Backend Developer",
     bio: "Designing and building intelligent, reliable, and robust backend and software solutions",
     image: "/FM.JPG"
+  },
+  {
+    name: "Dilara Karaduman",
+    role: "Researcher | AI Governance & Ethics",
+    bio: "Researching algorithmic fairness, AI governance, and the ethical dimensions of high-risk AI systems at TrustAI, with a background in psychology and Human-Centered AI.",
+    image: "/DL.JPG"
+  },
+  {
+    name: "Nisa Yegin",
+    role: "Intern",
+    bio: "I am an Artificial Intelligence Engineering student and a Trust AI intern, focusing on AI safety, AI governance, and responsible AI systems.",
+    image: "/NY.JPG"
   },
 
 ]
