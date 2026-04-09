@@ -1,295 +1,144 @@
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
-import { Menu, X, Globe } from 'lucide-vue-next'
-import { useRoute, useRouter } from 'vue-router'
+import { computed, ref, watch } from 'vue'
+import { Globe, Mail, Menu } from 'lucide-vue-next'
+import { RouterLink, useRoute } from 'vue-router'
 
+import { Button } from '@/components/ui/button'
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import { navigationItems, normalizeLocale } from '@/lib/site'
+import { cn } from '@/lib/utils'
 
-import { useI18n } from 'vue-i18n'
-import { watch } from 'vue'
-
-
-/* ---------- STATE ---------- */
-const isOpen = ref(false)
-const isScrolled = ref(false)
-
-/* ---------- SCROLL EFFECT ---------- */
-const handleScroll = () => {
-  isScrolled.value = window.scrollY > 50
-}
-
-onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
-})
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
-})
-
-/* ---------- ROUTE / LOCALE ---------- */
 const route = useRoute()
-const router = useRouter()
+const mobileOpen = ref(false)
 
-// reactive locale
-const locale = computed(() => route.params.locale || 'en')
+const locale = computed(() => normalizeLocale(route.params.locale))
+const currentRouteName = computed(() =>
+  typeof route.name === 'string' ? route.name : 'home'
+)
+const nextLocale = computed(() => (locale.value === 'en' ? 'tr' : 'en'))
+const switchLocaleTarget = computed(() => ({
+  name: currentRouteName.value,
+  params: {
+    ...route.params,
+    locale: nextLocale.value,
+  },
+}))
 
-const { locale: i18nLocale } = useI18n()
-
-watch(locale, (newLocale) => {
-  i18nLocale.value = newLocale
-}, { immediate: true })
-
-
-// determine next language
-const nextLocale = computed(() =>
-  locale.value === 'en' ? 'tr' : 'en'
+watch(
+  () => route.fullPath,
+  () => {
+    mobileOpen.value = false
+  }
 )
 
-// language switch
-const switchLanguage = () => {
-  // const currentPath = route.fullPath
-
-  // // replace current locale with next locale
-  // const newPath = currentPath.replace(
-  //   `/${locale.value}`,
-  //   `/${nextLocale.value}`
-  // )
-
-  // router.push(newPath)
-
-
-  const segments = route.fullPath.split('/')
-  segments[1] = nextLocale.value
-  router.push(segments.join('/'))
+function isActive(name) {
+  return route.name === name
 }
 </script>
 
 <template>
-  <header :class="['navbar', { shrink: isScrolled }]">
+  <header class="fixed inset-x-0 top-0 z-50 px-4 pb-3 pt-[17px] sm:px-6 lg:px-8">
+    <div
+      class="mx-auto flex max-w-7xl items-center justify-between rounded-full bg-linear-to-l from-[#4d7984] via-primary to-[#213d48] px-3 py-2 shadow-[0_20px_44px_-28px_rgba(48,86,105,0.4)]"
+    >
+      <RouterLink
+        :to="{ name: 'home', params: { locale } }"
+        class="inline-flex h-12 shrink-0 items-center rounded-full px-1"
+      >
+        <img
+          src="/logo.png"
+          alt="TrustAI"
+          class="pointer-events-none block h-8 w-auto rounded-full object-contain drop-shadow-[0_6px_18px_rgba(44,104,123,0.12)]"
+        />
+      </RouterLink>
 
-    <div class="nav-inner">
-
-      <!-- Logo -->
-       <div style="align-items: center;display: flex;">
-         <div class="logo">
-            <img src="/logo.png" alt="TrustAI" />
-        </div>
-         <div class="lang-toggle" @click="switchLanguage">
-            <Globe size="20" />
-             <span class="lang-code">
-                {{ locale.toUpperCase() }}
-             </span>
-        </div>
-       </div>
-
-     
-    
-
-      <!-- Desktop Menu -->
-      <nav class="nav-links">
-        <router-link :to="`/${locale}`">
-            {{ $t('navbar.home') }}
-        </router-link>
-        <router-link :to="`/${locale}/aboutUs`">
-            {{ $t('navbar.about') }}
-        </router-link>
-        <router-link :to="`/${locale}/ai-governance`">
-            {{ $t('navbar.governance') }}
-        </router-link>
-        <router-link :to="`/${locale}/research`">
-            {{ $t('navbar.research') }}
-        </router-link>
-        <router-link :to="`/${locale}/privacy`">
-            {{ $t('navbar.privacy') }}
-        </router-link>
-        <router-link :to="`/${locale}/our-teams`">
-            {{ $t('navbar.ourTeams') }}
-        </router-link>
-       
+      <nav class="hidden items-center gap-1 lg:flex">
+        <RouterLink
+          v-for="item in navigationItems"
+          :key="item.name"
+          :to="{ name: item.name, params: { locale } }"
+          :class="
+            cn(
+              'inline-flex h-10 items-center rounded-full px-4 text-sm font-semibold transition',
+              isActive(item.name)
+                ? 'bg-white text-primary shadow-[0_10px_26px_-20px_rgba(17,33,43,0.22)]'
+                : 'text-white/84 hover:bg-white/12 hover:text-white'
+            )
+          "
+        >
+          {{ $t(item.labelKey) }}
+        </RouterLink>
       </nav>
-      <div class="menu-toggle" @click="isOpen = !isOpen">
-        <Menu v-if="!isOpen" size="26" />
-        <X v-else size="26" />
+
+      <div class="hidden items-center gap-2 lg:flex">
+        <Button as-child variant="outline" class="rounded-full border-white/18 bg-white/8 text-white hover:bg-white/14 hover:text-white">
+          <RouterLink :to="switchLocaleTarget">
+            <Globe class="size-4" />
+            {{ locale.toUpperCase() }}
+          </RouterLink>
+        </Button>
+
+        <Button as-child class="rounded-full bg-accent text-accent-foreground shadow-[0_18px_32px_-22px_rgba(245,186,66,0.6)] hover:bg-accent/90">
+          <a href="mailto:info@trustai.com.tr">
+            <Mail class="size-4" />
+            {{ $t('cta.contact') }}
+          </a>
+        </Button>
       </div>
-      
 
+      <div class="flex items-center gap-2 lg:hidden">
+        <Button as-child variant="outline" size="icon" class="rounded-full border-white/18 bg-white/8 text-white hover:bg-white/14 hover:text-white">
+          <RouterLink :to="switchLocaleTarget" :aria-label="$t('common.switchLanguage', { locale: nextLocale.toUpperCase() })">
+            <Globe class="size-4" />
+          </RouterLink>
+        </Button>
+
+        <Sheet v-model:open="mobileOpen">
+          <SheetTrigger as-child>
+            <Button variant="outline" size="icon" class="rounded-full border-white/18 bg-white/8 text-white hover:bg-white/14 hover:text-white">
+              <Menu class="size-4" />
+            </Button>
+          </SheetTrigger>
+
+          <SheetContent side="right" class="w-[310px] border-l border-border bg-card px-0">
+            <div class="flex h-full flex-col">
+              <div class="px-6 pb-4 pt-8">
+                <p class="text-sm font-black uppercase tracking-[0.28em] text-primary">TrustAI</p>
+                <p class="mt-2 text-sm leading-7 text-muted-foreground">
+                  {{ $t('footer.tagline') }}
+                </p>
+              </div>
+
+              <div class="flex flex-1 flex-col gap-1 px-3">
+                <RouterLink
+                  v-for="item in navigationItems"
+                  :key="item.name"
+                  :to="{ name: item.name, params: { locale } }"
+                  :class="
+                    cn(
+                      'rounded-2xl px-4 py-3 text-sm font-semibold transition',
+                      isActive(item.name)
+                        ? 'bg-white text-primary'
+                        : 'text-muted-foreground hover:bg-white hover:text-foreground'
+                    )
+                  "
+                >
+                  {{ $t(item.labelKey) }}
+                </RouterLink>
+              </div>
+
+              <div class="space-y-3 border-t border-border px-6 py-6">
+                <Button as-child class="w-full rounded-full bg-accent text-accent-foreground shadow-[0_18px_32px_-22px_rgba(245,186,66,0.6)] hover:bg-accent/90">
+                  <a href="mailto:info@trustai.com.tr">
+                    <Mail class="size-4" />
+                    {{ $t('cta.contact') }}
+                  </a>
+                </Button>
+              </div>
+            </div>
+          </SheetContent>
+        </Sheet>
+      </div>
     </div>
-
-    <!-- Mobile Menu -->
-    <transition name="mobile-slide">
-    <div v-if="isOpen" class="mobile-menu">
-        <router-link :to="`/${locale}`" @click="isOpen = false">
-            {{ $t('navbar.home') }}
-        </router-link>
-
-        <router-link :to="`/${locale}/aboutUs`" @click="isOpen = false">
-            {{ $t('navbar.about') }}
-        </router-link>
-
-        <router-link :to="`/${locale}/ai-governance`" @click="isOpen = false">
-            {{ $t('navbar.governance') }}
-        </router-link>
-
-        <router-link :to="`/${locale}/research`" @click="isOpen = false">
-            {{ $t('navbar.research') }}
-        </router-link>
-
-        <router-link :to="`/${locale}/privacy`" @click="isOpen = false">
-             {{ $t('navbar.privacy') }}
-        </router-link>
-        <router-link :to="`/${locale}/our-teams`" @click="isOpen = false">
-             {{ $t('navbar.ourTeams') }}
-        </router-link>
-    </div>
-    </transition> 
-
   </header>
 </template>
-
-
-<style scoped>
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  background: rgba(236,189,90,1.0);
-  transition: all 0.3s ease;
-}
-
-.navbar.shrink {
-  background: #f8f9fc;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-}
-
-.nav-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 18px 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* LOGO */
-.logo img {
-  height: 42px;
-  transition: 0.3s ease;
-}
-
-.navbar.shrink .logo img {
-  height: 32px;
-}
-
-/* DESKTOP MENU */
-.nav-links {
-  display: flex;
-  gap: 28px;
-  font-weight: 600;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: #142355;
-  transition: 0.2s;
-}
-
-.nav-links a:hover {
-  color: white;
-}
-
-.navbar.shrink .nav-links a:hover {
-  color: rgba(236,189,90,1.0);
-}
-
-/* MENU BUTTON */
-.menu-toggle {
-  display: none;
-  cursor: pointer;
-  color: #142355;
-}
-
-/* MOBILE */
-@media (max-width: 992px) {
-
-  .nav-links {
-    display: none;
-  }
-
-  .menu-toggle {
-    display: block;
-  }
-
-  .mobile-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background: white;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    gap: 18px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-  }
-
-  .mobile-menu a {
-    text-decoration: none;
-    color: #142355;
-    font-weight: 600;
-  }
-}
-
-
-/* TRANSITION */
-.mobile-slide-enter-active,
-.mobile-slide-leave-active {
-  transition: all 0.3s ease;
-  overflow: hidden;
-}
-
-.mobile-slide-enter-from,
-.mobile-slide-leave-to {
-  opacity: 0;
-  transform: translateY(-10px);
-}
-
-.mobile-slide-enter-to,
-.mobile-slide-leave-from {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-
-.lang-toggle {
-  margin-left: 20px;
-  cursor: pointer;
-  color: #142355;
-  display: flex;
-  align-items: center;
-}
-
-.lang-toggle:hover {
-  opacity: 0.7;
-}
-
-.lang-toggle-mobile {
-  cursor: pointer;
-  color: #142355;
-  /* margin-top: -5 px; */
-  margin-right:20px;
-
-}
-.lang-toggle {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-}
-
-.lang-code {
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
-</style>

@@ -1,48 +1,16 @@
 <script setup>
-import { useRoute } from 'vue-router'
-import { computed, watch } from 'vue'
-import { useI18n } from 'vue-i18n'
-
-import Navbar from './components/Navbar.vue'
 import Footer from './components/Footer.vue'
-
-const route = useRoute()
-const { locale } = useI18n()
-
-// Keep your existing meta logic
-const showNavbar = computed(() => !route.meta.hideNavbar)
-const showFooter = computed(() => !route.meta.hideFooter)
-
-// Ensure locale updates if route param changes
-watch(
-  () => route.params.locale,
-  (newLocale) => {
-    if (newLocale) {
-      locale.value = newLocale
-    }
-  }
-)
+import Navbar from './components/Navbar.vue'
 </script>
 
 <template>
-  <Navbar v-if="showNavbar" class="nunito"/>
+  <div class="min-h-screen">
+    <Navbar />
 
-  <main class="page nunito">
-    <router-view />
-  </main>
+    <main class="px-4 pb-16 pt-32 sm:px-6 sm:pt-36 lg:px-8">
+      <router-view />
+    </main>
 
-  <Footer v-if="showFooter" class="nunito"/>
+    <Footer />
+  </div>
 </template>
-
-<style>
-.page {
-  padding-top: 100px;
-  background: #f8f9fc;
-}
-.nunito {
-  font-family: "Nunito", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-}
-</style>

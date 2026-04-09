@@ -1,205 +1,188 @@
 <script setup>
+import { computed } from 'vue'
+import { ArrowRight, ShieldCheck } from 'lucide-vue-next'
+import { useI18n } from 'vue-i18n'
+
+import PageHero from '@/components/PageHero.vue'
+import { Button } from '@/components/ui/button'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+
+const { tm } = useI18n()
+
+const collectedItems = computed(() => {
+  const items = tm('privacyPage.whatWeCollect.items')
+  return [
+    {
+      title: items['contact-title'],
+      description: items.contact,
+    },
+    {
+      title: items['usage-title'],
+      description: items.usage,
+    },
+    {
+      title: items['communications-title'],
+      description: items.communications,
+    },
+  ]
+})
+
+const usageItems = computed(() => {
+  const value = tm('privacyPage.howWeUse.items')
+  return Array.isArray(value) ? value : []
+})
+
+const rightsItems = computed(() => {
+  const value = tm('privacyPage.yourRights.items')
+  return Array.isArray(value) ? value : []
+})
 </script>
 
 <template>
-  <div class="privacy-page">
+  <div class="page-shell">
+    <PageHero
+      :label="$t('privacyPage.hero.label')"
+      :title="$t('privacyPage.hero.title')"
+      :description="$t('privacyPage.hero.subtitle')"
+    >
+      <template #actions>
+        <Button as-child size="lg" class="rounded-full shadow-sm">
+          <a href="mailto:info@trustai.com.tr">
+            {{ $t('cta.contact') }}
+            <ArrowRight class="size-4" />
+          </a>
+        </Button>
+      </template>
 
-    <!-- HERO -->
-    <section class="privacy-hero">
-      <div class="hero-inner">
-        <h1> {{ $t('privacyPage.hero.title') }}</h1>
-        <p>
-         {{ $t('privacyPage.hero.subtitle') }}
-        </p>
-      </div>
-    </section>
+      <!-- <template #aside>
+        <div class="space-y-3">
+          <div class="flex size-11 items-center justify-center rounded-2xl bg-secondary text-primary">
+            <ShieldCheck class="size-5" />
+          </div>
+          <p class="text-sm leading-7 text-muted-foreground">
+            TrustAI applies privacy and transparency principles to every interaction with the site.
+          </p>
+        </div>
+      </template> -->
+    </PageHero>
 
-    <!-- GENERAL PRINCIPLES -->
-    <section class="privacy-section">
-      <h2> {{ $t('privacyPage.generalPrinciples.title') }}</h2>
-      <p>
-        {{ $t('privacyPage.generalPrinciples.p1') }}
-      </p>
+    <Card class="content-card">
+      <CardHeader>
+        <CardTitle class="content-title">{{ $t('privacyPage.policyDetails') }}</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Accordion type="single" collapsible default-value="general">
+          <AccordionItem value="general" class="border-border/70">
+            <AccordionTrigger class="text-base font-medium text-muted-foreground">
+              {{ $t('privacyPage.generalPrinciples.title') }}
+            </AccordionTrigger>
+            <AccordionContent class="space-y-4 content-copy">
+              <p>{{ $t('privacyPage.generalPrinciples.p1') }}</p>
+              <p>{{ $t('privacyPage.generalPrinciples.p2') }}</p>
+            </AccordionContent>
+          </AccordionItem>
 
-      <p>
-       {{ $t('privacyPage.generalPrinciples.p2') }}
-      </p>
-    </section>
+          <AccordionItem value="collect" class="border-border/70">
+            <AccordionTrigger class="text-base font-medium text-muted-foreground">
+              {{ $t('privacyPage.whatWeCollect.title') }}
+            </AccordionTrigger>
+            <AccordionContent class="space-y-4 content-copy">
+              <p>{{ $t('privacyPage.whatWeCollect.intro') }}</p>
+              <div class="grid gap-3">
+                <div
+                  v-for="item in collectedItems"
+                  :key="item.title"
+                  class="content-chip"
+                >
+                  <p class="font-semibold text-muted-foreground">{{ item.title }}</p>
+                  <p class="mt-1">{{ item.description }}</p>
+                </div>
+              </div>
+            </AccordionContent>
+          </AccordionItem>
 
-    <!-- WHAT WE COLLECT -->
-    <section class="privacy-section light">
-      <h2> {{ $t('privacyPage.whatWeCollect.title') }}</h2>
+          <AccordionItem value="usage" class="border-border/70">
+            <AccordionTrigger class="text-base font-medium text-muted-foreground">
+              {{ $t('privacyPage.howWeUse.title') }}
+            </AccordionTrigger>
+            <AccordionContent class="space-y-4 content-copy">
+              <p>{{ $t('privacyPage.howWeUse.intro') }}</p>
+              <ul class="space-y-3">
+                <li
+                  v-for="item in usageItems"
+                  :key="item"
+                  class="content-chip"
+                >
+                  {{ item }}
+                </li>
+              </ul>
+            </AccordionContent>
+          </AccordionItem>
 
-      <p>
-       {{ $t('privacyPage.whatWeCollect.intro') }}
-      </p>
+          <AccordionItem value="security" class="border-border/70">
+            <AccordionTrigger class="text-base font-medium text-muted-foreground">
+              {{ $t('privacyPage.dataSecurity.title') }}
+            </AccordionTrigger>
+            <AccordionContent class="content-copy">
+              {{ $t('privacyPage.dataSecurity.description') }}
+            </AccordionContent>
+          </AccordionItem>
 
-      <ul>
-        <li><strong>{{ $t('privacyPage.whatWeCollect.items.contact-title') }}</strong>{{ $t('privacyPage.whatWeCollect.items.contact') }}</li>
-        <li><strong>{{ $t('privacyPage.whatWeCollect.items.usage-title') }}</strong> {{ $t('privacyPage.whatWeCollect.items.usage') }}</li>
-        <li><strong>{{ $t('privacyPage.whatWeCollect.items.communications-title') }}</strong> {{ $t('privacyPage.whatWeCollect.items.communications') }}</li>
-      </ul>
-    </section>
+          <AccordionItem value="rights" class="border-border/70">
+            <AccordionTrigger class="text-base font-medium text-muted-foreground">
+              {{ $t('privacyPage.yourRights.title') }}
+            </AccordionTrigger>
+            <AccordionContent class="space-y-4 content-copy">
+              <p>{{ $t('privacyPage.yourRights.intro') }}</p>
+              <ul class="space-y-3">
+                <li
+                  v-for="item in rightsItems"
+                  :key="item"
+                  class="content-chip"
+                >
+                  {{ item }}
+                </li>
+              </ul>
+            </AccordionContent>
+          </AccordionItem>
 
-    <!-- HOW WE USE IT -->
-    <section class="privacy-section">
-      <h2>{{ $t('privacyPage.howWeUse.title') }}</h2>
+          <AccordionItem value="cookies" class="border-border/70">
+            <AccordionTrigger class="text-base font-medium text-muted-foreground">
+              {{ $t('privacyPage.cookies.title') }}
+            </AccordionTrigger>
+            <AccordionContent class="content-copy">
+              {{ $t('privacyPage.cookies.description') }}
+            </AccordionContent>
+          </AccordionItem>
 
-      <p>
-       {{ $t('privacyPage.howWeUse.intro') }}
-      </p>
+          <AccordionItem value="updates" class="border-border/70">
+            <AccordionTrigger class="text-base font-medium text-muted-foreground">
+              {{ $t('privacyPage.updates.title') }}
+            </AccordionTrigger>
+            <AccordionContent class="content-copy">
+              {{ $t('privacyPage.updates.description') }}
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      </CardContent>
+    </Card>
 
-      <ul>
-        <li>{{ $t('privacyPage.howWeUse.items[0]') }}</li>
-        <li>{{ $t('privacyPage.howWeUse.items[1]') }}</li>
-        <li>{{ $t('privacyPage.howWeUse.items[2]') }}</li>
-        <li>{{ $t('privacyPage.howWeUse.items[3]') }}</li>
-      </ul>
-    </section>
-
-    <!-- DATA SECURITY -->
-    <section class="privacy-section light">
-      <h2>{{ $t('privacyPage.dataSecurity.title') }}</h2>
-
-      <p>
-        {{ $t('privacyPage.dataSecurity.description') }}
-      </p>
-    </section>
-
-    <!-- YOUR RIGHTS -->
-    <section class="privacy-section">
-      <h2>{{ $t('privacyPage.yourRights.title') }}</h2>
-
-      <p>
-        {{ $t('privacyPage.yourRights.intro') }}
-      </p>
-
-      <ul>
-        <li>{{ $t('privacyPage.yourRights.items[0]') }}</li>
-        <li>{{ $t('privacyPage.yourRights.items[1]') }}</li>
-        <li>{{ $t('privacyPage.yourRights.items[2]') }}</li>
-        <li>{{ $t('privacyPage.yourRights.items[3]') }}</li>
-      </ul>
-
-      <p>
-        {{ $t('privacyPage.yourRights.contact') }}
-        <a href="mailto:info@trustai.com.tr">info@trustai.com.tr</a>.
-      </p>
-    </section>
-
-    <!-- COOKIES -->
-    <section class="privacy-section light">
-      <h2>{{ $t('privacyPage.cookies.title') }}</h2>
-
-      <p>
-        {{ $t('privacyPage.cookies.description') }}
-      </p>
-    </section>
-
-    <!-- POLICY UPDATES -->
-    <section class="privacy-section">
-      <h2>{{ $t('privacyPage.updates.title') }}</h2>
-
-      <p>
-        {{ $t('privacyPage.updates.description') }}
-      </p>
-    </section>
-
+    <Card class="content-card bg-secondary/70">
+      <CardHeader>
+        <CardTitle class="content-title">{{ $t('privacyPage.contactTitle') }}</CardTitle>
+      </CardHeader>
+      <CardContent class="content-copy flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <p>{{ $t('privacyPage.contactDescription') }}</p>
+        <Button as-child class="rounded-full shadow-sm">
+          <a href="mailto:info@trustai.com.tr">info@trustai.com.tr</a>
+        </Button>
+      </CardContent>
+    </Card>
   </div>
 </template>
-
-<style scoped>
-section {
-  padding: 30px 8%;
-}
-.privacy-page {
-  background: white;
-}
-
-/* HERO */
-.privacy-hero {
-  background: #142355;
-  color: white;
-  text-align: center;
-  height: 200px;
-}
-@media (max-width: 1024px) {
-  .privacy-hero  {
-   height:250px;
-  }
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-  .privacy-hero {
-     height:250px;
-  }
-}
-.privacy-hero h1 {
-  font-size: 42px;
-  font-weight: 700;
-  margin-bottom: 16px;
-}
-
-.privacy-hero p {
-  font-size: 18px;
-  max-width: 860px;
-  margin: auto;
-  line-height: 1.6;
-}
-
-/* SECTIONS */
-.privacy-section {
-  /* padding: 90px 80px; */
-  max-width: 960px;
-  margin: auto;
-}
-
-.privacy-section h2 {
-  font-size: 30px;
-  font-weight: 700;
-  color: #142355;
-  margin-bottom: 18px;
-}
-
-.privacy-section p,
-.privacy-section ul {
-  font-size: 15px;
-  color: #333;
-  line-height: 1.7;
-  margin-bottom: 16px;
-}
-
-.privacy-section ul {
-  padding-left: 20px;
-}
-
-.privacy-section ul li {
-  margin-bottom: 10px;
-}
-
-.privacy-section.light {
-  background: #f9fafc;
-}
-
-/* CENTER CTA */
-.privacy-section.center {
-  text-align: center;
-}
-
-.privacy-cta {
-  display: inline-block;
-  padding: 14px 32px;
-  margin-top: 18px;
-  background: rgba(236,189,90,1.0);
-  color: #142355;
-  font-weight: 600;
-  border-radius: 28px;
-  text-decoration: none;
-  transition: 0.3s ease;
-}
-
-.privacy-cta:hover {
-  opacity: 0.85;
-}
-</style>
