@@ -21,9 +21,54 @@
   },
   "cta": {
   "title": "Ready to Strengthen Your AI Governance Framework?",
-  "description": "Whether you are preparing for regulatory review or designing high-risk AI systems, TrustAI provides structured, research-driven solutions tailored to your environment.",
+  "description": "We help your teams turn AI governance questions into clear controls, evidence, and operating practices.",
   "contact": "Contact Us",
   "research": "Explore Our Research"
+  },
+  "contactForm": {
+    "eyebrow": "Contact Request",
+    "title": "Tell us what you need",
+    "description": "Share a few details and we will use this as the starting point for the right conversation.",
+    "close": "Close contact form",
+    "cancel": "Close",
+    "fields": {
+      "name": "Full name",
+      "email": "Email",
+      "organization": "Organization",
+      "topic": "Topic",
+      "message": "Message"
+    },
+    "placeholders": {
+      "name": "Your name",
+      "email": "name@company.com",
+      "organization": "Company or institution",
+      "message": "Tell us what you are working on or what kind of support you need."
+    },
+    "topics": [
+      {
+        "value": "governance",
+        "label": "AI governance or compliance"
+      },
+      {
+        "value": "products",
+        "label": "TrustAI products"
+      },
+      {
+        "value": "research",
+        "label": "Research collaboration"
+      },
+      {
+        "value": "other",
+        "label": "Other"
+      }
+    ],
+    "button": {
+      "idle": "Send request",
+      "sending": "Preparing your note...",
+      "sent": "Request ready"
+    },
+    "toastTitle": "Request received",
+    "toastDescription": "Thank you. We will review your message and get back to you soon."
   },
   "researchHero": {
   "label": "Research-Driven AI Governance",
@@ -34,7 +79,8 @@
   "homePage": {
     "focusAreas": "Focus Areas",
     "servicesDescription": "Composable governance workflows built for transparent, regulated AI delivery.",
-    "researchDescription": "Selected work that informs our platform architecture, governance patterns, and explainability methods."
+    "researchDescription": "Selected work that informs our platform architecture, governance patterns, and explainability methods.",
+    "ctaDescription": "Have a question about TrustAI or our research? We would be happy to hear from you."
   },
   "whatWeDo": {
     "label": "What We Do?",
@@ -59,10 +105,10 @@
   "about": {
     "label": "About Us",
     "title": "Research-Based AI Governance for Regulated Environments",
-    "intro": "TrustAI is a research-based initiative from Türkiye, focused on the explainability, reliability, and governance of artificial intelligence systems.",
+    "intro": "We help organizations apply research-based AI governance from Türkiye to improve explainability, reliability, and oversight.",
     "sectorFocus": "Our current solutions are tailored to the financial sector, where regulatory oversight, transparency, and risk management are of critical importance. In the near future, we plan to expand our services to high-impact domains such as healthcare, manufacturing, and public services.",
     "approach": "We transform the latest research into practical solutions that are transparent, fair, and audit-ready for high-risk financial applications such as credit risk scoring, fraud detection, and compliance monitoring.",
-    "team": "Our team consists of experts in explainable AI (XAI), optimization, model risk, and MLOps; we combine academic depth with industry experience. We collaborate with financial institutions that value trust, compliance, and resilience."
+    "team": "We bring together experts in explainable AI (XAI), optimization, model risk, and MLOps, combining academic depth with industry experience for financial institutions that value trust, compliance, and resilience."
   },
   "why": {
     "label": "Why TrustAI?",
@@ -99,17 +145,17 @@
     "hero": {
       "label": "Research-Led Foundations",
       "title": "About TrustAI",
-      "subtitle": "TrustAI is a research-driven AI governance and trustworthy artificial intelligence initiative, built to enable transparent, auditable, and regulation-ready AI systems in high-risk environments."
+      "subtitle": "TrustAI combines academic rigor with production-ready engineering to help organizations build transparent, auditable, and regulation-ready AI systems in high-risk sectors."
     },
     "whoWeAre": {
       "title": "Who We Are",
-      "p1": "TrustAI is a research-driven AI governance and trustworthy AI initiative based in Türkiye, developed in collaboration with academic institutions and industry partners.",
-      "p2": "We focus on explainability, fairness, robustness, and regulatory compliance for high-risk AI systems — particularly in regulated sectors such as finance.",
-      "p3": "TrustAI combines academic rigor with production-ready engineering to deliver AI systems that are transparent, auditable, and compliant by design."
+      "p1": "We help organizations in Türkiye and regulated markets connect academic AI governance research with practical implementation.",
+      "p2": "We help teams address explainability, fairness, robustness, and regulatory compliance for high-risk AI systems — particularly in regulated sectors such as finance.",
+      "p3": "We combine academic rigor with production-ready engineering to help organizations deliver AI systems that are transparent, auditable, and compliant by design."
     },
     "vision": {
       "title": "Our Vision",
-      "description": "To become a leading platform for trustworthy and auditable artificial intelligence, enabling organizations to deploy high-risk AI systems with confidence, transparency, and regulatory alignment."
+      "description": "To build a Türkiye-based, academically grounded governance platform that helps financial institutions and other regulated sectors deploy high-risk AI systems with transparency, auditability, and confidence."
     },
     "mission": {
       "title": "Our Mission",
@@ -122,12 +168,12 @@
     },
     "difference": {
       "title": "What Makes TrustAI Different",
-      "p1": "TrustAI is not merely a toolkit. It is an integrated governance framework. Unlike fragmented solutions, TrustAI brings together explainability, fairness analysis, robustness monitoring, automated compliance reporting, and MLOps-native architecture — within a unified and structured system.",
-      "p2": "This integration ensures AI systems are designed to be compliant, transparent, and operationally resilient from inception."
+      "p1": "We provide more than a toolkit: an integrated governance framework that brings together explainability, fairness analysis, robustness monitoring, automated compliance reporting, and MLOps-native architecture within a unified and structured system.",
+      "p2": "We ensure AI systems are designed to be compliant, transparent, and operationally resilient from inception."
     },
     "platform": {
       "title": "TrustAI-X Platform",
-      "description": "TrustAI-X is our flagship platform — a trustworthy and auditable artificial intelligence infrastructure designed for high-risk environments."
+      "description": "We provide TrustAI-X as a trustworthy and auditable artificial intelligence infrastructure for high-risk environments."
     },
     "coreCapabilities": {
       "title": "Core Capabilities",
@@ -152,32 +198,31 @@
     },
     "scientific": {
       "title": "Scientific Foundation",
-      "p1": "TrustAI is built on peer-reviewed research. Our work includes DiCE-Extended: A Robust Approach to Counterfactual Explanations, presented at MCO 2025 and published by Springer.",
+      "p1": "We build TrustAI on peer-reviewed research, including DiCE-Extended: A Robust Approach to Counterfactual Explanations, presented at MCO 2025 and published by Springer.",
       "p2": "Our research focuses on the stability of counterfactual explanations, multi-criteria optimization, and robust and fair AI decision systems.",
-      "p3": "TrustAI aims to produce SCI/SSCI indexed publications, patent applications, graduate-level research outputs, and open-source contributions."
+      "p3": "We aim to produce SCI/SSCI indexed publications, patent applications, graduate-level research outputs, and open-source contributions."
     },
     "regulatory": {
       "title": "Regulatory Alignment",
-      "p1": "TrustAI is designed with regulatory compliance embedded from the beginning. Our framework aligns with:",
+      "p1": "We embed regulatory compliance from the beginning and align our framework with:",
       "items": [
         "EU AI Act (2024/1689)",
         "ISO/IEC 42001:2023",
         "ISO/IEC 24029",
         "NIST AI Risk Management Framework",
-        "National AI Strategy (2021–2025)",
-        "KVKK transparency requirements"
+        "National AI Strategy (2021–2025)"
       ],
-      "p2": "Our approach ensures AI systems are documented, traceable, auditable, and continuously monitored."
+      "p2": "We ensure AI systems are documented, traceable, auditable, and continuously monitored."
     },
     "sectors": {
       "title": "Target Sectors",
-      "p1": "TrustAI primarily focuses on high-risk AI systems in banking, credit scoring, fraud detection, financial risk modeling, and regulated enterprise AI environments.",
-      "p2": "The platform is adaptable to manufacturing, public sector, and healthcare domains requiring structured governance frameworks."
+      "p1": "We focus primarily on high-risk AI systems in banking, credit scoring, fraud detection, financial risk modeling, and regulated enterprise AI environments.",
+      "p2": "We help adapt the platform for manufacturing, public sector, and healthcare domains that require structured governance frameworks."
     },
     "team": {
       "title": "Our Team",
-      "p1": "TrustAI operates through a multidisciplinary structure combining academic leadership, AI and data science researchers, software engineers, MLOps specialists, regulatory experts, and industry advisors.",
-      "p2": "Our work is supported by university R&D infrastructure and research networks, ensuring scientific depth and applied innovation."
+      "p1": "We operate through a multidisciplinary structure that combines academic leadership, AI and data science researchers, software engineers, MLOps specialists, regulatory experts, and industry advisors.",
+      "p2": "We work with university R&D infrastructure and research networks to ensure scientific depth and applied innovation."
     },
     "closing": {
       "statement": "AI must be explainable. AI must be measurable. AI must be accountable. AI must be scientifically grounded and regulation-ready.",
@@ -203,7 +248,7 @@
     "hero": {
       "label": "Trust, Risk & Accountability",
       "title": "AI Governance: Importance and Impact",
-      "subtitle": "Artificial intelligence systems increasingly shape high-impact decisions across finance, healthcare, public services, and critical infrastructure. While AI delivers efficiency, scalability, and predictive power, it also introduces risks related to bias, opacity, accountability gaps, and regulatory exposure."
+      "subtitle": "We help organizations design and implement AI governance frameworks for high-impact systems across finance, healthcare, public services, and critical infrastructure, addressing risks related to bias, opacity, accountability, and regulatory exposure."
     },
 
     "whatIs": {
@@ -269,11 +314,19 @@
     "hero": {
       "label": "Policy & Transparency",
       "title": "Privacy Policy",
-      "subtitle": "TrustAI values your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your personal information when you visit and interact with our website."
+      "subtitle": "This notice reflects the current website setup while TrustAI does not run a backend, active contact form storage, cookies, or analytics."
     },
-    "policyDetails": "Policy Details",
-    "contactTitle": "Privacy Contact",
-    "contactDescription": "If you have questions about this policy or your data, contact us directly.",
+    "policyDetails": "Privacy Notice",
+    "noticeTitle": "Website Data Practices",
+    "noticeIntro": "This website is provided for informational purposes. Personal data is not collected or stored through the website itself.",
+    "noticeItems": [
+      "Cookies, advertising trackers, and website analytics tools are not used.",
+      "Contact form submissions are not collected or stored.",
+      "Email inquiries are used only to respond to the sender's request.",
+      "The hosting provider may process basic technical logs for security and site delivery."
+    ],
+    "contactTitle": "Questions",
+    "contactDescription": "If you have questions about this notice, contact us directly.",
 
     "generalPrinciples": {
       "title": "1. General Principles",
@@ -288,9 +341,9 @@
         "contact-title": "Contact Information:",
         "contact": "Email addresses, names, and titles.",
         "usage-title": "Usage Data:",
-        "usage": "Usage Data: Browser type, IP address, pages visited, timestamps.",
+        "usage": "We do not run website analytics. Basic technical logs may be processed by the hosting provider for security and delivery.",
         "communications-title": "Communications:",
-        "communications": "Any message content you send through contact forms."
+        "communications": "Any message content you voluntarily send by email."
       }
     },
 
@@ -299,7 +352,7 @@
       "intro": "We use your information to:",
       "items": [
         "Respond to inquiries and requests",
-        "Provide updates or newsletters if you opt in",
+        "Respond to messages you voluntarily send by email",
         "Improve the functionality and performance of our services",
         "Meet legal or regulatory obligations"
       ]
@@ -324,7 +377,7 @@
 
     "cookies": {
       "title": "6. Cookies & Tracking",
-      "description": "We use cookies and similar technologies to enhance site performance and user experience. You may control cookie settings through your browser preferences. We do not use cookies for advertising tracking."
+      "description": "We do not currently use cookies, advertising trackers, or website analytics tools."
     },
 
     "updates": {
@@ -375,31 +428,29 @@
     "hero": {
       "label": "Governance Product Suite",
       "title": "Platforms For Models, Agents, and AI Oversight",
-      "subtitle": "TrustAI products help organizations govern predictive models and agent-based systems with the same principles: transparency, control, auditability, and operational trust."
+      "subtitle": "We help organizations govern predictive models and agent-based systems with the same principles: transparency, control, auditability, and operational trust."
     },
     "overview": {
       "label": "Product Ecosystem",
       "title": "Two complementary layers for modern AI governance",
-      "description": "TrustAI-X governs machine learning systems across their lifecycle, while TrustAI-UX governs autonomous behavior at runtime. Together they create a complete governance stack for high-risk AI."
+      "description": "We help organizations govern machine learning systems across their lifecycle with TrustAI-X and control autonomous behavior at runtime with TrustAI-UX."
     },
     "trustaiX": {
       "name": "TrustAI-X",
       "category": "AI Governance Platform",
-      "overview": "TrustAI-X is an end-to-end platform for governing machine learning systems. It helps organizations ensure transparency, fairness, robustness, and compliance across the full AI lifecycle.",
+      "overview": "We help teams govern machine learning models with clear controls for transparency, fairness, robustness, and compliance.",
       "whatItDoesTitle": "What It Does",
       "whatItDoes": [
-        "Explains model decisions with SHAP, LIME, and counterfactual methods",
-        "Detects bias and evaluates fairness across outcomes and groups",
-        "Monitors model performance as well as data and model drift",
-        "Generates regulatory documentation aligned with the EU AI Act",
-        "Provides structured audit trails and reporting outputs"
+        "We explain model decisions",
+        "We detect bias and evaluate fairness across outcomes and groups",
+        "We monitor performance, data drift, and model drift",
+        "We provide structured audit trails and reporting outputs"
       ],
       "featuresTitle": "Key Features",
       "features": [
-        "Explainability and interpretability tools",
-        "Bias and fairness analysis",
-        "Drift and performance monitoring",
-        "Automated documentation",
+        "Explainability tools",
+        "Bias and fairness checks",
+        "Drift monitoring",
         "Audit-ready reporting"
       ],
       "deploymentTitle": "Deployment",
@@ -410,31 +461,27 @@
       ],
       "valueTitle": "Value",
       "value": [
-        "Reduces compliance risk",
-        "Improves trust and transparency",
-        "Centralizes AI governance",
-        "Ready for regulated industries"
+        "We reduce compliance risk",
+        "We improve trust and transparency",
+        "We centralize model governance"
       ]
     },
     "trustaiUX": {
       "name": "TrustAI-UX",
       "category": "Agent Governance Layer",
-      "overview": "TrustAI-UX is a control layer for autonomous and agent-based AI systems. It ensures agents act safely, within defined policies, and remain fully auditable.",
+      "overview": "We help teams control autonomous and agent-based AI systems with policy enforcement, monitoring, and audit logs.",
       "whatItDoesTitle": "What It Does",
       "whatItDoes": [
-        "Controls agent permissions and actions",
-        "Monitors behavior in real time",
-        "Enforces governance policies",
-        "Enables human intervention when needed",
-        "Logs every decision for auditability"
+        "We control agent permissions and actions",
+        "We monitor behavior in real time",
+        "We enforce governance policies",
+        "We log decisions for auditability"
       ],
       "featuresTitle": "Key Features",
       "features": [
-        "Policy-based access control",
+        "Policy-based controls",
         "Real-time monitoring",
-        "Zero-trust agent identity",
         "Human-in-the-loop workflows",
-        "Kill switch and override mechanisms",
         "Full audit logs"
       ],
       "compatibilityTitle": "Compatibility",
@@ -446,20 +493,19 @@
       ],
       "valueTitle": "Value",
       "value": [
-        "Prevents unsafe agent behavior",
-        "Enables safe AI automation",
-        "Ensures compliance for agent systems",
-        "Provides full visibility and control"
+        "We prevent unsafe agent behavior",
+        "We ensure compliance for agent systems",
+        "We provide full visibility and control"
       ]
     },
     "ecosystem": {
       "label": "How They Work Together",
       "title": "One stack for lifecycle governance and runtime control",
-      "description": "TrustAI-X explains and evaluates models before and after deployment. TrustAI-UX enforces policy and control over agent behavior during execution. Combined, they form a complete AI governance solution for modern enterprise systems.",
+      "description": "We help teams explain and evaluate models with TrustAI-X before and after deployment, then enforce policy and control agent behavior with TrustAI-UX during execution.",
       "items": [
-        "TrustAI-X explains, evaluates, and documents model behavior",
-        "TrustAI-UX governs agent permissions, actions, and interventions at runtime",
-        "Together they connect model governance with live operational oversight"
+        "We explain, evaluate, and document model behavior with TrustAI-X",
+        "We govern agent permissions, actions, and interventions at runtime with TrustAI-UX",
+        "We connect model governance with live operational oversight"
       ]
     }
   },
@@ -469,91 +515,88 @@
       "title": "Services For Governance, Compliance, and AI Safety",
       "subtitle": "We help organizations design governance frameworks, implement responsible AI controls, and build compliance-ready operating models for high-risk systems."
     },
+    "cta": {
+      "title": "Need Support With Governance, Compliance, or AI Safety?"
+    },
     "overview": {
       "label": "How We Support Teams",
       "title": "From framework design to continuous assurance",
-      "description": "Our services combine governance strategy, technical implementation, and ongoing monitoring so organizations can move from fragmented controls to a structured and defensible AI operating model."
+      "description": "We combine governance strategy, technical implementation, and ongoing monitoring to help organizations move from fragmented controls to a structured and defensible AI operating model."
     },
     "framework": {
       "name": "AI Governance Framework Consulting",
       "category": "Design & Implementation",
-      "overview": "We help organizations design and implement AI governance frameworks tailored to their systems, risks, and regulatory requirements.",
+      "overview": "We help teams design practical AI governance frameworks for their systems, risks, and regulatory requirements.",
       "whatWeDoTitle": "What We Do",
       "whatWeDo": [
-        "Identify AI use cases and risk levels",
-        "Define governance structure and internal policies",
-        "Align with regulations such as the EU AI Act, ISO 42001, and KVKK",
-        "Design workflows for explainability, monitoring, and control",
-        "Support implementation across legal, risk, product, and engineering teams"
+        "We identify AI use cases and risk levels",
+        "We define governance structure and internal policies",
+        "We align workflows with EU AI Act, ISO 42001",
+        "We support implementation across legal, risk, product, and engineering teams"
       ],
       "deliverablesTitle": "Deliverables",
       "deliverables": [
         "Governance framework design",
         "Policy definitions",
         "Risk classification",
-        "Technical architecture",
         "Documentation templates"
       ],
       "valueTitle": "Value",
       "value": [
-        "Clear governance structure",
-        "Faster compliance readiness",
-        "Scalable AI processes",
-        "Reduced operational risk"
+        "We provide clear governance structure",
+        "We accelerate compliance readiness",
+        "We reduce operational risk"
       ]
     },
     "assurance": {
       "name": "Responsible AI Governance, Compliance & AI Safety",
       "category": "Assessment, Implementation & Monitoring",
-      "overview": "We ensure your AI systems are compliant, safe, and continuously monitored. Our approach integrates governance into real operations, not just documentation.",
+      "overview": "We ensure your AI systems are compliant, safe, and continuously monitored in real operations.",
       "whatWeDoTitle": "What We Do",
       "whatWeDo": [
-        "Evaluate current AI systems through gap analysis",
-        "Apply SAFE governance assessment",
-        "Implement explainability, fairness, and monitoring tools",
-        "Prepare audit-ready documentation",
-        "Enable continuous compliance tracking"
+        "We evaluate current AI systems through gap analysis",
+        "We implement explainability, fairness, and monitoring tools",
+        "We prepare audit-ready documentation",
+        "We enable continuous compliance tracking"
       ],
       "capabilitiesTitle": "Core Capabilities",
       "capabilities": [
         "Explainability and transparency",
         "Fairness and bias mitigation",
-        "Robustness and adversarial testing",
         "Drift and performance monitoring",
         "Audit and compliance reporting"
       ],
       "valueTitle": "Value",
       "value": [
-        "Regulatory compliance across EU AI Act, KVKK, and ISO-aligned environments",
-        "Safer and more reliable AI systems",
-        "Continuous governance rather than one-time setup",
-        "Audit-ready outputs at any time"
+        "We support EU AI Act, and ISO-aligned readiness",
+        "We help build safer and more reliable AI systems",
+        "We prepare audit-ready outputs"
       ]
     },
     "process": {
       "label": "Delivery Process",
       "title": "A practical path from discovery to continuous monitoring",
-      "description": "Our engagement model is structured, collaborative, and implementation-focused so governance becomes part of daily operations rather than a disconnected compliance exercise.",
+      "description": "We use a structured, collaborative, and implementation-focused engagement model so governance becomes part of daily operations rather than a disconnected compliance exercise.",
       "steps": [
         {
           "title": "Discovery",
-          "description": "Understand systems, stakeholders, use cases, and risk exposure."
+          "description": "We understand systems, stakeholders, use cases, and risk exposure."
         },
         {
           "title": "Assessment",
-          "description": "Evaluate governance maturity, control gaps, and regulatory readiness."
+          "description": "We evaluate governance maturity, control gaps, and regulatory readiness."
         },
         {
           "title": "Implementation",
-          "description": "Apply governance workflows, technical controls, and reporting structures."
+          "description": "We apply governance workflows, technical controls, and reporting structures."
         },
         {
           "title": "Assurance",
-          "description": "Prepare evidence, documentation, and review-ready outputs."
+          "description": "We prepare evidence, documentation, and review-ready outputs."
         },
         {
           "title": "Monitoring",
-          "description": "Track compliance, performance, and governance signals over time."
+          "description": "We track compliance, performance, and governance signals over time."
         }
       ]
     }

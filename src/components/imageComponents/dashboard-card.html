@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TrustAI – Dashboard Card</title>
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            /* ── Exact website palette ── */
+            --background: #faf7f0;
+            --surface: #fffdf8;
+            --primary: #305669;
+            --primary-dark: #1e3d4f;
+            --primary-mid: #3d6b82;
+            --primary-light: #6b9eb4;
+            --primary-xlight: #c8dae2;
+            --secondary: #FAEAB1;
+            --foreground: #0f2b2c;
+            --foreground-muted: #174143;
+            --accent: #f5ba42;
+            --accent-dark: #c4911a;
+            --accent-light: #fdf0cc;
+            --border: #e6dece;
+            --border-strong: #c8bfaa;
+            --radius: 1.25rem;
+
+            /* ── Status — palette-mapped, no traffic lights ── */
+            --flagged-bg: #fdf0cc;
+            /* accent-light */
+            --flagged-color: #7a4e08;
+            /* dark amber */
+            --flagged-border: #e8c060;
+            --monitored-bg: #e8f0f4;
+            /* primary-xlight */
+            --monitored-color: #1e3d4f;
+            /* primary-dark */
+            --monitored-border: #a0c0d0;
+            --neutral-bg: #f0ece4;
+            --neutral-color: #305669;
+            --neutral-border: #c8bfaa;
+
+            --shadow-lg: 0 8px 40px rgba(15, 43, 44, 0.16);
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            background: var(--background);
+            color: var(--foreground);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 2rem;
+        }
+
+        /* ── Card wrapper ────────────────────────────────────── */
+        .card-wrap {
+            perspective: 900px;
+            max-width: 520px;
+            width: 100%;
+        }
+
+        .dash-card {
+            background: var(--surface);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px 22px 18px;
+            box-shadow: var(--shadow-lg);
+            opacity: 0;
+            transform: translateY(20px) scale(0.98);
+            transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s;
+            will-change: transform;
+        }
+
+        .dash-card.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* ── Top bar ─────────────────────────────────────────── */
+        .dash-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+        }
+
+        .dash-logo {
+            height: 28px;
+            width: auto;
+            object-fit: contain;
+        }
+
+
+
+        /* ── Title block ─────────────────────────────────────── */
+        .dash-title-block {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 14px;
+            padding-bottom: 12px;
+            border-bottom: 1.5px solid var(--border);
+        }
+
+        .dash-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent-dark);
+            margin-bottom: 3px;
+        }
+
+        .dash-heading {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--foreground);
+        }
+
+        /* ── KPI row ─────────────────────────────────────────── */
+        /* Dark-teal-anchored tiles — primary bg, accent/surface text */
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+
+        .kpi-card {
+            background: var(--primary);
+            border: 1px solid var(--primary-dark);
+            border-radius: 10px;
+            padding: 10px 9px 9px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            cursor: default;
+            transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 6px 20px rgba(48, 86, 105, 0.30);
+            background: var(--primary-dark);
+        }
+
+        .kpi-value {
+            font-size: 19px;
+            font-weight: 700;
+            color: var(--surface);
+            line-height: 1;
+        }
+
+        .kpi-text {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--surface);
+        }
+
+        .kpi-name {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--primary-light);
+            line-height: 1.25;
+            margin-top: 3px;
+        }
+
+        .kpi-caption {
+            font-size: 9px;
+            color: var(--primary-light);
+            opacity: 0.8;
+            line-height: 1.25;
+        }
+
+        /* ── Mid row ─────────────────────────────────────────── */
+        .mid-row {
+            display: grid;
+            grid-template-columns: 1.15fr 1fr;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        /* ── Panels ──────────────────────────────────────────── */
+        .panel {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 11px;
+            padding: 11px 13px;
+            transition: box-shadow 0.25s, transform 0.25s;
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+
+        .panel:hover {
+            box-shadow: 0 10px 28px rgba(15, 43, 44, 0.12);
+        }
+
+        .panel-explain {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .panel-title {
+            font-size: 10.5px;
+            font-weight: 700;
+            color: var(--foreground);
+        }
+
+        .panel-tag {
+            font-size: 9px;
+            font-weight: 700;
+            background: var(--primary);
+            color: var(--secondary);
+            border: 1px solid var(--primary-dark);
+            padding: 2px 8px;
+            border-radius: 20px;
+        }
+
+        /* ── Feature bars ────────────────────────────────────── */
+        /* Palette-mapped — no red/green traffic lights */
+        .feat-bars {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+
+        .feat-row {
+            display: grid;
+            grid-template-columns: 92px 1fr 42px;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .feat-label {
+            font-size: 9.5px;
+            font-weight: 500;
+            color: var(--foreground-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .feat-track {
+            height: 7px;
+            background: var(--primary-xlight);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .feat-bar {
+            height: 100%;
+            border-radius: 4px;
+            width: 0;
+            transition: width 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        /* Positive = primary teal gradient */
+        .feat-bar.pos {
+            background: linear-gradient(70deg, var(--primary-dark), var(--primary-light));
+        }
+
+        /* Negative = foreground-muted teal, slightly lighter */
+        .feat-bar.neg {
+            background: linear-gradient(70deg, var(--foreground-muted), #2e6568);
+        }
+
+        .feat-track.neg-track {
+            background: var(--primary-xlight);
+        }
+
+        .feat-pct {
+            font-size: 9.5px;
+            font-weight: 700;
+            text-align: right;
+        }
+
+        .feat-pct.p {
+            color: var(--primary);
+        }
+
+        .feat-pct.n {
+            color: var(--foreground-muted);
+        }
+
+        /* ── Risk distribution donut ─────────────────────────── */
+        /* Segments: primary-dark → primary → accent → border */
+        .risk-section {
+            border-top: 1px solid var(--border);
+            padding-top: 5px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .risk-title {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--foreground);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .risk-donut-wrap {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .risk-donut-center {
+            position: relative;
+            width: 90px;
+            height: 90px;
+            flex-shrink: 0;
+        }
+
+        .risk-donut {
+            width: 90px;
+            height: 90px;
+            transform: rotate(-90deg);
+            display: block;
+        }
+
+        .risk-donut-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .risk-donut-total {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--foreground);
+            line-height: 1;
+        }
+
+        .risk-donut-sub {
+            display: block;
+            font-size: 8px;
+            color: var(--foreground-muted);
+            margin-top: 2px;
+        }
+
+        .risk-legend {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex: 1;
+        }
+
+        .risk-leg-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 10px;
+            color: var(--foreground-muted);
+        }
+
+        .risk-leg-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .risk-leg-name {
+            flex: 1;
+        }
+
+        .risk-leg-pct {
+            font-weight: 700;
+            color: var(--foreground);
+            min-width: 28px;
+            text-align: right;
+        }
+
+        /* ── Fairness rows ───────────────────────────────────── */
+        .fairness-rows {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+
+        .fairness-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4px;
+        }
+
+        .fairness-metric {
+            font-size: 10px;
+            color: var(--foreground-muted);
+        }
+
+        /* Palette-mapped badges — no red/green */
+        .pill {
+            font-size: 9px;
+            font-weight: 700;
+            padding: 2px 9px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        .pill-flagged {
+            background: var(--flagged-bg);
+            color: var(--flagged-color);
+            border: 1px solid var(--flagged-border);
+        }
+
+        .pill-monitored {
+            background: var(--monitored-bg);
+            color: var(--monitored-color);
+            border: 1px solid var(--monitored-border);
+        }
+
+        .pill-neutral {
+            background: var(--neutral-bg);
+            color: var(--neutral-color);
+            border: 1px solid var(--neutral-border);
+        }
+
+        /* ── Eval context ────────────────────────────────────── */
+        .eval-context {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            padding: 9px 10px;
+            margin-bottom: 10px;
+        }
+
+        .eval-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .eval-title {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--foreground);
+        }
+
+        /* Active badge = primary */
+        .eval-badge {
+            font-size: 9px;
+            font-weight: 700;
+            background: var(--primary);
+            color: var(--surface);
+            border: 1px solid var(--primary-dark);
+            padding: 2px 8px;
+            border-radius: 20px;
+        }
+
+        .eval-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px;
+        }
+
+        .eval-full {
+            grid-column: 1 / -1;
+        }
+
+        .eval-meta-card {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 7px;
+            padding: 5px 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .eval-meta-label {
+            font-size: 8.5px;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+        }
+
+        .eval-meta-val {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--foreground);
+        }
+
+        .eval-meta-mono {
+            font-family: 'Courier New', monospace;
+            font-size: 9px;
+            color: var(--foreground-muted);
+        }
+
+        /* ── Progress bars ───────────────────────────────────── */
+        .progress-section {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .progress-label-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .progress-name {
+            font-size: 10px;
+            font-weight: 500;
+            color: var(--foreground-muted);
+        }
+
+        .progress-pct {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .progress-track {
+            height: 6px;
+            background: var(--primary-xlight);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            width: 0;
+            transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        /* Both bars = primary teal family */
+        .fill-primary {
+            background: linear-gradient(90deg, var(--primary-dark), var(--primary-mid));
+        }
+
+        .fill-accent {
+            background: linear-gradient(90deg, var(--accent-dark), var(--accent));
+        }
+
+        /* ── Bottom chips ────────────────────────────────────── */
+        /* border bg + primary text / invert on hover */
+        .bottom-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            border-top: 1.5px solid var(--border);
+            padding-top: 12px;
+        }
+
+        .chip {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--primary);
+            background: var(--border);
+            border: 1px solid var(--border-strong);
+            padding: 5px 12px;
+            border-radius: 20px;
+            cursor: default;
+            transition: background 0.18s, color 0.18s, border-color 0.18s, transform 0.15s;
+        }
+
+        .chip .ck {
+            color: var(--accent-dark);
+            margin-left: 2px;
+        }
+
+        .chip:hover {
+            background: var(--primary);
+            color: var(--surface);
+            border-color: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .chip:hover .ck {
+            color: var(--accent);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card-wrap" id="cardWrap">
+        <div class="dash-card" id="dashCard">
+
+            <!-- Top bar -->
+            <!-- <div class="dash-topbar">
+                <img src="logo.png" alt="TrustAI" class="dash-logo" />
+
+            </div> -->
+
+            <!-- Title -->
+            <div class="dash-title-block">
+                <span class="dash-label">AI Governance Snapshot</span>
+                <span class="dash-heading">Evaluation Overview</span>
+            </div>
+
+            <!-- KPI row — dark teal tiles -->
+            
+
+            <!-- Mid row -->
+            <div class="mid-row">
+
+                <!-- Left panel -->
+                <div class="panel panel-explain" id="panelExplain">
+                    <div class="panel-header">
+                        <span class="panel-title">Record-Level Explanation Snapshot</span>
+                        <span class="panel-tag">Top Features</span>
+                    </div>
+
+                    <div class="feat-bars">
+                        <div class="feat-row">
+                            <span class="feat-label">Income Stability</span>
+                            <div class="feat-track">
+                                <div class="feat-bar pos" data-width="92"></div>
+                            </div>
+                            <span class="feat-pct p">+22.9%</span>
+                        </div>
+                        <div class="feat-row">
+                            <span class="feat-label">Credit History</span>
+                            <div class="feat-track">
+                                <div class="feat-bar pos" data-width="76"></div>
+                            </div>
+                            <span class="feat-pct p">+16.5%</span>
+                        </div>
+                        <div class="feat-row">
+                            <span class="feat-label">Debt Ratio</span>
+                            <div class="feat-track neg-track">
+                                <div class="feat-bar neg" data-width="58"></div>
+                            </div>
+                            <span class="feat-pct n">−11.6%</span>
+                        </div>
+                        <div class="feat-row">
+                            <span class="feat-label">Account Age</span>
+                            <div class="feat-track">
+                                <div class="feat-bar pos" data-width="64"></div>
+                            </div>
+                            <span class="feat-pct p">+10.4%</span>
+                        </div>
+                        <!-- <div class="feat-row">
+                            <span class="feat-label">Repayment Pattern</span>
+                            <div class="feat-track">
+                                <div class="feat-bar pos" data-width="60"></div>
+                            </div>
+                            <span class="feat-pct p">+9.5%</span>
+                        </div> -->
+                    </div>
+
+                    <!-- Donut — palette segments -->
+                    <div class="risk-section">
+                        <span class="risk-title">Risk Distribution</span>
+                        <div class="risk-donut-wrap">
+                            <div class="risk-donut-center">
+                                <svg class="risk-donut" viewBox="0 0 100 100" id="riskDonut"></svg>
+                                <div class="risk-donut-label">
+                                    <span class="risk-donut-total">100%</span>
+                                    <span class="risk-donut-sub">Records</span>
+                                </div>
+                            </div>
+                            <div class="risk-legend">
+                                <div class="risk-leg-row">
+                                    <span class="risk-leg-dot" style="background:#1e3d4f"></span>
+                                    <span class="risk-leg-name">Critical</span>
+                                    <span class="risk-leg-pct">16%</span>
+                                </div>
+                                <div class="risk-leg-row">
+                                    <span class="risk-leg-dot" style="background:#305669"></span>
+                                    <span class="risk-leg-name">High</span>
+                                    <span class="risk-leg-pct">24%</span>
+                                </div>
+                                <div class="risk-leg-row">
+                                    <span class="risk-leg-dot" style="background:#f5ba42"></span>
+                                    <span class="risk-leg-name">Med</span>
+                                    <span class="risk-leg-pct">28%</span>
+                                </div>
+                                <div class="risk-leg-row">
+                                    <span class="risk-leg-dot" style="background:#c2d8e2"></span>
+                                    <span class="risk-leg-name">Low</span>
+                                    <span class="risk-leg-pct">32%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right panel -->
+                <div class="panel" id="panelFairness">
+                    <div class="panel-header">
+                        <span class="panel-title">Governance Review</span>
+                    </div>
+
+                    <div class="fairness-rows">
+                        <div class="fairness-row">
+                            <span class="fairness-metric">Policy Coverage</span>
+                            <span class="pill pill-monitored">Active</span>
+                        </div>
+                        <div class="fairness-row">
+                            <span class="fairness-metric">Control Evidence</span>
+                            <span class="pill pill-monitored">Ready</span>
+                        </div>
+                        <div class="fairness-row">
+                            <span class="fairness-metric">Monitoring Cadence</span>
+                            <span class="pill pill-neutral">Ongoing</span>
+                        </div>
+                        <div class="fairness-row">
+                            <span class="fairness-metric">Review Status</span>
+                            <span class="pill pill-neutral">In Progress</span>
+                        </div>
+                    </div>
+
+                    <div class="eval-context">
+                        <div class="eval-header">
+                            <span class="eval-title">Governance Context</span>
+                            <span class="eval-badge">Active</span>
+                        </div>
+                        <div class="eval-grid">
+                            <div class="eval-meta-card">
+                                <span class="eval-meta-label">Scope</span>
+                                <span class="eval-meta-val">AI Lifecycle</span>
+                            </div>
+                            <div class="eval-meta-card">
+                                <span class="eval-meta-label">Focus</span>
+                                <span class="eval-meta-val">Governance Controls</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="progress-section">
+                        <div class="progress-item">
+                            <div class="progress-label-row">
+                                <span class="progress-name">Explainability Readiness</span>
+                                <span class="progress-pct">94%</span>
+                            </div>
+                            <div class="progress-track">
+                                <div class="progress-fill fill-primary" data-width="94"></div>
+                            </div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-label-row">
+                                <span class="progress-name">Fairness Monitoring</span>
+                                <span class="progress-pct">88%</span>
+                            </div>
+                            <div class="progress-track">
+                                <div class="progress-fill fill-accent" data-width="88"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Chips — border bg + primary text, accent checkmark -->
+            <div class="bottom-chips">
+                <span class="chip">Explainability <span class="ck">✓</span></span>
+                <span class="chip">Fairness <span class="ck">✓</span></span>
+                <span class="chip">Traceability <span class="ck">✓</span></span>
+                <span class="chip">Report Generated <span class="ck">✓</span></span>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const card = document.getElementById('dashCard');
+            const cardWrap = document.getElementById('cardWrap');
+
+            /* Entrance */
+            setTimeout(() => { card.classList.add('visible'); runAnimations(); }, 120);
+
+            /* Outer card tilt */
+            cardWrap.addEventListener('mousemove', e => {
+                const r = card.getBoundingClientRect();
+                const dx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2);
+                const dy = (e.clientY - (r.top + r.height / 2)) / (r.height / 2);
+                card.style.transform = `rotateX(${dy * -4}deg) rotateY(${dx * 4}deg) scale(1.01)`;
+                card.style.boxShadow = `${-dx * 4}px ${dy * 4}px 32px rgba(15,43,44,0.18)`;
+            });
+            cardWrap.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+                card.style.boxShadow = '';
+            });
+
+            /* Panel tilt */
+            ['panelExplain', 'panelFairness'].forEach(id => {
+                const p = document.getElementById(id);
+                p.addEventListener('mousemove', e => {
+                    e.stopPropagation();
+                    const r = p.getBoundingClientRect();
+                    const dx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2);
+                    const dy = (e.clientY - (r.top + r.height / 2)) / (r.height / 2);
+                    p.style.transform = `rotateX(${dy * -6}deg) rotateY(${dx * 6}deg) translateZ(8px) scale(1.025)`;
+                    p.style.boxShadow = `${-dx * 3}px ${dy * 3}px 22px rgba(15,43,44,0.18)`;
+                    p.style.transition = 'box-shadow 0.1s, transform 0.1s';
+                    p.style.zIndex = '10';
+                });
+                p.addEventListener('mouseleave', () => {
+                    p.style.transform = 'rotateX(0) rotateY(0) translateZ(0) scale(1)';
+                    p.style.boxShadow = '';
+                    p.style.transition = 'box-shadow 0.4s, transform 0.4s';
+                    p.style.zIndex = '';
+                });
+            });
+
+            /* Animations */
+            function runAnimations() {
+                /* Counters */
+                document.querySelectorAll('[data-target]').forEach(el => {
+                    counter(el, parseInt(el.dataset.target), 1100);
+                });
+                /* Feature bars */
+                setTimeout(() => {
+                    document.querySelectorAll('.feat-bar[data-width]').forEach(b => {
+                        b.style.width = b.dataset.width + '%';
+                    });
+                }, 300);
+                /* Donut */
+                setTimeout(drawDonut, 420);
+                /* Progress bars */
+                setTimeout(() => {
+                    document.querySelectorAll('.progress-fill[data-width]').forEach(f => {
+                        f.style.width = f.dataset.width + '%';
+                    });
+                }, 650);
+            }
+
+            function counter(el, target, dur) {
+                const start = performance.now();
+                (function tick(now) {
+                    const p = Math.min((now - start) / dur, 1);
+                    el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+                    if (p < 1) requestAnimationFrame(tick);
+                })(performance.now());
+            }
+
+            function drawDonut() {
+                const svg = document.getElementById('riskDonut');
+                const ns = 'http://www.w3.org/2000/svg';
+                const cx = 50, cy = 50, r = 36, sw = 14;
+                const C = 2 * Math.PI * r;
+                /* Palette-mapped: dark→light = Critical→Low */
+                const segs = [
+                    { pct: 16, color: '#1e3d4f' }, /* Critical — primary-dark  */
+                    { pct: 24, color: '#305669' }, /* High     — primary       */
+                    { pct: 28, color: '#f5ba42' }, /* Med      — accent        */
+                    { pct: 32, color: '#c2d8e2' }, /* Low      — primary-light */
+                ];
+                const gapDeg = 3;
+
+                /* Background track */
+                const bg = document.createElementNS(ns, 'circle');
+                bg.setAttribute('cx', cx); bg.setAttribute('cy', cy); bg.setAttribute('r', r);
+                bg.setAttribute('fill', 'none'); bg.setAttribute('stroke', '#e6dece');
+                bg.setAttribute('stroke-width', sw);
+                svg.appendChild(bg);
+
+                let angle = 0;
+                segs.forEach(seg => {
+                    const el = document.createElementNS(ns, 'circle');
+                    el.setAttribute('cx', cx); el.setAttribute('cy', cy); el.setAttribute('r', r);
+                    el.setAttribute('fill', 'none'); el.setAttribute('stroke', seg.color);
+                    el.setAttribute('stroke-width', sw); el.setAttribute('stroke-linecap', 'butt');
+                    const len = ((seg.pct / 100 * 360 - gapDeg) / 360) * C;
+                    const offset = -((angle / 360) * C);
+                    el.setAttribute('stroke-dasharray', `0 ${C}`);
+                    el.setAttribute('stroke-dashoffset', offset);
+                    svg.appendChild(el);
+                    requestAnimationFrame(() => requestAnimationFrame(() => {
+                        el.style.transition = 'stroke-dasharray 1s cubic-bezier(0.22,1,0.36,1)';
+                        el.setAttribute('stroke-dasharray', `${len} ${C - len}`);
+                    }));
+                    angle += seg.pct / 100 * 360;
+                });
+            }
+
+        });
+    </script>
+</body>
+
+</html>

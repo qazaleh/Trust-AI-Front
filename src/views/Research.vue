@@ -29,7 +29,7 @@ const researchThemes = ['counterfactual', 'robustness', 'audit']
       :title="$t('researchReferences.title')"
       :description="$t('researchReferences.description')"
     >
-      <template #actions>
+      <!-- <template #actions>
         <Button as-child size="lg" class="rounded-full shadow-sm">
           <a href="mailto:info@trustai.com.tr">
             {{ $t('cta.contact') }}
@@ -42,7 +42,7 @@ const researchThemes = ['counterfactual', 'robustness', 'audit']
             {{ $t('navbar.governance') }}
           </RouterLink>
         </Button>
-      </template>
+      </template> -->
 <!-- 
       <template #aside>
         <div class="space-y-4">
@@ -101,9 +101,15 @@ const researchThemes = ['counterfactual', 'robustness', 'audit']
                 {{ $t('researchSection.publicationBtn') }}
               </a>
             </Button>
-            <p v-else class="content-copy">
-              {{ $t('researchPage.publicationRequest') }}
-            </p>
+            <Button
+              v-else
+              variant="outline"
+              class="pointer-events-none rounded-full border-border/80 bg-white/45 text-muted-foreground"
+              disabled
+              aria-disabled="true"
+            >
+              Preprint available soon
+            </Button>
           </CardContent>
         </Card>
       </div>
@@ -116,11 +122,11 @@ const researchThemes = ['counterfactual', 'robustness', 'audit']
           {{ $t('researchPage.collaborateDescription') }}
         </CardDescription>
       </CardHeader>
-      <CardContent>
+      <!-- <CardContent>
         <Button as-child class="rounded-full shadow-sm">
           <a href="mailto:info@trustai.com.tr">{{ $t('cta.contact') }}</a>
         </Button>
-      </CardContent>
+      </CardContent> -->
     </Card>
   </div>
 </template>

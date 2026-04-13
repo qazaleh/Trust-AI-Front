@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TrustAI — Governance diagram (single-file embed)</title>
+  <style>
+body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem;background:#eae6de;font-family:system-ui,sans-serif;}
+.trustai-diagram-embed{width:100%;max-width:min(1160px,100%);display:flex;justify-content:center;}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  min-height: 100%;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.trustai-diagram-host {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 4vw, 2.5rem);
+  width: 100%;
+  max-width: min(1160px, 100%);
+  margin-inline: auto;
+}
+
+/* TrustAI — circular governance diagram (restored) */
+
+:root {
+  --background: #faf7f0;
+  --surface: #fffdf8;
+  --primary: #1d465e;
+  --secondary: #e3ebee;
+  --foreground: #11212b;
+  --foreground-muted: #667885;
+  --accent: #f5ba42;
+  --border: #e6dece;
+  --radius: 1.25rem;
+  --ta-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ta-ease-spring: cubic-bezier(0.34, 1.45, 0.64, 1);
+  --ta-shadow-node: 0 4px 18px rgba(29, 70, 94, 0.12);
+  --ta-shadow-node-hover: 0 10px 28px rgba(29, 70, 94, 0.18);
+  --trustai-diagram-max-width: 460px;
+  --trustai-diagram-width: 100%;
+}
+
+@media (max-width: 900px) {
+  :root {
+    --trustai-diagram-max-width: min(360px, 88vw);
+  }
+}
+
+@media (max-width: 600px) {
+  :root {
+    --trustai-diagram-max-width: min(300px, 90vw);
+  }
+}
+
+.trustai-diagram {
+  position: relative;
+  box-sizing: border-box;
+  width: var(--trustai-diagram-width, 100%);
+  max-width: min(var(--trustai-diagram-max-width, 460px), 100%);
+  min-width: 0;
+  margin-inline: auto;
+  aspect-ratio: 1;
+  border-radius: var(--radius);
+  background: var(--background);
+  isolation: isolate;
+}
+
+.trustai-diagram__svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* ——— Ambient glow behind core ——— */
+.ta-ambient {
+  transition: fill-opacity 1.4s ease;
+}
+
+.trustai-diagram--play-flow .ta-ambient {
+  fill-opacity: 0.055;
+  animation: ta-ambient-breathe 5s ease-in-out infinite;
+}
+
+@keyframes ta-ambient-breathe {
+  0%,
+  100% {
+    fill-opacity: 0.04;
+  }
+  50% {
+    fill-opacity: 0.08;
+  }
+}
+
+/* ——— Orbit ring ——— */
+.ta-orbit-ring--dash {
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+
+.ta-orbit-ring--highlight {
+  opacity: 0;
+  transition: opacity 0.9s ease 0.08s;
+  transform-origin: 250px 250px;
+  animation: ta-orbit-highlight-rotate 36s linear infinite;
+}
+
+.trustai-diagram--play-lines .ta-orbit-ring--dash,
+.trustai-diagram--play-lines .ta-orbit-ring--highlight {
+  opacity: 1;
+}
+
+@keyframes ta-orbit-highlight-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ta-orbit-dot {
+  transition: opacity 0.8s ease;
+}
+
+.trustai-diagram--play-flow .ta-orbit-dot {
+  opacity: 0.92;
+}
+
+/* ——— Radial connections ——— */
+.ta-line {
+  stroke: var(--primary);
+  stroke-width: 1.25;
+  stroke-opacity: 0.2;
+  fill: none;
+  stroke-dasharray: var(--ta-dash, 1) var(--ta-dash, 1);
+  stroke-dashoffset: var(--ta-dash-offset, 0);
+  transition:
+    stroke-dashoffset 1s var(--ta-ease-out),
+    stroke-opacity 0.55s ease,
+    stroke 0.35s ease;
+  animation: ta-line-pulse 4s ease-in-out infinite;
+}
+
+.trustai-diagram--play-lines .ta-line {
+  stroke-dashoffset: 0;
+}
+
+@keyframes ta-line-pulse {
+  0%,
+  100% {
+    stroke-opacity: 0.17;
+  }
+  50% {
+    stroke-opacity: 0.26;
+  }
+}
+
+.ta-line.is-active {
+  stroke: var(--accent);
+  stroke-opacity: 0.55;
+  animation: none;
+}
+
+.ta-radial-flow {
+  transition: opacity 0.7s ease;
+}
+
+.trustai-diagram--play-flow .ta-radial-flow {
+  opacity: 1;
+}
+
+/* ——— Base ——— */
+.ta-base-shadow,
+.ta-base-rings {
+  opacity: 0;
+  transition: opacity 0.7s ease 0.15s;
+}
+
+.trustai-diagram--play-lines .ta-base-shadow,
+.trustai-diagram--play-lines .ta-base-rings {
+  opacity: 1;
+}
+
+/* ——— Center core ——— */
+.ta-center {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+}
+
+.ta-center__entrance {
+  opacity: 0;
+  transform: scale(0.84);
+  transition:
+    opacity 0.55s ease,
+    transform 0.72s var(--ta-ease-spring);
+}
+
+.trustai-diagram--play .ta-center__entrance {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.ta-center__idle {
+  transform-origin: 250px 250px;
+  transform-box: view-box;
+  animation: ta-core-breathe 4.8s ease-in-out infinite;
+}
+
+@keyframes ta-core-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.018);
+  }
+}
+
+.ta-core-pulse-ring {
+  animation: ta-core-ring-pulse 4.8s ease-in-out infinite;
+}
+
+@keyframes ta-core-ring-pulse {
+  0%,
+  100% {
+    stroke-opacity: 0.14;
+  }
+  50% {
+    stroke-opacity: 0.06;
+  }
+}
+
+.ta-center.is-glow .ta-core-glow {
+  fill-opacity: 0.11;
+}
+
+.ta-center.is-glow .ta-core-pulse-ring {
+  stroke-opacity: 0.22;
+}
+
+/* ——— Joints ——— */
+.ta-joints {
+  transition: opacity 0.55s ease 0.2s;
+}
+
+.trustai-diagram--play-lines .ta-joints {
+  opacity: 1;
+}
+
+.ta-joint {
+  animation: ta-joint-pulse 2.8s ease-in-out infinite;
+}
+
+.ta-joint:nth-child(odd) {
+  animation-delay: 0.4s;
+}
+
+@keyframes ta-joint-pulse {
+  0%,
+  100% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ——— Nodes ——— */
+.ta-node__entrance {
+  opacity: 0;
+  transform: scale(0.46);
+  transition:
+    opacity 0.48s ease,
+    transform 0.62s var(--ta-ease-spring);
+}
+
+.trustai-diagram--play .ta-node[data-i="0"] .ta-node__entrance {
+  transition-delay: 0.22s;
+}
+.trustai-diagram--play .ta-node[data-i="1"] .ta-node__entrance {
+  transition-delay: 0.3s;
+}
+.trustai-diagram--play .ta-node[data-i="2"] .ta-node__entrance {
+  transition-delay: 0.38s;
+}
+.trustai-diagram--play .ta-node[data-i="3"] .ta-node__entrance {
+  transition-delay: 0.46s;
+}
+.trustai-diagram--play .ta-node[data-i="4"] .ta-node__entrance {
+  transition-delay: 0.54s;
+}
+.trustai-diagram--play .ta-node[data-i="5"] .ta-node__entrance {
+  transition-delay: 0.62s;
+}
+
+.trustai-diagram--play .ta-node__entrance {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.ta-node__float {
+  transform-origin: 0 0;
+  animation: ta-node-float 5s ease-in-out infinite;
+}
+
+.ta-node[data-i="0"] .ta-node__float {
+  animation-delay: 0s;
+}
+.ta-node[data-i="1"] .ta-node__float {
+  animation-delay: 0.35s;
+}
+.ta-node[data-i="2"] .ta-node__float {
+  animation-delay: 0.7s;
+}
+.ta-node[data-i="3"] .ta-node__float {
+  animation-delay: 1.05s;
+}
+.ta-node[data-i="4"] .ta-node__float {
+  animation-delay: 1.4s;
+}
+.ta-node[data-i="5"] .ta-node__float {
+  animation-delay: 1.75s;
+}
+
+@keyframes ta-node-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3.5px);
+  }
+}
+
+.ta-node__outer {
+  fill: var(--surface);
+  stroke: var(--border);
+  stroke-width: 1.5;
+  transition:
+    r 0.38s var(--ta-ease-spring),
+    stroke 0.35s ease,
+    filter 0.35s ease;
+}
+
+.ta-node__inner {
+  fill: var(--background);
+  pointer-events: none;
+}
+
+.ta-node__accent {
+  pointer-events: none;
+  animation: ta-accent-spin 14s linear infinite;
+}
+
+@keyframes ta-accent-spin {
+  to {
+    stroke-dashoffset: -251;
+  }
+}
+
+.ta-node__hit {
+  cursor: pointer;
+  outline: none;
+  transition:
+    transform 0.38s var(--ta-ease-spring),
+    filter 0.38s ease;
+}
+
+.ta-node__hit:hover,
+.ta-node__hit:focus-visible {
+  transform: scale(1.07);
+  filter: drop-shadow(var(--ta-shadow-node-hover));
+}
+
+.ta-node__hit:hover .ta-node__outer,
+.ta-node__hit:focus-visible .ta-node__outer {
+  r: 43;
+  stroke: rgba(245, 186, 66, 0.45);
+}
+
+.ta-node__hit:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+/* Tooltip */
+.trustai-diagram__tooltip {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(12px, -36px);
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: var(--primary);
+  color: var(--surface);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  box-shadow: 0 6px 20px rgba(17, 33, 43, 0.12);
+  z-index: 2;
+  white-space: nowrap;
+}
+
+.trustai-diagram__tooltip.is-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .ta-orbit-ring--highlight,
+  .ta-node__float,
+  .ta-center__idle,
+  .ta-core-pulse-ring,
+  .ta-line,
+  .ta-joint,
+  .ta-node__accent {
+    animation: none !important;
+  }
+
+  .trustai-diagram--play .ta-line {
+    stroke-dashoffset: 0;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="trustai-diagram-embed">
+<div
+      class="trustai-diagram"
+      id="trustai-diagram"
+      role="img"
+      aria-label="Animated TrustAI governance architecture: central orchestration connected to knowledge, compliance, monitoring, robustness, fairness, and explainability modules."
+    >
+<svg class="trustai-diagram__svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <filter id="ta-glow-center" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur stdDeviation="10" result="b" />
+            <feMerge>
+              <feMergeNode in="b" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+          <filter id="ta-glow-node" x="-35%" y="-35%" width="170%" height="170%">
+            <feGaussianBlur stdDeviation="5" result="bn" />
+            <feMerge>
+              <feMergeNode in="bn" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+          <filter id="ta-shadow" x="-25%" y="-25%" width="150%" height="150%">
+            <feDropShadow dx="0" dy="5" stdDeviation="10" flood-color="#1d465e" flood-opacity="0.14" />
+          </filter>
+          <filter id="ta-shadow-soft" x="-30%" y="-30%" width="160%" height="160%">
+            <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#1d465e" flood-opacity="0.12" />
+          </filter>
+          <radialGradient id="ta-core-grad" cx="50%" cy="32%" r="70%">
+            <stop offset="0%" stop-color="#2a5f7a" />
+            <stop offset="100%" stop-color="#0f2d3d" />
+          </radialGradient>
+          <linearGradient id="ta-platform-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#d4e4eb" />
+            <stop offset="100%" stop-color="#a8c4d2" />
+          </linearGradient>
+          <linearGradient id="ta-ring-highlight" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#1d465e" stop-opacity="0.2" />
+            <stop offset="45%" stop-color="#f5ba42" stop-opacity="0.65" />
+            <stop offset="100%" stop-color="#1d465e" stop-opacity="0.2" />
+          </linearGradient>
+          <!-- Motion path for ring particle (r=172) -->
+          <path
+            id="ta-orbit-motion"
+            fill="none"
+            d="M 250,78 A 172,172 0 1 1 249.99 78"
+          />
+          <path id="ta-path-0" d="M250,250 L250,92" />
+          <path id="ta-path-1" d="M250,250 L398.9,164" />
+          <path id="ta-path-2" d="M250,250 L398.9,336" />
+          <path id="ta-path-3" d="M250,250 L250,408" />
+          <path id="ta-path-4" d="M250,250 L101.1,336" />
+          <path id="ta-path-5" d="M250,250 L101.1,164" />
+        </defs>
+
+        <!-- Ambient glow (fades in last) -->
+        <circle class="ta-ambient" cx="250" cy="248" r="120" fill="#f5ba42" fill-opacity="0" />
+
+        <!-- Outer dashed orbit -->
+        <g class="ta-orbit-group" transform-origin="250px 250px">
+          <circle
+            class="ta-orbit-ring ta-orbit-ring--dash"
+            cx="250"
+            cy="250"
+            r="172"
+            fill="none"
+            stroke="#1d465e"
+            stroke-width="1"
+            stroke-dasharray="5 7"
+            stroke-opacity="0.22"
+          />
+          <circle
+            class="ta-orbit-ring ta-orbit-ring--highlight"
+            cx="250"
+            cy="250"
+            r="172"
+            fill="none"
+            stroke="url(#ta-ring-highlight)"
+            stroke-width="2.2"
+            stroke-dasharray="72 1008"
+            stroke-linecap="round"
+          />
+        </g>
+
+        <!-- Radial connections -->
+        <g class="ta-connections" stroke-linecap="round">
+          <line class="ta-line" data-i="0" x1="250" y1="250" x2="250" y2="92" />
+          <line class="ta-line" data-i="1" x1="250" y1="250" x2="398.9" y2="164" />
+          <line class="ta-line" data-i="2" x1="250" y1="250" x2="398.9" y2="336" />
+          <line class="ta-line" data-i="3" x1="250" y1="250" x2="250" y2="408" />
+          <line class="ta-line" data-i="4" x1="250" y1="250" x2="101.1" y2="336" />
+          <line class="ta-line" data-i="5" x1="250" y1="250" x2="101.1" y2="164" />
+        </g>
+
+        <!-- Flow dots along radials (SMIL, lightweight) -->
+        <g class="ta-radial-flow" opacity="0">
+          <circle r="3" fill="#f5ba42">
+            <animateMotion dur="2.8s" repeatCount="indefinite" begin="0s" keyPoints="0;1" keyTimes="0;1" calcMode="linear">
+              <mpath href="#ta-path-0" />
+            </animateMotion>
+            <animate attributeName="opacity" values="0;0.85;0" dur="2.8s" repeatCount="indefinite" begin="0s" />
+          </circle>
+          <circle r="2.8" fill="#1d465e">
+            <animateMotion dur="2.8s" repeatCount="indefinite" begin="0.45s" keyPoints="0;1" keyTimes="0;1" calcMode="linear">
+              <mpath href="#ta-path-1" />
+            </animateMotion>
+            <animate attributeName="opacity" values="0;0.75;0" dur="2.8s" repeatCount="indefinite" begin="0.45s" />
+          </circle>
+          <circle r="3" fill="#f5ba42">
+            <animateMotion dur="2.8s" repeatCount="indefinite" begin="0.9s" keyPoints="0;1" keyTimes="0;1" calcMode="linear">
+              <mpath href="#ta-path-2" />
+            </animateMotion>
+            <animate attributeName="opacity" values="0;0.85;0" dur="2.8s" repeatCount="indefinite" begin="0.9s" />
+          </circle>
+          <circle r="2.8" fill="#1d465e">
+            <animateMotion dur="2.8s" repeatCount="indefinite" begin="1.35s" keyPoints="0;1" keyTimes="0;1" calcMode="linear">
+              <mpath href="#ta-path-3" />
+            </animateMotion>
+            <animate attributeName="opacity" values="0;0.75;0" dur="2.8s" repeatCount="indefinite" begin="1.35s" />
+          </circle>
+          <circle r="3" fill="#f5ba42">
+            <animateMotion dur="2.8s" repeatCount="indefinite" begin="1.8s" keyPoints="0;1" keyTimes="0;1" calcMode="linear">
+              <mpath href="#ta-path-4" />
+            </animateMotion>
+            <animate attributeName="opacity" values="0;0.85;0" dur="2.8s" repeatCount="indefinite" begin="1.8s" />
+          </circle>
+          <circle r="2.8" fill="#1d465e">
+            <animateMotion dur="2.8s" repeatCount="indefinite" begin="2.25s" keyPoints="0;1" keyTimes="0;1" calcMode="linear">
+              <mpath href="#ta-path-5" />
+            </animateMotion>
+            <animate attributeName="opacity" values="0;0.75;0" dur="2.8s" repeatCount="indefinite" begin="2.25s" />
+          </circle>
+        </g>
+
+        <!-- Ring flow particle -->
+        <circle class="ta-orbit-dot" r="3.2" fill="#f5ba42" opacity="0">
+          <animateMotion dur="22s" repeatCount="indefinite" rotate="auto">
+            <mpath href="#ta-orbit-motion" />
+          </animateMotion>
+        </circle>
+
+        <!-- Base platform -->
+        <ellipse class="ta-base-shadow" cx="250" cy="308" rx="92" ry="20" fill="#1d465e" opacity="0.07" />
+        <g class="ta-base-rings" transform="translate(250 302)">
+          <ellipse rx="86" ry="16" fill="none" stroke="#e3ebee" stroke-width="1.2" stroke-opacity="0.9" />
+          <ellipse rx="74" ry="13" fill="none" stroke="#1d465e" stroke-width="0.8" stroke-opacity="0.12" stroke-dasharray="3 5" class="ta-base-ring-spin">
+            <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="48s" repeatCount="indefinite" />
+          </ellipse>
+        </g>
+        <ellipse cx="250" cy="298" rx="94" ry="24" fill="url(#ta-platform-grad)" opacity="0.35" />
+
+        <!-- Center core -->
+        <g class="ta-center" id="ta-center" transform-origin="250px 250px">
+          <g class="ta-center__entrance">
+            <g class="ta-center__idle">
+              <circle class="ta-core-glow" cx="250" cy="250" r="78" fill="#f5ba42" fill-opacity="0.06" />
+              <circle class="ta-core-pulse-ring" cx="250" cy="250" r="70" fill="none" stroke="#1d465e" stroke-width="1.2" stroke-opacity="0.14" />
+              <circle class="ta-core-disk" cx="250" cy="250" r="62" fill="url(#ta-core-grad)" filter="url(#ta-shadow)" />
+              <circle cx="250" cy="250" r="62" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="7" stroke-dasharray="55 340" stroke-linecap="round" transform="rotate(-48 250 250)" />
+              <!-- Gear + shield: shift so visual centroid is at origin, scale, then place on disk -->
+              <g class="ta-core-mark" transform="translate(250 250) translate(2.25 1.75)">
+                <g transform="scale(1.24)">
+                  <g transform="translate(9 24.875)">
+                    <g transform="translate(-30, -44)" fill="#fffdf8" fill-opacity="0.92">
+                      <path
+                        d="M28 15c0-.55-.04-1.08-.12-1.6l3.35-2.62-3.15-5.45-3.98 1.5a11.8 11.8 0 00-2.05-1.2L20.5 1h-6.3l-1.26 4.23c-.74.3-1.44.68-2.08 1.15l-3.98-1.5-3.15 5.45 3.35 2.62A11.6 11.6 0 009.5 15c0 .52.04 1.04.12 1.55l-3.35 2.62 3.15 5.45 3.98-1.5c.64.47 1.34.88 2.08 1.2L14.2 29h6.3l1.26-4.2c.72-.32 1.4-.7 2.05-1.2l3.98 1.5 3.15-5.45-3.35-2.62c.08-.52.12-1.05.12-1.58zM18.5 20a5 5 0 110-10 5 5 0 010 10z"
+                      />
+                    </g>
+                    <g transform="translate(-11, -29)" fill="#f5ba42" fill-opacity="0.92">
+                      <path d="M9 0L0 3.2v5.4c0 4.8 3.7 9.2 9 10.3 5.3-1.1 9-5.5 9-10.3V3.2L9 0z" />
+                      <polyline points="3.5,8 7,12 14.5,5" stroke="#fffdf8" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </g>
+        </g>
+
+        <!-- Endpoint joints -->
+        <g class="ta-joints" opacity="0">
+          <circle cx="250" cy="92" r="3.5" fill="#f5ba42" class="ta-joint" />
+          <circle cx="398.9" cy="164" r="3.5" fill="#1d465e" class="ta-joint" />
+          <circle cx="398.9" cy="336" r="3.5" fill="#f5ba42" class="ta-joint" />
+          <circle cx="250" cy="408" r="3.5" fill="#1d465e" class="ta-joint" />
+          <circle cx="101.1" cy="336" r="3.5" fill="#f5ba42" class="ta-joint" />
+          <circle cx="101.1" cy="164" r="3.5" fill="#1d465e" class="ta-joint" />
+        </g>
+
+        <!-- Nodes: position groups + inner entrance/float -->
+        <g class="ta-node" data-i="0" transform="translate(250 92)">
+          <g class="ta-node__entrance">
+            <g class="ta-node__float">
+              <g class="ta-node__hit" data-label="Knowledge" tabindex="0" role="button">
+                <circle r="40" class="ta-node__outer" />
+                <circle r="40" class="ta-node__accent" fill="none" stroke="#f5ba42" stroke-width="2" stroke-opacity="0.55" stroke-dasharray="251" />
+                <circle r="32" class="ta-node__inner" />
+                <g transform="translate(-12,-12)" fill="none" stroke="#1d465e" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2zM22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z" />
+                </g>
+                <circle cx="10" cy="-20" r="6" fill="#f5ba42" />
+                <g stroke="#fffdf8" stroke-width="1.1" stroke-linecap="round" opacity="0.9">
+                  <line x1="10" y1="-28" x2="10" y2="-26" />
+                  <line x1="4" y1="-25" x2="5.5" y2="-23.5" />
+                  <line x1="16" y1="-25" x2="14.5" y2="-23.5" />
+                </g>
+              </g>
+            </g>
+          </g>
+        </g>
+
+        <g class="ta-node" data-i="1" transform="translate(398.9 164)">
+          <g class="ta-node__entrance">
+            <g class="ta-node__float">
+              <g class="ta-node__hit" data-label="Compliance" tabindex="0" role="button">
+                <circle r="40" class="ta-node__outer" />
+                <circle r="40" class="ta-node__accent" fill="none" stroke="#1d465e" stroke-width="2" stroke-opacity="0.35" stroke-dasharray="251" />
+                <circle r="32" class="ta-node__inner" />
+                <g transform="translate(-12,-12)" fill="none" stroke="#1d465e" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="3" y1="22" x2="21" y2="22" />
+                  <rect x="5" y="11" width="3" height="11" />
+                  <rect x="11" y="11" width="3" height="11" />
+                  <rect x="17" y="11" width="3" height="11" />
+                  <polyline points="3,11 12,2 21,11" />
+                </g>
+                <path d="M-6,-18 L6,-18 L6,-8 L-6,-8 Z" fill="#1d465e" fill-opacity="0.85" />
+                <polyline points="-3,-14 0,-11 3,-14" stroke="#fffdf8" stroke-width="1.3" fill="none" stroke-linecap="round" />
+              </g>
+            </g>
+          </g>
+        </g>
+
+        <g class="ta-node" data-i="2" transform="translate(398.9 336)">
+          <g class="ta-node__entrance">
+            <g class="ta-node__float">
+              <g class="ta-node__hit" data-label="Monitoring" tabindex="0" role="button">
+                <circle r="40" class="ta-node__outer" />
+                <circle r="40" class="ta-node__accent" fill="none" stroke="#f5ba42" stroke-width="2" stroke-opacity="0.45" stroke-dasharray="251" />
+                <circle r="32" class="ta-node__inner" />
+                <g transform="translate(-12,-13)" fill="none" stroke="#1d465e" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="4" y="3" width="16" height="18" rx="2" />
+                  <line x1="8" y1="8" x2="16" y2="8" />
+                  <line x1="8" y1="12" x2="14" y2="12" />
+                  <line x1="8" y1="16" x2="12" y2="16" />
+                </g>
+                <rect x="-10" y="-22" width="14" height="10" rx="1" fill="none" stroke="#1d465e" stroke-width="1.2" />
+                <path d="M-10,-17 h14" stroke="#f5ba42" stroke-width="1.5" stroke-linecap="round" />
+              </g>
+            </g>
+          </g>
+        </g>
+
+        <g class="ta-node" data-i="3" transform="translate(250 408)">
+          <g class="ta-node__entrance">
+            <g class="ta-node__float">
+              <g class="ta-node__hit" data-label="Robustness" tabindex="0" role="button">
+                <circle r="40" class="ta-node__outer" />
+                <circle r="40" class="ta-node__accent" fill="none" stroke="#1d465e" stroke-width="2" stroke-opacity="0.3" stroke-dasharray="251" />
+                <circle r="32" class="ta-node__inner" />
+                <g transform="translate(-12,-12)" fill="none" stroke="#1d465e" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3l8 4v6c0 5-3.5 9.6-8 10.8C7.5 22.6 4 18 4 13V7l8-4z" />
+                  <path d="M9 12l3 3 6-6" />
+                </g>
+                <circle cx="14" cy="-18" r="5" fill="#f5ba42" fill-opacity="0.9" />
+                <line x1="14" y1="-20" x2="14" y2="-17" stroke="#11212b" stroke-width="1.3" stroke-linecap="round" />
+                <circle cx="14" cy="-14.8" r="1" fill="#11212b" />
+              </g>
+            </g>
+          </g>
+        </g>
+
+        <g class="ta-node" data-i="4" transform="translate(101.1 336)">
+          <g class="ta-node__entrance">
+            <g class="ta-node__float">
+              <g class="ta-node__hit" data-label="Fairness" tabindex="0" role="button">
+                <circle r="40" class="ta-node__outer" />
+                <circle r="40" class="ta-node__accent" fill="none" stroke="#1d465e" stroke-width="2" stroke-opacity="0.32" stroke-dasharray="251" />
+                <circle r="32" class="ta-node__inner" />
+                <g transform="translate(-12,-13)" fill="none" stroke="#1d465e" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="3" x2="12" y2="21" />
+                  <path d="M5 21h14" />
+                  <line x1="3" y1="6" x2="21" y2="6" />
+                  <path d="M3 6l4 7c0 2-1.8 3.5-4 3.5S-1 15 0 13L3 6z" />
+                  <path d="M21 6l-4 7c0 2 1.8 3.5 4 3.5s5-1.5 4-3.5l-4-7z" />
+                </g>
+                <g transform="translate(6,2)">
+                  <rect x="0" y="-8" width="3.5" height="12" rx="0.8" fill="#1d465e" opacity="0.55" />
+                  <rect x="5" y="-12" width="3.5" height="16" rx="0.8" fill="#f5ba42" opacity="0.85" />
+                  <rect x="10" y="-5" width="3.5" height="9" rx="0.8" fill="#1d465e" opacity="0.35" />
+                </g>
+              </g>
+            </g>
+          </g>
+        </g>
+
+        <g class="ta-node" data-i="5" transform="translate(101.1 164)">
+          <g class="ta-node__entrance">
+            <g class="ta-node__float">
+              <g class="ta-node__hit" data-label="Explainability" tabindex="0" role="button">
+                <circle r="40" class="ta-node__outer" />
+                <circle r="40" class="ta-node__accent" fill="none" stroke="#f5ba42" stroke-width="2" stroke-opacity="0.5" stroke-dasharray="251" />
+                <circle r="32" class="ta-node__inner" />
+                <g transform="translate(-12,-12)" fill="none" stroke="#1d465e" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="4" y="2" width="12" height="18" rx="2" />
+                  <line x1="8" y1="7" x2="14" y2="7" />
+                  <line x1="8" y1="11" x2="14" y2="11" />
+                  <line x1="8" y1="15" x2="11" y2="15" />
+                </g>
+                <circle cx="9" cy="5" r="5.5" fill="none" stroke="#1d465e" stroke-width="1.4" />
+                <line x1="13" y1="9" x2="17" y2="13" stroke="#1d465e" stroke-width="1.8" stroke-linecap="round" />
+                <circle cx="-18" cy="-16" r="2.5" fill="#f5ba42" />
+                <circle cx="-24" cy="-10" r="2" fill="#1d465e" opacity="0.45" />
+                <line x1="-18" y1="-16" x2="-24" y2="-10" stroke="#1d465e" stroke-width="0.9" opacity="0.35" />
+              </g>
+            </g>
+          </g>
+        </g>
+      </svg>
+    <div class="trustai-diagram__tooltip" id="ta-tooltip" aria-live="polite" hidden></div>
+    </div>
+  </div>
+  <script>
+/**
+ * TrustAI circular governance diagram — animations & interactions
+ */
+(function () {
+  'use strict';
+
+  var root = document.getElementById('trustai-diagram');
+  if (!root) return;
+
+  var center = document.getElementById('ta-center');
+  var lines = root.querySelectorAll('.ta-line');
+  var hits = root.querySelectorAll('.ta-node__hit');
+  var tooltip = document.getElementById('ta-tooltip');
+  var played = false;
+  var entranceObserver = null;
+
+  function delay(ms) {
+    return new Promise(function (resolve) {
+      setTimeout(resolve, ms);
+    });
+  }
+
+  function setLineDashMetrics() {
+    lines.forEach(function (line) {
+      try {
+        var len = line.getTotalLength();
+        line.style.setProperty('--ta-dash', String(len));
+        line.style.setProperty('--ta-dash-offset', String(len));
+      } catch (_) {
+        line.style.setProperty('--ta-dash', '1');
+        line.style.setProperty('--ta-dash-offset', '0');
+      }
+    });
+  }
+
+  function clearActiveLines() {
+    lines.forEach(function (l) {
+      l.classList.remove('is-active');
+    });
+  }
+
+  function highlightLine(index) {
+    clearActiveLines();
+    var el = root.querySelector('.ta-line[data-i="' + index + '"]');
+    if (el) el.classList.add('is-active');
+  }
+
+  function showTooltip(label, clientX, clientY) {
+    if (!tooltip) return;
+    tooltip.textContent = label;
+    tooltip.hidden = false;
+    var rect = root.getBoundingClientRect();
+    tooltip.style.left = clientX - rect.left + 'px';
+    tooltip.style.top = clientY - rect.top + 'px';
+    tooltip.classList.add('is-visible');
+  }
+
+  function hideTooltip() {
+    if (!tooltip) return;
+    tooltip.classList.remove('is-visible');
+    tooltip.hidden = true;
+  }
+
+  async function runEntrance() {
+    if (played) return;
+    played = true;
+    if (entranceObserver) {
+      entranceObserver.disconnect();
+      entranceObserver = null;
+    }
+
+    root.classList.add('trustai-diagram--play');
+    await delay(720);
+    root.classList.add('trustai-diagram--play-lines');
+    await delay(520);
+    root.classList.add('trustai-diagram--play-flow');
+  }
+
+  function bindNodeInteractions() {
+    hits.forEach(function (hit) {
+      var slot = hit.closest('.ta-node');
+      var idx = slot && slot.getAttribute('data-i');
+      var label = hit.getAttribute('data-label') || '';
+
+      hit.addEventListener('mouseenter', function (e) {
+        if (idx !== null) highlightLine(idx);
+        showTooltip(label, e.clientX, e.clientY);
+      });
+
+      hit.addEventListener('mousemove', function (e) {
+        if (tooltip && tooltip.classList.contains('is-visible')) {
+          showTooltip(label, e.clientX, e.clientY);
+        }
+      });
+
+      hit.addEventListener('mouseleave', function () {
+        clearActiveLines();
+        hideTooltip();
+      });
+
+      hit.addEventListener('focus', function () {
+        if (idx !== null) highlightLine(idx);
+        var r = hit.getBoundingClientRect();
+        showTooltip(label, r.left + r.width / 2, r.top);
+      });
+
+      hit.addEventListener('blur', function () {
+        clearActiveLines();
+        hideTooltip();
+      });
+    });
+  }
+
+  function bindCenterHover() {
+    if (!center) return;
+    center.addEventListener('mouseenter', function () {
+      center.classList.add('is-glow');
+      lines.forEach(function (l) {
+        l.style.strokeOpacity = '0.38';
+      });
+    });
+    center.addEventListener('mouseleave', function () {
+      center.classList.remove('is-glow');
+      lines.forEach(function (l) {
+        l.style.removeProperty('stroke-opacity');
+      });
+    });
+  }
+
+  function maybeAutoplay() {
+    var rect = root.getBoundingClientRect();
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    if (rect.top < vh && rect.bottom > 0) {
+      runEntrance();
+      return true;
+    }
+    return false;
+  }
+
+  function init() {
+    setLineDashMetrics();
+    bindNodeInteractions();
+    bindCenterHover();
+
+    if (!window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      entranceObserver = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              runEntrance();
+            }
+          });
+        },
+        { threshold: 0.12 }
+      );
+      entranceObserver.observe(root);
+      maybeAutoplay();
+    } else {
+      root.classList.add('trustai-diagram--play');
+      root.classList.add('trustai-diagram--play-lines');
+      root.classList.add('trustai-diagram--play-flow');
+      played = true;
+    }
+
+    window.addEventListener('resize', setLineDashMetrics, { passive: true });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+
+  </script>
+</body>
+</html>

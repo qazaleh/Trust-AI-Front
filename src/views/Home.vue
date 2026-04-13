@@ -13,6 +13,9 @@ import {
 import { useRoute } from 'vue-router'
 
 import PageHero from '@/components/PageHero.vue'
+import dashboardCardHtmlSource from '@/components/imageComponents/dashboard-card.html?raw'
+import diagramcHtmlSource from '@/components/imageComponents/diagramc.html?raw'
+import trustaiDiagramHtmlSource from '@/components/imageComponents/trustai-diagram.html?raw'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -26,6 +29,97 @@ import { normalizeLocale, publications } from '@/lib/site'
 
 const route = useRoute()
 const locale = computed(() => normalizeLocale(route.params.locale))
+
+const createEmbeddedHtml = (source, styles) => source.replace('</head>', `<style>${styles}</style></head>`)
+
+const dashboardCardHtml = createEmbeddedHtml(
+  dashboardCardHtmlSource.replace('src="logo.png"', 'src="/logo.png"'),
+  `
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      min-height: 0 !important;
+      overflow: hidden !important;
+      background: transparent !important;
+    }
+
+    body {
+      padding: 0 !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+
+    .card-wrap {
+      max-width: min(520px, 100%) !important;
+    }
+
+    .dash-card {
+      background: transparent !important;
+      border: 0 !important;
+      opacity: 1 !important;
+      transform: none !important;
+      transition: box-shadow 0.3s ease !important;
+      box-shadow: none !important;
+    }
+  `,
+)
+const diagramcHtml = createEmbeddedHtml(
+  diagramcHtmlSource,
+  `
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      min-height: 0 !important;
+      overflow: hidden !important;
+      background: transparent !important;
+    }
+
+    body {
+      padding: 0 !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+
+    .trustai-diagram-embed,
+    .trustai-diagram {
+      max-width: 100% !important;
+    }
+
+    .trustai-diagram {
+      background: transparent !important;
+      border: 0 !important;
+      box-shadow: none !important;
+    }
+  `,
+)
+const trustaiDiagramHtml = createEmbeddedHtml(
+  trustaiDiagramHtmlSource,
+  `
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      min-height: 0 !important;
+      overflow: hidden !important;
+      background: transparent !important;
+    }
+
+    body {
+      padding: 0 !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+
+    .diagram-box {
+      background: transparent !important;
+      border: 0 !important;
+      max-width: min(440px, 100%) !important;
+      box-shadow: none !important;
+    }
+  `,
+)
 
 const serviceCards = [
   {
@@ -78,6 +172,11 @@ const whyCards = [
   <div class="page-shell gap-10">
     <PageHero
       v-reveal
+      aside-width="32rem"
+      aside-class="hidden lg:block"
+      :aside-chrome="false"
+      compact
+      content-align="center"
       :label="$t('researchHero.label')"
       :title="$t('researchHero.title')"
       :description="$t('researchHero.description')"
@@ -90,36 +189,19 @@ const whyCards = [
           </RouterLink>
         </Button>
 
-        <Button as-child variant="outline" size="lg" class="rounded-full">
+        <!-- <Button as-child variant="outline" size="lg" class="rounded-full">
           <a href="mailto:info@trustai.com.tr">{{ $t('cta.contact') }}</a>
-        </Button>
+        </Button> -->
       </template>
 
-      <!-- <template #aside>
-        <div class="space-y-4">
-          <p class="text-sm font-bold uppercase tracking-[0.22em] text-foreground">{{ $t('homePage.focusAreas') }}</p>
-          <div class="space-y-3">
-            <div class="rounded-[1.6rem] border border-border/70 bg-white/55 px-4 py-3">
-              <p class="text-sm font-semibold text-foreground">{{ $t('whatWeDo.explainability.title') }}</p>
-              <p class="mt-1 text-sm leading-6 text-foreground">
-                {{ $t('whatWeDo.explainability.description') }}
-              </p>
-            </div>
-            <div class="rounded-[1.6rem] border border-border/70 bg-white/55 px-4 py-3">
-              <p class="text-sm font-semibold text-foreground">{{ $t('whatWeDo.traceability.title') }}</p>
-              <p class="mt-1 text-sm leading-6 text-foreground">
-                {{ $t('whatWeDo.traceability.description') }}
-              </p>
-            </div>
-            <div class="rounded-[1.6rem] border border-border/70 bg-white/55 px-4 py-3">
-              <p class="text-sm font-semibold text-foreground">{{ $t('whatWeDo.audit.title') }}</p>
-              <p class="mt-1 text-sm leading-6 text-foreground">
-                {{ $t('whatWeDo.audit.description') }}
-              </p>
-            </div>
-          </div>
-        </div>
-      </template> -->
+      <template #aside>
+        <iframe
+          :srcdoc="dashboardCardHtml"
+          title="TrustAI dashboard card"
+          scrolling="no"
+          class="block h-[21rem] w-full overflow-hidden border-0 bg-transparent"
+        />
+      </template>
     </PageHero>
 
     <section class="space-y-6">
@@ -173,11 +255,13 @@ const whyCards = [
         </div>
       </div>
 
-      <div v-reveal="{ delay: 120 }" class="content-panel">
-        <img
-          src="/whatwedo.png"
-          alt="TrustAI governance capabilities"
-          class="h-full w-full object-cover"
+      <div v-reveal="{ delay: 120 }" class="overflow-hidden">
+        <iframe
+          :srcdoc="trustaiDiagramHtml"
+          title="TrustAI governance capabilities"
+          loading="lazy"
+          scrolling="no"
+          class="block h-[38rem] w-full overflow-hidden border-0 bg-transparent sm:h-[34rem]"
         />
       </div>
     </section>
@@ -215,8 +299,14 @@ const whyCards = [
         </div>
       </div>
 
-      <div v-reveal="{ delay: 130 }" class="content-panel bg-secondary/35 p-4">
-        <img src="/why.png" alt="Why TrustAI" class="h-auto w-full object-contain" />
+      <div v-reveal="{ delay: 130 }" class="overflow-hidden">
+        <iframe
+          :srcdoc="diagramcHtml"
+          title="Why TrustAI"
+          loading="lazy"
+          scrolling="no"
+          class="block h-[24rem] w-full overflow-hidden border-0 bg-transparent sm:h-[30rem]"
+        />
       </div>
     </section>
 
@@ -257,20 +347,30 @@ const whyCards = [
               <ArrowRight class="size-4" />
             </a>
           </Button>
+          <Button
+            v-else
+            variant="outline"
+            class="pointer-events-none rounded-full border-border/80 bg-white/45 text-muted-foreground"
+            disabled
+            aria-disabled="true"
+          >
+            Preprint available soon
+          </Button>
         </article>
       </div>
     </section>
+    
 
     <Card v-reveal="{ delay: 120 }" class="content-card overflow-hidden bg-secondary/70">
       <CardHeader class="space-y-3">
         <CardTitle class="section-title">{{ $t('cta.title') }}</CardTitle>
         <CardDescription class="section-description">
-          {{ $t('cta.description') }}
+          {{ $t('homePage.ctaDescription') }}
         </CardDescription>
       </CardHeader>
       <CardContent class="space-y-6">
-        <Separator class="bg-border" />
-        <div class="flex flex-col gap-3 sm:flex-row">
+        <!-- <Separator class="bg-border" /> -->
+        <!-- <div class="flex flex-col gap-3 sm:flex-row">
           <Button as-child variant="secondary" size="lg" class="rounded-full bg-primary text-primary-foreground hover:bg-primary/90">
             <a href="mailto:info@trustai.com.tr">{{ $t('cta.contact') }}</a>
           </Button>
@@ -284,7 +384,7 @@ const whyCards = [
               {{ $t('cta.research') }}
             </RouterLink>
           </Button>
-        </div>
+        </div> -->
       </CardContent>
     </Card>
   </div>

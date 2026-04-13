@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://trustai.com.tr/sitemap.xml

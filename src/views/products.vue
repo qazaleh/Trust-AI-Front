@@ -53,7 +53,7 @@ function list(path) {
       :title="$t('productsPage.hero.title')"
       :description="$t('productsPage.hero.subtitle')"
     >
-      <template #actions>
+      <!-- <template #actions>
         <Button as-child size="lg" class="rounded-full shadow-sm">
           <a href="mailto:info@trustai.com.tr">
             {{ $t('cta.contact') }}
@@ -65,7 +65,7 @@ function list(path) {
             {{ $t('navbar.services') }}
           </RouterLink>
         </Button>
-      </template>
+      </template> -->
     </PageHero>
 
     <section v-reveal="{ delay: 120 }" class="space-y-6">
@@ -204,7 +204,7 @@ function list(path) {
             <p class="content-copy">{{ item }}</p>
           </div>
         </div>
-
+<!-- 
         <div class="flex flex-col gap-3 sm:flex-row">
           <Button as-child size="lg" class="rounded-full bg-accent text-accent-foreground hover:bg-accent/90">
             <RouterLink :to="{ name: 'services', params: { locale } }">
@@ -214,7 +214,7 @@ function list(path) {
           <Button as-child variant="outline" size="lg" class="rounded-full border-border bg-white/55 text-primary hover:bg-white">
             <a href="mailto:info@trustai.com.tr">{{ $t('cta.contact') }}</a>
           </Button>
-        </div>
+        </div> -->
       </CardContent>
     </Card>
   </div>

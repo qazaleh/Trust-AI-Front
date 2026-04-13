@@ -51,12 +51,12 @@ const regulatoryItems = computed(() => {
       :description="$t('aboutPage.hero.subtitle')"
     >
       <template #actions>
-        <Button as-child size="lg" class="rounded-full shadow-sm">
+        <!-- <Button as-child size="lg" class="rounded-full shadow-sm">
           <RouterLink :to="{ name: 'research', params: { locale } }">
             {{ $t('cta.research') }}
             <ArrowRight class="size-4" />
           </RouterLink>
-        </Button>
+        </Button> -->
 
         <Button as-child variant="outline" size="lg" class="rounded-full">
           <a href="mailto:info@trustai.com.tr">{{ $t('cta.contact') }}</a>

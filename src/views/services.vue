@@ -51,7 +51,7 @@ function list(path) {
       :title="$t('servicesPage.hero.title')"
       :description="$t('servicesPage.hero.subtitle')"
     >
-      <template #actions>
+      <!-- <template #actions>
         <Button as-child size="lg" class="rounded-full shadow-sm">
           <a href="mailto:info@trustai.com.tr">
             {{ $t('cta.contact') }}
@@ -63,7 +63,7 @@ function list(path) {
             {{ $t('navbar.products') }}
           </RouterLink>
         </Button>
-      </template>
+      </template> -->
     </PageHero>
 
     <section v-reveal="{ delay: 120 }" class="space-y-6">
@@ -199,13 +199,13 @@ function list(path) {
       <CardHeader class="space-y-3">
         <p class="section-label">{{ $t('servicesPage.hero.label') }}</p>
         <CardTitle class="section-title max-w-3xl">
-          {{ $t('cta.title') }}
+          {{ $t('servicesPage.cta.title') }}
         </CardTitle>
         <CardDescription class="section-description">
           {{ $t('cta.description') }}
         </CardDescription>
       </CardHeader>
-      <CardContent class="flex flex-col gap-3 sm:flex-row">
+      <!-- <CardContent class="flex flex-col gap-3 sm:flex-row">
         <Button as-child size="lg" class="rounded-full bg-accent text-accent-foreground hover:bg-accent/90">
           <a href="mailto:info@trustai.com.tr">{{ $t('cta.contact') }}</a>
         </Button>
@@ -214,7 +214,7 @@ function list(path) {
             {{ $t('navbar.products') }}
           </RouterLink>
         </Button>
-      </CardContent>
+      </CardContent> -->
     </Card>
   </div>
 </template>

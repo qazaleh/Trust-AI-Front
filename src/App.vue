@@ -1,4 +1,5 @@
 <script setup>
+// import ContactFormModal from './components/ContactFormModal.vue'
 import Footer from './components/Footer.vue'
 import Navbar from './components/Navbar.vue'
 </script>
@@ -12,5 +13,6 @@ import Navbar from './components/Navbar.vue'
     </main>
 
     <Footer />
+    <!-- <ContactFormModal /> -->
   </div>
 </template>

@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TrustAI – AI Governance Diagram</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+/* === ROOT TOKENS === */
+:root {
+  --background:       #faf7f0;
+  --surface:          #fffdf8;
+  --primary:          #1d465e;
+  --secondary:        #e3ebee;
+  --foreground:       #11212b;
+  --foreground-muted: #667885;
+  --accent:           #f5ba42;
+  --border:           #e6dece;
+  --radius:           1.25rem;
+  --radius-sm:        0.75rem;
+  --shadow-card:      0 2px 12px rgba(29,70,94,0.07), 0 1px 3px rgba(29,70,94,0.05);
+  --shadow-hover:     0 6px 24px rgba(29,70,94,0.12), 0 2px 6px rgba(29,70,94,0.08);
+  --shadow-center:    0 8px 32px rgba(29,70,94,0.14), 0 2px 8px rgba(29,70,94,0.10);
+  --shadow-box:       0 8px 40px rgba(29,70,94,0.13), 0 2px 8px rgba(29,70,94,0.07);
+}
+
+/* === RESET === */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ul { list-style: none; }
+
+/* === BODY === */
+body {
+  background: #eae6de;
+  font-family: 'Inter', sans-serif;
+  color: var(--foreground);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1.5rem;
+}
+
+/* === DIAGRAM BOX === */
+.diagram-box {
+  background: var(--background);
+  border: 1.5px solid var(--border);
+  border-radius: 1.75rem;
+  box-shadow: var(--shadow-box);
+  padding: 1.25rem 1.1rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 440px;
+}
+
+/* === TITLE === */
+.title-pill {
+  background: var(--primary);
+  color: var(--surface);
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 9999px;
+  padding: 0.45rem 1.4rem;
+  text-align: center;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  box-shadow: 0 3px 12px rgba(29,70,94,0.18);
+  width: 100%;
+}
+
+/* === GRID === */
+.grid-wrapper {
+  position: relative;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-rows: auto auto;
+  gap: 0.7rem 0.6rem;
+  align-items: center;
+  justify-items: stretch;
+}
+
+.card--explainability { grid-column: 1; grid-row: 1; }
+.card--robustness     { grid-column: 3; grid-row: 1; }
+.card--bias           { grid-column: 1; grid-row: 2; }
+.card--calibration    { grid-column: 3; grid-row: 2; }
+.center-col {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* === CARDS === */
+.card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  min-height: 130px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+  transition:
+    transform    0.25s ease,
+    box-shadow   0.25s ease,
+    border-color 0.25s ease;
+}
+.card__header {
+  height: 38px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  transition: filter 0.25s ease;
+}
+.card__header--accent      { background: linear-gradient(135deg, #f5ba42, #f0a820); }
+.card__header--secondary   { background: var(--secondary); }
+.card__header--bias        { background: linear-gradient(135deg, var(--secondary) 0%, #dce8ec 100%); }
+.card__header--calibration { background: linear-gradient(135deg, #fdf3d8, #fae7b0); }
+
+.card__title {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--primary);
+  letter-spacing: -0.005em;
+}
+.card__body {
+  padding: 8px 10px 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.bullet-list { display: flex; flex-direction: column; gap: 4px; }
+.bullet-list li {
+  font-size: 10.5px;
+  font-weight: 500;
+  color: var(--foreground);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.25s ease;
+}
+.bullet-list li::before {
+  content: '';
+  display: block;
+  width: 5px; height: 5px; min-width: 5px;
+  border-radius: 50%;
+  background: var(--primary);
+  transition: background 0.25s ease;
+}
+.support-text {
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--foreground-muted);
+  margin-top: 6px;
+}
+
+/* === CENTER MODULE === */
+.trustai-module {
+  width: 148px;
+  height: 148px;
+  border-radius: 50%;
+  background: var(--primary);
+  border: 2.5px solid var(--accent);
+  box-shadow: var(--shadow-center);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: default;
+  position: relative;
+  z-index: 5;
+  transition:
+    border-width 0.25s ease,
+    box-shadow   0.30s ease;
+}
+.trustai-module::after {
+  content: '';
+  position: absolute;
+  inset: -7px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  pointer-events: none;
+  transition: border-color 0.30s ease, opacity 0.30s ease;
+  opacity: 0;
+}
+.trustai-icon {
+  width: 52px; height: 52px;
+  flex-shrink: 0;
+  transition: transform 0.4s ease-out;
+}
+.trustai-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.trustai-sub {
+  font-size: 7.5px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.70);
+  text-align: center;
+  max-width: 120px;
+  line-height: 1.4;
+  padding: 0 6px;
+}
+
+/* === COMPLIANCE PANEL === */
+.compliance-panel {
+  width: 100%;
+  min-height: 46px;
+  background: var(--primary);
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 0.75rem 1rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.compliance-panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0);
+  border-radius: var(--radius-sm);
+  pointer-events: none;
+  transition: background 0.25s ease;
+}
+.compliance-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+.compliance-sub {
+  font-size: 9.5px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.72);
+  line-height: 1.45;
+}
+
+/* === KEYFRAMES === */
+@keyframes fadeRise {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes titleDrop {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes springIn {
+  from { opacity: 0; transform: scale(0.88); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes pulseCenterGlow {
+  0%, 100% { box-shadow: var(--shadow-center), 0 0 0 0 rgba(245,186,66,0); }
+  50%      { box-shadow: var(--shadow-center), 0 0 0 10px rgba(245,186,66,0.15); }
+}
+@keyframes floatCard {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-3px); }
+}
+
+/* === HIDDEN STATE === */
+.is-hidden        { opacity: 0; transform: translateY(10px); }
+.is-hidden-center { opacity: 0; transform: scale(0.88); }
+
+/* === ANIMATE-IN === */
+.anim-fadeRise  { animation: fadeRise  0.50s cubic-bezier(0.22,1,0.36,1) forwards; }
+.anim-titleDrop { animation: titleDrop 0.50s cubic-bezier(0.22,1,0.36,1) forwards; }
+.anim-springIn  { animation: springIn  0.60s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+
+/* === IDLE === */
+.idle-pulse    { animation: pulseCenterGlow 3.5s ease-in-out infinite; }
+.idle-float-0  { animation: floatCard 4.0s ease-in-out 0.0s infinite; }
+.idle-float-1  { animation: floatCard 4.0s ease-in-out 1.0s infinite; }
+.idle-float-2  { animation: floatCard 4.0s ease-in-out 2.0s infinite; }
+.idle-float-3  { animation: floatCard 4.0s ease-in-out 3.0s infinite; }
+
+/* === HOVERS === */
+.card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); border-color: var(--accent); }
+.card:hover .card__header { filter: brightness(1.05); }
+.card:hover .bullet-list li { color: var(--primary); }
+.card:hover .bullet-list li::before { background: var(--accent); }
+.card.idle-float-0:hover,
+.card.idle-float-1:hover,
+.card.idle-float-2:hover,
+.card.idle-float-3:hover { animation: none; }
+
+.trustai-module:hover {
+  border-width: 3.5px;
+  box-shadow: var(--shadow-center), 0 0 0 8px rgba(245,186,66,0.10), 0 0 0 16px rgba(245,186,66,0.05);
+}
+.trustai-module:hover::after { border-color: rgba(245,186,66,0.40); opacity: 1; }
+.trustai-module:hover .trustai-icon { transform: rotate(15deg); }
+.compliance-panel:hover::after { background: rgba(255,255,255,0.05); }
+
+/* === RESPONSIVE === */
+@media (max-width: 480px) {
+  .diagram-box { padding: 1rem 0.75rem 0.75rem; }
+  .grid-wrapper {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 0.6rem;
+  }
+  .card--explainability { grid-column: 1; grid-row: 1; }
+  .card--robustness     { grid-column: 2; grid-row: 1; }
+  .center-col           { grid-column: 1 / 3; grid-row: 2; }
+  .card--bias           { grid-column: 1; grid-row: 3; }
+  .card--calibration    { grid-column: 2; grid-row: 3; }
+}
+  </style>
+</head>
+<body>
+
+  <div class="diagram-box" id="diagram-box">
+
+    <!-- ① Title pill -->
+    <div class="title-pill" id="title-pill">
+      Our Approach to AI Governance
+    </div>
+
+    <!-- ② Grid -->
+    <div class="grid-wrapper" id="grid-wrapper">
+
+      <!-- Upper-left: Explainability -->
+      <article class="card card--explainability" id="card-explain" data-float="0">
+        <header class="card__header card__header--accent">
+          <span class="card__title">Explainability</span>
+        </header>
+        <div class="card__body">
+          <ul class="bullet-list">
+            <li>SHAP / LIME / Counterfactuals</li>
+          </ul>
+          <p class="support-text">Generate interpretable insights for audit and review.</p>
+        </div>
+      </article>
+
+      <!-- Center: TrustAI -->
+      <div class="center-col">
+        <div class="trustai-module" id="trustai-module">
+          <svg class="trustai-icon" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path id="gear-path"
+              d="M29.5 10.2 L30.9 14.1 C32.6 13.7 34.3 13.5 36 13.5
+                 C37.7 13.5 39.4 13.7 41.1 14.1 L42.5 10.2
+                 C43.0 8.9 44.4 8.2 45.7 8.7 L49.6 10.2
+                 C50.9 10.7 51.6 12.1 51.1 13.4 L49.7 17.3
+                 C51.0 18.3 52.2 19.4 53.2 20.7 L57.1 19.3
+                 C58.4 18.8 59.8 19.5 60.3 20.8 L61.8 24.7
+                 C62.3 26.0 61.6 27.4 60.3 27.9 L56.4 29.3
+                 C56.8 31.0 57.0 32.5 57.0 34.2 C57.0 35.9 56.8 37.6 56.4 39.3
+                 L60.3 40.7 C61.6 41.2 62.3 42.6 61.8 43.9 L60.3 47.8
+                 C59.8 49.1 58.4 49.8 57.1 49.3 L53.2 47.9
+                 C52.2 49.2 51.0 50.3 49.7 51.3 L51.1 55.2
+                 C51.6 56.5 50.9 57.9 49.6 58.4 L45.7 59.9
+                 C44.4 60.4 43.0 59.7 42.5 58.4 L41.1 54.5
+                 C39.4 54.9 37.7 55.1 36 55.1 C34.3 55.1 32.6 54.9 30.9 54.5
+                 L29.5 58.4 C29.0 59.7 27.6 60.4 26.3 59.9 L22.4 58.4
+                 C21.1 57.9 20.4 56.5 20.9 55.2 L22.3 51.3
+                 C21.0 50.3 19.8 49.2 18.8 47.9 L14.9 49.3
+                 C13.6 49.8 12.2 49.1 11.7 47.8 L10.2 43.9
+                 C9.7 42.6 10.4 41.2 11.7 40.7 L15.6 39.3
+                 C15.2 37.6 15.0 35.9 15.0 34.2 C15.0 32.5 15.2 31.0 15.6 29.3
+                 L11.7 27.9 C10.4 27.4 9.7 26.0 10.2 24.7 L11.7 20.8
+                 C12.2 19.5 13.6 18.8 14.9 19.3 L18.8 20.7
+                 C19.8 19.4 21.0 18.3 22.3 17.3 L20.9 13.4
+                 C20.4 12.1 21.1 10.7 22.4 10.2 L26.3 8.7
+                 C27.6 8.2 29.0 8.9 29.5 10.2 Z"
+              fill="none" stroke="rgba(255,255,255,0.30)" stroke-width="1.8" stroke-linejoin="round" />
+            <circle cx="36" cy="34" r="12" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.2" />
+            <path d="M36 20 L47 25 L47 33 C47 40.5 42.2 47 36 49 C29.8 47 25 40.5 25 33 L25 25 Z"
+              fill="rgba(245,186,66,0.18)" stroke="#f5ba42" stroke-width="2" stroke-linejoin="round" />
+            <polyline points="29.5,34 33.5,39 42.5,28"
+              fill="none" stroke="#ffffff" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <span class="trustai-title">TrustAI</span>
+        </div>
+      </div>
+
+      <!-- Upper-right: Robustness -->
+      <article class="card card--robustness" id="card-robust" data-float="1">
+        <header class="card__header card__header--secondary">
+          <span class="card__title">Robustness</span>
+        </header>
+        <div class="card__body">
+          <ul class="bullet-list">
+            <li>Detect Drift</li>
+            <li>Stress Testing</li>
+          </ul>
+          <p class="support-text">Enhance model reliability and stability.</p>
+        </div>
+      </article>
+
+      <!-- Lower-left: Bias / Fairness -->
+      <article class="card card--bias" id="card-bias" data-float="2">
+        <header class="card__header card__header--bias">
+          <span class="card__title">Bias / Fairness</span>
+        </header>
+        <div class="card__body">
+          <ul class="bullet-list">
+            <li>Segment Metrics</li>
+            <li>Bias Mitigation</li>
+          </ul>
+          <p class="support-text">Promote equity by identifying and reducing bias.</p>
+        </div>
+      </article>
+
+      <!-- Lower-right: Calibration -->
+      <article class="card card--calibration" id="card-calib" data-float="3">
+        <header class="card__header card__header--calibration">
+          <span class="card__title">Calibration</span>
+        </header>
+        <div class="card__body">
+          <ul class="bullet-list">
+            <li>Calibrate (ECE – Brier)</li>
+          </ul>
+          <p class="support-text">Measure and reduce prediction uncertainty.</p>
+        </div>
+      </article>
+
+    </div><!-- /grid-wrapper -->
+
+    <!-- ③ Compliance panel -->
+    <div class="compliance-panel" id="compliance-panel">
+      <p class="compliance-title">Compliance &amp; Reporting</p>
+    </div>
+
+  </div>
+
+  <script>
+'use strict';
+
+const titlePill       = document.getElementById('title-pill');
+const trustaiModule   = document.getElementById('trustai-module');
+const compliancePanel = document.getElementById('compliance-panel');
+const cardExplain     = document.getElementById('card-explain');
+const cardRobust      = document.getElementById('card-robust');
+const cardBias        = document.getElementById('card-bias');
+const cardCalib       = document.getElementById('card-calib');
+
+const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function applyHidden() {
+  titlePill.classList.add('is-hidden');
+  cardExplain.classList.add('is-hidden');
+  cardRobust.classList.add('is-hidden');
+  cardBias.classList.add('is-hidden');
+  cardCalib.classList.add('is-hidden');
+  trustaiModule.classList.add('is-hidden-center');
+  compliancePanel.classList.add('is-hidden');
+}
+
+function startIdleAnimations() {
+  trustaiModule.classList.add('idle-pulse');
+  cardExplain.classList.add('idle-float-0');
+  cardRobust.classList.add('idle-float-1');
+  cardBias.classList.add('idle-float-2');
+  cardCalib.classList.add('idle-float-3');
+}
+
+function runEntrance() {
+  if (prefersReduced) {
+    [titlePill, cardExplain, cardRobust, cardBias, cardCalib, trustaiModule, compliancePanel].forEach(el => {
+      el.classList.remove('is-hidden', 'is-hidden-center');
+      el.style.opacity = '1'; el.style.transform = 'none';
+    });
+    startIdleAnimations();
+    return;
+  }
+  setTimeout(() => { titlePill.classList.remove('is-hidden'); titlePill.classList.add('anim-titleDrop'); }, 0);
+  setTimeout(() => { cardExplain.classList.remove('is-hidden'); cardExplain.classList.add('anim-fadeRise'); }, 150);
+  setTimeout(() => { cardRobust.classList.remove('is-hidden'); cardRobust.classList.add('anim-fadeRise'); }, 250);
+  setTimeout(() => { cardBias.classList.remove('is-hidden'); cardBias.classList.add('anim-fadeRise'); }, 350);
+  setTimeout(() => { cardCalib.classList.remove('is-hidden'); cardCalib.classList.add('anim-fadeRise'); }, 450);
+  setTimeout(() => { trustaiModule.classList.remove('is-hidden-center'); trustaiModule.classList.add('anim-springIn'); }, 600);
+  setTimeout(() => { compliancePanel.classList.remove('is-hidden'); compliancePanel.classList.add('anim-fadeRise'); }, 900);
+  setTimeout(startIdleAnimations, 1300);
+}
+
+applyHidden();
+document.fonts.ready.then(() => {
+  requestAnimationFrame(() => requestAnimationFrame(runEntrance));
+});
+  </script>
+</body>
+</html>

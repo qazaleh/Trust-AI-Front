@@ -63,7 +63,7 @@ const pillarCards = [
       :title="$t('aiGovernancePage.hero.title')"
       :description="$t('aiGovernancePage.hero.subtitle')"
     >
-      <template #actions>
+      <!-- <template #actions>
         <Button as-child size="lg" class="rounded-full shadow-sm">
           <a href="mailto:info@trustai.com.tr">
             {{ $t('aiGovernancePage.closing.cta') }}
@@ -76,7 +76,7 @@ const pillarCards = [
             {{ $t('cta.research') }}
           </RouterLink>
         </Button>
-      </template>
+      </template> -->
 <!-- 
       <template #aside>
         <div class="space-y-3">
@@ -175,11 +175,11 @@ const pillarCards = [
           {{ $t('aiGovernancePage.closing.description') }}
         </CardDescription>
       </CardHeader>
-      <CardContent>
+      <!-- <CardContent>
         <Button as-child variant="secondary" size="lg" class="rounded-full">
           <a href="mailto:info@trustai.com.tr">{{ $t('aiGovernancePage.closing.cta') }}</a>
         </Button>
-      </CardContent>
+      </CardContent> -->
     </Card>
   </div>
 </template>
