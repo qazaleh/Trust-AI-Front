@@ -1,8 +1,7 @@
 <script setup>
 import { ArrowRight, ClipboardCheck, Shield, ShieldAlert, Workflow } from 'lucide-vue-next'
-import { computed } from 'vue'
+import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useRoute } from 'vue-router'
 
 import PageHero from '@/components/PageHero.vue'
 import SectionHeading from '@/components/SectionHeading.vue'
@@ -14,11 +13,9 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { normalizeLocale } from '@/lib/site'
 
-const route = useRoute()
-const locale = computed(() => normalizeLocale(route.params.locale))
 const { tm } = useI18n()
+const selectedService = ref(null)
 
 const serviceCards = [
   {
@@ -40,6 +37,10 @@ const processIcons = [ClipboardCheck, Shield, Workflow, ArrowRight, ClipboardChe
 function list(path) {
   const value = tm(path)
   return Array.isArray(value) ? value : []
+}
+
+function toggleService(key) {
+  selectedService.value = selectedService.value === key ? null : key
 }
 </script>
 
@@ -73,7 +74,7 @@ function list(path) {
         :description="$t('servicesPage.overview.description')"
       />
 
-      <div class="grid gap-4 lg:grid-cols-2">
+      <div class="grid items-start gap-4">
         <Card
           v-for="service in serviceCards"
           :key="service.key"
@@ -91,78 +92,76 @@ function list(path) {
                 {{ $t(`servicesPage.${service.key}.overview`) }}
               </CardDescription>
             </div>
-          </CardHeader>
-        </Card>
-      </div>
-    </section>
 
-    <section class="space-y-6">
-      <Card
-        v-for="service in serviceCards"
-        :key="`${service.key}-detail`"
-        v-reveal="{ delay: service.delay }"
-        :class="['content-card overflow-hidden hover-lift']"
-      >
-        <CardHeader class="gap-4 border-b border-border/70 pb-6">
-          <div class="flex items-start gap-4">
-            <div class="flex size-14 items-center justify-center rounded-[1.3rem]" :class="service.accentClass">
-              <component :is="service.icon" class="size-6" />
-            </div>
-            <div class="space-y-2">
-              <p class="section-label">{{ $t(`servicesPage.${service.key}.category`) }}</p>
-              <CardTitle class="content-title">{{ $t(`servicesPage.${service.key}.name`) }}</CardTitle>
-              <CardDescription class="section-description">
-                {{ $t(`servicesPage.${service.key}.overview`) }}
-              </CardDescription>
-            </div>
-          </div>
-        </CardHeader>
-
-        <CardContent class="grid gap-5 pt-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
-          <div class="space-y-4">
-            <p class="section-label">{{ $t(`servicesPage.${service.key}.whatWeDoTitle`) }}</p>
-            <div class="grid gap-3">
-              <div
-                v-for="item in list(`servicesPage.${service.key}.whatWeDo`)"
-                :key="item"
-                class="content-chip bg-background/82"
+            <div class="pt-2">
+              <Button
+                variant="outline"
+                class="group rounded-full border-border bg-background/78 text-primary hover:bg-white"
+                :aria-expanded="selectedService === service.key"
+                @click="toggleService(service.key)"
               >
-                {{ item }}
-              </div>
+                {{ selectedService === service.key ? $t('common.hideServiceDetails') : $t('common.showServiceDetails') }}
+                <ArrowRight
+                  :class="[
+                    'size-4 transition-transform duration-300',
+                    selectedService === service.key ? 'rotate-90' : 'group-hover:translate-x-1'
+                  ]"
+                />
+              </Button>
             </div>
-          </div>
+          </CardHeader>
 
-          <div class="grid gap-5">
-            <div class="rounded-[1.5rem] border border-border/70 bg-background/78 p-5">
-              <p class="section-label">
-                {{ $t(`servicesPage.${service.key}.${service.key === 'framework' ? 'deliverablesTitle' : 'capabilitiesTitle'}`) }}
-              </p>
-              <ul class="mt-4 space-y-3">
-                <li
-                  v-for="item in list(`servicesPage.${service.key}.${service.key === 'framework' ? 'deliverables' : 'capabilities'}`)"
-                  :key="item"
-                  class="content-copy"
-                >
-                  {{ item }}
-                </li>
-              </ul>
-            </div>
-
-            <div class="rounded-[1.5rem] border border-border/70 bg-secondary/55 p-5">
-              <p class="section-label">{{ $t(`servicesPage.${service.key}.valueTitle`) }}</p>
-              <div class="mt-4 grid gap-3">
-                <div
-                  v-for="item in list(`servicesPage.${service.key}.value`)"
-                  :key="item"
-                  class="content-chip bg-background/82"
-                >
-                  {{ item }}
+          <Transition name="detail-panel">
+            <CardContent
+              v-if="selectedService === service.key"
+              class="grid gap-5 border-t border-border/70 pt-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]"
+            >
+              <div class="space-y-4">
+                <p class="section-label">{{ $t(`servicesPage.${service.key}.whatWeDoTitle`) }}</p>
+                <div class="grid gap-3">
+                  <div
+                    v-for="item in list(`servicesPage.${service.key}.whatWeDo`)"
+                    :key="item"
+                    class="content-chip bg-background/82"
+                  >
+                    {{ item }}
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+
+              <div class="grid gap-5">
+                <div class="rounded-[1.5rem] border border-border/70 bg-background/78 p-5">
+                  <p class="section-label">
+                    {{ $t(`servicesPage.${service.key}.${service.key === 'framework' ? 'deliverablesTitle' : 'capabilitiesTitle'}`) }}
+                  </p>
+                  <ul class="mt-4 space-y-3">
+                    <li
+                      v-for="item in list(`servicesPage.${service.key}.${service.key === 'framework' ? 'deliverables' : 'capabilities'}`)"
+                      :key="item"
+                      class="content-copy"
+                    >
+                      {{ item }}
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="rounded-[1.5rem] border border-border/70 bg-secondary/55 p-5">
+                  <p class="section-label">{{ $t(`servicesPage.${service.key}.valueTitle`) }}</p>
+                  <div class="mt-4 grid gap-3">
+                    <div
+                      v-for="item in list(`servicesPage.${service.key}.value`)"
+                      :key="item"
+                      class="content-chip bg-background/82"
+                    >
+                      {{ item }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Transition>
+        </Card>
+      </div>
     </section>
 
     <section v-reveal="{ delay: 200 }" class="space-y-6">

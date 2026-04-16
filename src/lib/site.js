@@ -30,6 +30,7 @@ export const teamMembers = [
     roleKey: 'teamMembers.sureyya.role',
     bioKey: 'teamMembers.sureyya.bio',
     image: '/SA.JPG',
+    imagePosition: 'center top',
     initials: 'SA',
   },
   {
@@ -37,6 +38,7 @@ export const teamMembers = [
     roleKey: 'teamMembers.qazaleh.role',
     bioKey: 'teamMembers.qazaleh.bio',
     image: '/QA.JPG',
+    imagePosition: 'center center',
     initials: 'QA',
   },
   {
@@ -44,6 +46,7 @@ export const teamMembers = [
     roleKey: 'teamMembers.faramarz.role',
     bioKey: 'teamMembers.faramarz.bio',
     image: '/FM.JPG',
+    imagePosition: 'center 18%',
     initials: 'FM',
   },
   {
@@ -51,6 +54,7 @@ export const teamMembers = [
     roleKey: 'teamMembers.dilara.role',
     bioKey: 'teamMembers.dilara.bio',
     image: '/DL.JPG',
+    imagePosition: '43% center',
     initials: 'DK',
   },
   {
@@ -58,7 +62,16 @@ export const teamMembers = [
     roleKey: 'teamMembers.nisa.role',
     bioKey: 'teamMembers.nisa.bio',
     image: '/NY.JPG',
+    imagePosition: 'center center',
     initials: 'NY',
+  },
+  {
+    name: 'Arya Sokhangoo',
+    roleKey: 'teamMembers.arya.role',
+    bioKey: 'teamMembers.arya.bio',
+    image: '/AS.jpeg',
+    imagePosition: 'center center',
+    initials: 'AS',
   },
 ]
 

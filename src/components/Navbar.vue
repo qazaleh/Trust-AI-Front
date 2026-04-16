@@ -37,7 +37,7 @@ function isActive(name) {
 </script>
 
 <template>
-  <header class="fixed inset-x-0 top-0 z-50 px-4 pb-3 pt-[17px] sm:px-6 lg:px-8">
+  <header class="relative z-50 px-4 pb-3 pt-[17px] sm:px-6 lg:fixed lg:inset-x-0 lg:top-0 lg:px-8">
     <div
       class="mx-auto flex max-w-7xl items-center justify-between rounded-full bg-linear-to-l from-[#4d7984] via-primary to-[#213d48] px-3 py-2 shadow-[0_20px_44px_-28px_rgba(48,86,105,0.4)]"
     >

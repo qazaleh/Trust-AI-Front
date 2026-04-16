@@ -17,7 +17,11 @@
   "address": "Dijital Park Teknokent, Atasehir / Istanbul"
   },
   "common": {
-    "switchLanguage": "Switch language to {locale}"
+    "switchLanguage": "Switch language to {locale}",
+    "showServiceDetails": "See service details",
+    "hideServiceDetails": "Hide service details",
+    "showProductDetails": "See product details",
+    "hideProductDetails": "Hide product details"
   },
   "cta": {
   "title": "Ready to Strengthen Your AI Governance Framework?",
@@ -422,6 +426,10 @@
     "nisa": {
       "role": "Intern",
       "bio": "An artificial intelligence engineering student focusing on AI safety, AI governance, and responsible AI systems."
+    },
+    "arya": {
+      "role": "AI Engineering Student",
+      "bio": "AI Engineering student with hands-on experience in machine learning and LLM systems, focusing on explainability, model reliability, and responsible AI."
     }
   },
   "productsPage": {

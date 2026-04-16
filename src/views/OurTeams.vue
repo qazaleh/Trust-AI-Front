@@ -83,8 +83,13 @@ import { teamMembers } from '@/lib/site'
         class="content-card"
       >
         <CardHeader class="items-start gap-4">
-          <Avatar class="size-28 rounded-[1.75rem] border border-border/70">
-            <AvatarImage :src="member.image" :alt="member.name" class="object-cover" />
+          <Avatar class="size-28 rounded-[1.75rem] border border-border/70 bg-secondary/55">
+            <AvatarImage
+              :src="member.image"
+              :alt="member.name"
+              class="object-cover"
+              :style="{ objectPosition: member.imagePosition || 'center center' }"
+            />
             <AvatarFallback class="rounded-[1.75rem] bg-secondary text-primary">
               {{ member.initials }}
             </AvatarFallback>

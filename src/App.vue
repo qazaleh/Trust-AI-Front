@@ -8,7 +8,7 @@ import Navbar from './components/Navbar.vue'
   <div class="min-h-screen">
     <Navbar />
 
-    <main class="px-4 pb-16 pt-32 sm:px-6 sm:pt-36 lg:px-8">
+    <main class="px-4 pb-16 pt-8 sm:px-6 sm:pt-10 lg:px-8 lg:pt-36">
       <router-view />
     </main>
 

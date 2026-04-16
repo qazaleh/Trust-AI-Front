@@ -192,6 +192,19 @@
     filter: blur(0);
     transform: translateX(0) scale(1);
   }
+
+  .detail-panel-enter-active,
+  .detail-panel-leave-active {
+    transition:
+      opacity 0.24s ease,
+      transform 0.24s ease;
+  }
+
+  .detail-panel-enter-from,
+  .detail-panel-leave-to {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -204,5 +217,10 @@
 
   .hover-lift:hover {
     transform: none;
+  }
+
+  .detail-panel-enter-active,
+  .detail-panel-leave-active {
+    transition: none;
   }
 }

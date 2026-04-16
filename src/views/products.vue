@@ -1,8 +1,7 @@
 <script setup>
-import { Bot, Boxes, BrainCircuit, FileSearch, Workflow } from 'lucide-vue-next'
-import { computed } from 'vue'
+import { ArrowRight, Bot, Boxes, BrainCircuit, FileSearch, Workflow } from 'lucide-vue-next'
+import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useRoute } from 'vue-router'
 
 import PageHero from '@/components/PageHero.vue'
 import SectionHeading from '@/components/SectionHeading.vue'
@@ -14,11 +13,9 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { normalizeLocale } from '@/lib/site'
 
-const route = useRoute()
-const locale = computed(() => normalizeLocale(route.params.locale))
 const { tm } = useI18n()
+const selectedProduct = ref(null)
 
 const productCards = [
   {
@@ -42,6 +39,10 @@ const ecosystemIcons = [FileSearch, Workflow, Boxes]
 function list(path) {
   const value = tm(path)
   return Array.isArray(value) ? value : []
+}
+
+function toggleProduct(key) {
+  selectedProduct.value = selectedProduct.value === key ? null : key
 }
 </script>
 
@@ -75,7 +76,7 @@ function list(path) {
         :description="$t('productsPage.overview.description')"
       />
 
-      <div class="grid gap-4 lg:grid-cols-2">
+      <div class="grid items-start gap-4">
         <Card
           v-for="product in productCards"
           :key="product.key"
@@ -93,93 +94,91 @@ function list(path) {
                 {{ $t(`productsPage.${product.key}.overview`) }}
               </CardDescription>
             </div>
-          </CardHeader>
-        </Card>
-      </div>
-    </section>
 
-    <section class="space-y-6">
-      <Card
-        v-for="product in productCards"
-        :key="`${product.key}-detail`"
-        v-reveal="{ delay: product.delay }"
-        :class="['content-card overflow-hidden hover-lift']"
-      >
-        <CardHeader class="gap-4 border-b border-border/70 pb-6">
-          <div class="flex items-start gap-4">
-            <div class="flex size-14 items-center justify-center rounded-[1.3rem]" :class="product.accentClass">
-              <component :is="product.icon" class="size-6" />
-            </div>
-            <div class="space-y-2">
-              <p class="section-label">{{ $t(`productsPage.${product.key}.category`) }}</p>
-              <CardTitle class="content-title">{{ $t(`productsPage.${product.key}.name`) }}</CardTitle>
-              <CardDescription class="section-description">
-                {{ $t(`productsPage.${product.key}.overview`) }}
-              </CardDescription>
-            </div>
-          </div>
-        </CardHeader>
-
-        <CardContent class="grid gap-5 pt-6 lg:grid-cols-2">
-          <div class="space-y-4">
-            <div class="section-intro">
-              <p class="section-label">{{ $t(`productsPage.${product.key}.whatItDoesTitle`) }}</p>
-            </div>
-            <div class="grid gap-3">
-              <div
-                v-for="item in list(`productsPage.${product.key}.whatItDoes`)"
-                :key="item"
-                class="content-chip bg-background/82"
+            <div class="pt-2">
+              <Button
+                variant="outline"
+                class="group rounded-full border-border bg-background/78 text-primary hover:bg-white"
+                :aria-expanded="selectedProduct === product.key"
+                @click="toggleProduct(product.key)"
               >
-                {{ item }}
-              </div>
+                {{ selectedProduct === product.key ? $t('common.hideProductDetails') : $t('common.showProductDetails') }}
+                <ArrowRight
+                  :class="[
+                    'size-4 transition-transform duration-300',
+                    selectedProduct === product.key ? 'rotate-90' : 'group-hover:translate-x-1'
+                  ]"
+                />
+              </Button>
             </div>
-          </div>
+          </CardHeader>
 
-          <div class="grid gap-5 sm:grid-cols-2">
-            <div class="space-y-4 rounded-[1.5rem] border border-border/70 bg-background/78 p-5">
-              <p class="section-label">{{ $t(`productsPage.${product.key}.featuresTitle`) }}</p>
-              <ul class="space-y-3">
-                <li
-                  v-for="item in list(`productsPage.${product.key}.features`)"
-                  :key="item"
-                  class="content-copy"
-                >
-                  {{ item }}
-                </li>
-              </ul>
-            </div>
-
-            <div class="space-y-4 rounded-[1.5rem] border border-border/70 bg-background/78 p-5">
-              <p class="section-label">
-                {{ $t(`productsPage.${product.key}.${product.key === 'trustaiX' ? 'deploymentTitle' : 'compatibilityTitle'}`) }}
-              </p>
-              <ul class="space-y-3">
-                <li
-                  v-for="item in list(`productsPage.${product.key}.${product.key === 'trustaiX' ? 'deployment' : 'compatibility'}`)"
-                  :key="item"
-                  class="content-copy"
-                >
-                  {{ item }}
-                </li>
-              </ul>
-            </div>
-
-            <div class="space-y-4 rounded-[1.5rem] border border-border/70 bg-secondary/55 p-5 sm:col-span-2">
-              <p class="section-label">{{ $t(`productsPage.${product.key}.valueTitle`) }}</p>
-              <div class="grid gap-3 md:grid-cols-2">
-                <div
-                  v-for="item in list(`productsPage.${product.key}.value`)"
-                  :key="item"
-                  class="content-chip bg-background/82"
-                >
-                  {{ item }}
+          <Transition name="detail-panel">
+            <CardContent
+              v-if="selectedProduct === product.key"
+              class="grid gap-5 border-t border-border/70 pt-6 lg:grid-cols-2"
+            >
+              <div class="space-y-4">
+                <div class="section-intro">
+                  <p class="section-label">{{ $t(`productsPage.${product.key}.whatItDoesTitle`) }}</p>
+                </div>
+                <div class="grid gap-3">
+                  <div
+                    v-for="item in list(`productsPage.${product.key}.whatItDoes`)"
+                    :key="item"
+                    class="content-chip bg-background/82"
+                  >
+                    {{ item }}
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+
+              <div class="grid gap-5 sm:grid-cols-2">
+                <div class="space-y-4 rounded-[1.5rem] border border-border/70 bg-background/78 p-5">
+                  <p class="section-label">{{ $t(`productsPage.${product.key}.featuresTitle`) }}</p>
+                  <ul class="space-y-3">
+                    <li
+                      v-for="item in list(`productsPage.${product.key}.features`)"
+                      :key="item"
+                      class="content-copy"
+                    >
+                      {{ item }}
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="space-y-4 rounded-[1.5rem] border border-border/70 bg-background/78 p-5">
+                  <p class="section-label">
+                    {{ $t(`productsPage.${product.key}.${product.key === 'trustaiX' ? 'deploymentTitle' : 'compatibilityTitle'}`) }}
+                  </p>
+                  <ul class="space-y-3">
+                    <li
+                      v-for="item in list(`productsPage.${product.key}.${product.key === 'trustaiX' ? 'deployment' : 'compatibility'}`)"
+                      :key="item"
+                      class="content-copy"
+                    >
+                      {{ item }}
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="space-y-4 rounded-[1.5rem] border border-border/70 bg-secondary/55 p-5 sm:col-span-2">
+                  <p class="section-label">{{ $t(`productsPage.${product.key}.valueTitle`) }}</p>
+                  <div class="grid gap-3 md:grid-cols-2">
+                    <div
+                      v-for="item in list(`productsPage.${product.key}.value`)"
+                      :key="item"
+                      class="content-chip bg-background/82"
+                    >
+                      {{ item }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Transition>
+        </Card>
+      </div>
     </section>
 
     <Card v-reveal="{ delay: 300 }" class="content-card overflow-hidden bg-secondary/70">

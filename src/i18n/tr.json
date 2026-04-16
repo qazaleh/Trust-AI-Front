@@ -17,7 +17,11 @@
   "address": "Dijital Park Teknokent, Ataşehir / İstanbul"
   },
   "common": {
-    "switchLanguage": "Dili {locale} olarak değiştir"
+    "switchLanguage": "Dili {locale} olarak değiştir",
+    "showServiceDetails": "Hizmet detayları",
+    "hideServiceDetails": "Detayları gizle",
+    "showProductDetails": "Ürün detayları",
+    "hideProductDetails": "Detayları gizle"
   },
   "cta": {
   "title": "Yapay Zeka Yönetişimi Çerçevenizi Güçlendirmeye Hazır mısınız?",
@@ -400,6 +404,10 @@
     "nisa": {
       "role": "Stajyer",
       "bio": "Yapay zeka güvenliği, yapay zeka yönetişimi ve sorumlu yapay zeka sistemlerine odaklanan bir yapay zeka mühendisliği öğrencisidir."
+    },
+    "arya": {
+      "role": "Yapay Zeka Mühendisliği Öğrencisi",
+      "bio": "Makine öğrenmesi ve LLM sistemlerinde uygulamalı deneyime sahip, açıklanabilirlik, model güvenilirliği ve sorumlu yapay zeka alanlarına odaklanan bir Yapay Zeka Mühendisliği öğrencisidir."
     }
   },
   "productsPage": {
