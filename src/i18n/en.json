@@ -75,8 +75,8 @@
     "toastDescription": "Thank you. We will review your message and get back to you soon."
   },
   "researchHero": {
-    "label": "Sector-Agnostic AI Governance",
-    "title": "Trustworthy AI Evaluation and Governance for Every Sector",
+    "label": "DATA-AGNOSTIC",
+    "title": "AI model conformity assesment",
     "description": "TrustAI helps organizations evaluate, monitor, and govern AI systems across industries - from traditional machine learning models to LLM applications and AI agents.",
     "button": "Explore Our Research"
   },

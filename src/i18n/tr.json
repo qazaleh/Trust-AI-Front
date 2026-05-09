@@ -75,8 +75,8 @@
     "toastDescription": "Teşekkürler. Mesajınızı inceleyip en kısa sürede size dönüş yapacağız."
   },
   "researchHero": {
-    "label": "Sektörden Bağımsız Yapay Zeka Yönetişimi",
-    "title": "Her Sektör İçin Güvenilir Yapay Zeka Değerlendirme ve Yönetişimi",
+    "label": "DATA-AGNOSTIC",
+    "title": "AI model conformity assesment",
     "description": "TrustAI, kuruluşların yapay zeka sistemlerini sektörler genelinde değerlendirmesine, izlemesine ve yönetmesine yardımcı olur - geleneksel makine öğrenmesi modellerinden LLM uygulamalarına ve yapay zeka ajanlarına kadar.",
     "button": "Araştırmalarımızı Keşfedin"
   },
