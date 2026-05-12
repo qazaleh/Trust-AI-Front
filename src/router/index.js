@@ -6,11 +6,11 @@ import About from '../views/About.vue'
 import AIGovernance from '../views/AIGovernance.vue'
 import Home from '../views/Home.vue'
 import LocaleLayout from '../views/LocaleLayout.vue'
-import OurTeams from '../views/OurTeams.vue'
-import Privacy from '../views/Privacy.vue'
-import Products from '../views/products.vue'
+import ProductTrustAIX from '../views/ProductTrustAIX.vue'
+import ProductTrustAIUX from '../views/ProductTrustAIUX.vue'
 import Research from '../views/Research.vue'
-import Services from '../views/services.vue'
+import SolutionReadinessCompliance from '../views/SolutionReadinessCompliance.vue'
+import SolutionRemediationAssurance from '../views/SolutionRemediationAssurance.vue'
 
 const routes = [
   {
@@ -23,39 +23,47 @@ const routes = [
         component: Home,
       },
       {
+        path: 'solutions/ai-governance',
+        name: 'solution-governance',
+        component: AIGovernance,
+      },
+      {
+        path: 'solutions/readiness-compliance',
+        name: 'solution-readiness',
+        component: SolutionReadinessCompliance,
+      },
+      {
+        path: 'solutions/remediation-assurance',
+        name: 'solution-remediation',
+        component: SolutionRemediationAssurance,
+      },
+      {
+        path: 'products/trustai-x',
+        name: 'product-trustaix',
+        component: ProductTrustAIX,
+      },
+      {
+        path: 'products/trustai-ux',
+        name: 'product-trustaiux',
+        component: ProductTrustAIUX,
+      },
+      {
+        path: 'research-insights',
+        name: 'research-insights',
+        component: Research,
+      },
+      {
         path: 'about',
         name: 'about',
         component: About,
       },
       {
-        path: 'governance',
-        name: 'governance',
-        component: AIGovernance,
-      },
-      {
-        path: 'research',
-        name: 'research',
-        component: Research,
-      },
-      {
-        path: 'services',
-        name: 'services',
-        component: Services,
-      },
-      {
-        path: 'products',
-        name: 'products',
-        component: Products,
-      },
-      {
         path: 'privacy',
-        name: 'privacy',
-        component: Privacy,
+        redirect: to => ({ name: 'home', params: to.params }),
       },
       {
         path: 'team',
-        name: 'team',
-        component: OurTeams,
+        redirect: to => ({ name: 'about', params: to.params }),
       },
       {
         path: 'aboutUs',
@@ -63,11 +71,27 @@ const routes = [
       },
       {
         path: 'ai-governance',
-        redirect: to => ({ name: 'governance', params: to.params }),
+        redirect: to => ({ name: 'solution-governance', params: to.params }),
       },
       {
         path: 'our-teams',
-        redirect: to => ({ name: 'team', params: to.params }),
+        redirect: to => ({ name: 'about', params: to.params }),
+      },
+      {
+        path: 'governance',
+        redirect: to => ({ name: 'solution-governance', params: to.params }),
+      },
+      {
+        path: 'services',
+        redirect: to => ({ name: 'solution-readiness', params: to.params }),
+      },
+      {
+        path: 'products',
+        redirect: to => ({ name: 'product-trustaix', params: to.params }),
+      },
+      {
+        path: 'research',
+        redirect: to => ({ name: 'research-insights', params: to.params }),
       },
     ],
   },
@@ -84,7 +108,15 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
-  scrollBehavior() {
+  scrollBehavior(to) {
+    if (to.hash) {
+      return {
+        el: to.hash,
+        top: 120,
+        behavior: 'smooth',
+      }
+    }
+
     return { top: 0 }
   },
 })

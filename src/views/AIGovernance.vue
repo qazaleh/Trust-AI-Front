@@ -1,11 +1,8 @@
 <script setup>
-import { AlertTriangle, ArrowRight, Eye, FileSearch, LineChart, Scale, ShieldCheck } from 'lucide-vue-next'
-import { computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { AlertTriangle, Eye, FileSearch, LineChart, Scale, ShieldCheck } from 'lucide-vue-next'
 
-import PageHero from '@/components/PageHero.vue'
+import FeatureHero from '@/components/FeatureHero.vue'
 import SectionHeading from '@/components/SectionHeading.vue'
-import { Button } from '@/components/ui/button'
 import {
   Card,
   CardContent,
@@ -13,10 +10,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { normalizeLocale } from '@/lib/site'
-
-const route = useRoute()
-const locale = computed(() => normalizeLocale(route.params.locale))
 
 const riskCards = [
   {
@@ -57,44 +50,13 @@ const pillarCards = [
 
 <template>
   <div class="page-shell">
-    <PageHero
+    <FeatureHero
       v-reveal
+      :show-grid-pattern="false"
       :label="$t('aiGovernancePage.hero.label')"
       :title="$t('aiGovernancePage.hero.title')"
       :description="$t('aiGovernancePage.hero.subtitle')"
-    >
-      <!-- <template #actions>
-        <Button as-child size="lg" class="rounded-full shadow-sm">
-          <a href="mailto:info@trustai.com.tr">
-            {{ $t('aiGovernancePage.closing.cta') }}
-            <ArrowRight class="size-4" />
-          </a>
-        </Button>
-
-        <Button as-child variant="outline" size="lg" class="rounded-full">
-          <RouterLink :to="{ name: 'research', params: { locale } }">
-            {{ $t('cta.research') }}
-          </RouterLink>
-        </Button>
-      </template> -->
-<!-- 
-      <template #aside>
-        <div class="space-y-3">
-          <p class="text-sm font-bold uppercase tracking-[0.22em] text-primary">Governance Outcomes</p>
-          <div class="space-y-3 text-sm leading-7 text-muted-foreground">
-            <div class="rounded-2xl bg-secondary/70 px-4 py-3">
-              {{ $t('aiGovernancePage.pillars.accountability.title') }}
-            </div>
-            <div class="rounded-2xl bg-secondary/70 px-4 py-3">
-              {{ $t('aiGovernancePage.pillars.traceability.title') }}
-            </div>
-            <div class="rounded-2xl bg-secondary/70 px-4 py-3">
-              {{ $t('aiGovernancePage.pillars.monitoring.title') }}
-            </div>
-          </div>
-        </div>
-      </template> -->
-    </PageHero>
+    />
 
     <section v-reveal="{ delay: 120 }" class="grid gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
       <Card class="content-card">

@@ -640,28 +640,24 @@
                             <div class="feat-track">
                                 <div class="feat-bar pos" data-width="92"></div>
                             </div>
-                            <span class="feat-pct p">+22.9%</span>
                         </div>
                         <div class="feat-row">
                             <span class="feat-label">Credit History</span>
                             <div class="feat-track">
                                 <div class="feat-bar pos" data-width="76"></div>
                             </div>
-                            <span class="feat-pct p">+16.5%</span>
                         </div>
                         <div class="feat-row">
                             <span class="feat-label">Debt Ratio</span>
                             <div class="feat-track neg-track">
                                 <div class="feat-bar neg" data-width="58"></div>
                             </div>
-                            <span class="feat-pct n">−11.6%</span>
                         </div>
                         <div class="feat-row">
                             <span class="feat-label">Account Age</span>
                             <div class="feat-track">
                                 <div class="feat-bar pos" data-width="64"></div>
                             </div>
-                            <span class="feat-pct p">+10.4%</span>
                         </div>
                         <!-- <div class="feat-row">
                             <span class="feat-label">Repayment Pattern</span>
@@ -685,12 +681,12 @@
                             </div>
                             <div class="risk-legend">
                                 <div class="risk-leg-row">
-                                    <span class="risk-leg-dot" style="background:#1e3d4f"></span>
+                                    <span class="risk-leg-dot" style="background:#D62828"></span>
                                     <span class="risk-leg-name">Critical</span>
                                     <span class="risk-leg-pct">16%</span>
                                 </div>
                                 <div class="risk-leg-row">
-                                    <span class="risk-leg-dot" style="background:#305669"></span>
+                                    <span class="risk-leg-dot" style="background:#da7373"></span>
                                     <span class="risk-leg-name">High</span>
                                     <span class="risk-leg-pct">24%</span>
                                 </div>
@@ -867,8 +863,8 @@
                 const C = 2 * Math.PI * r;
                 /* Palette-mapped: dark→light = Critical→Low */
                 const segs = [
-                    { pct: 16, color: '#1e3d4f' }, /* Critical — primary-dark  */
-                    { pct: 24, color: '#305669' }, /* High     — primary       */
+                    { pct: 16, color: '#D62828' }, /* Critical */
+                    { pct: 24, color: '#da7373' }, /* High     */
                     { pct: 28, color: '#f5ba42' }, /* Med      — accent        */
                     { pct: 32, color: '#c2d8e2' }, /* Low      — primary-light */
                 ];

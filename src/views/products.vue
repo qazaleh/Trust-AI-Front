@@ -1,7 +1,8 @@
 <script setup>
 import { ArrowRight, Bot, Boxes, BrainCircuit, FileSearch, Workflow } from 'lucide-vue-next'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useRoute } from 'vue-router'
 
 import PageHero from '@/components/PageHero.vue'
 import SectionHeading from '@/components/SectionHeading.vue'
@@ -15,6 +16,7 @@ import {
 } from '@/components/ui/card'
 
 const { tm } = useI18n()
+const route = useRoute()
 const selectedProduct = ref(null)
 
 const productCards = [
@@ -44,6 +46,28 @@ function list(path) {
 function toggleProduct(key) {
   selectedProduct.value = selectedProduct.value === key ? null : key
 }
+
+function syncSelectedProduct(hash) {
+  if (hash === '#trustaix') {
+    selectedProduct.value = 'trustaiX'
+    return
+  }
+
+  if (hash === '#trustaiux') {
+    selectedProduct.value = 'trustaiUX'
+    return
+  }
+
+  selectedProduct.value = null
+}
+
+watch(
+  () => route.hash,
+  (hash) => {
+    syncSelectedProduct(hash)
+  },
+  { immediate: true },
+)
 </script>
 
 <template>
@@ -80,6 +104,7 @@ function toggleProduct(key) {
         <Card
           v-for="product in productCards"
           :key="product.key"
+          :id="product.key === 'trustaiX' ? 'trustaix' : 'trustaiux'"
           v-reveal="{ delay: product.delay }"
           :class="['content-card hover-lift', product.revealClass]"
         >

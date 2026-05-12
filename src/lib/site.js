@@ -1,14 +1,88 @@
 export const supportedLocales = ['en', 'tr']
 
 export const navigationItems = [
-  { name: 'home', labelKey: 'navbar.home' },
-  { name: 'about', labelKey: 'navbar.about' },
-  { name: 'governance', labelKey: 'navbar.governance' },
-  { name: 'research', labelKey: 'navbar.research' },
-  { name: 'services', labelKey: 'navbar.services' },
-  { name: 'products', labelKey: 'navbar.products' },
-  { name: 'privacy', labelKey: 'navbar.privacy' },
-  { name: 'team', labelKey: 'navbar.ourTeams' },
+  {
+    type: 'link',
+    key: 'home',
+    labelKey: 'navbar.home',
+    to: { name: 'home' },
+  },
+  {
+    type: 'group',
+    key: 'solutions',
+    labelKey: 'navbar.solutions',
+    matches: ['solution-governance', 'solution-readiness', 'solution-remediation'],
+    children: [
+      {
+        key: 'ai-governance',
+        labelKey: 'navbar.aiGovernance',
+        to: { name: 'solution-governance' },
+      },
+      {
+        key: 'readiness-compliance',
+        labelKey: 'navbar.readinessCompliance',
+        to: { name: 'solution-readiness' },
+      },
+      {
+        key: 'remediation-assurance',
+        labelKey: 'navbar.remediationAssurance',
+        to: { name: 'solution-remediation' },
+      },
+    ],
+  },
+  {
+    type: 'group',
+    key: 'products',
+    labelKey: 'navbar.products',
+    matches: ['product-trustaix', 'product-trustaiux'],
+    children: [
+      {
+        key: 'trustai-x',
+        labelKey: 'navbar.trustaiX',
+        to: { name: 'product-trustaix' },
+      },
+      {
+        key: 'trustai-ux',
+        labelKey: 'navbar.trustaiUX',
+        to: { name: 'product-trustaiux' },
+      },
+    ],
+  },
+  {
+    type: 'link',
+    key: 'research-insights',
+    labelKey: 'navbar.researchInsights',
+    to: { name: 'research-insights' },
+  },
+  {
+    type: 'link',
+    key: 'about',
+    labelKey: 'navbar.about',
+    to: { name: 'about' },
+  },
+]
+
+export const footerNavigationItems = [
+  { key: 'home', labelKey: 'navbar.home', to: { name: 'home' } },
+  { key: 'ai-governance', labelKey: 'navbar.aiGovernance', to: { name: 'solution-governance' } },
+  {
+    key: 'readiness-compliance',
+    labelKey: 'navbar.readinessCompliance',
+    to: { name: 'solution-readiness' },
+  },
+  {
+    key: 'remediation-assurance',
+    labelKey: 'navbar.remediationAssurance',
+    to: { name: 'solution-remediation' },
+  },
+  { key: 'trustai-x', labelKey: 'navbar.trustaiX', to: { name: 'product-trustaix' } },
+  { key: 'trustai-ux', labelKey: 'navbar.trustaiUX', to: { name: 'product-trustaiux' } },
+  {
+    key: 'research-insights',
+    labelKey: 'navbar.researchInsights',
+    to: { name: 'research-insights' },
+  },
+  { key: 'about', labelKey: 'navbar.about', to: { name: 'about' } },
 ]
 
 export const publications = [

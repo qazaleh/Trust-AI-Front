@@ -5,10 +5,20 @@ import { RouterLink, useRoute } from 'vue-router'
 
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import { navigationItems, normalizeLocale } from '@/lib/site'
+import { footerNavigationItems, normalizeLocale } from '@/lib/site'
 
 const route = useRoute()
 const locale = computed(() => normalizeLocale(route.params.locale))
+
+function localizeTarget(target) {
+  return {
+    ...target,
+    params: {
+      ...(target.params || {}),
+      locale: locale.value,
+    },
+  }
+}
 </script>
 
 <template>
@@ -25,6 +35,10 @@ const locale = computed(() => normalizeLocale(route.params.locale))
             </div>
           </div>
 
+          <p class="max-w-md text-sm leading-7 text-white/68">
+            {{ $t('footer.privacyDescription') }}
+          </p>
+
           <Button as-child class="rounded-full bg-accent text-accent-foreground shadow-[0_18px_32px_-22px_rgba(245,186,66,0.5)] hover:bg-accent/90">
             <a href="mailto:info@trustai.com.tr">
               <Mail class="size-4" />
@@ -37,9 +51,9 @@ const locale = computed(() => normalizeLocale(route.params.locale))
           <p class="text-sm font-bold uppercase tracking-[0.2em] text-accent">{{ $t('footer.navigation') }}</p>
           <div class="grid gap-1">
             <RouterLink
-              v-for="item in navigationItems"
-              :key="item.name"
-              :to="{ name: item.name, params: { locale } }"
+              v-for="item in footerNavigationItems"
+              :key="item.key"
+              :to="localizeTarget(item.to)"
               class="w-fit text-sm font-medium text-white/72 transition hover:text-white"
             >
               {{ $t(item.labelKey) }}
