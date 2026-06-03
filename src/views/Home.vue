@@ -7,6 +7,7 @@ import {
   BrainCircuit,
   ChartColumnBig,
   Database,
+  Download,
   FileSearch,
   FileText,
   MessageSquareText,
@@ -292,17 +293,31 @@ onBeforeUnmount(() => {
 
               <div
                 v-if="slide.key === 'overview'"
-                class="flex flex-col gap-3 sm:flex-row"
+                class="flex w-full max-w-[18rem] flex-col gap-3"
               >
                 <Button
                   as-child
                   size="lg"
-                  class="rounded-full bg-primary text-primary-foreground shadow-sm hover:bg-primary/92"
+                  class="w-full rounded-full bg-primary text-primary-foreground shadow-sm hover:bg-primary/92"
                 >
                   <RouterLink :to="{ name: 'research-insights', params: { locale } }">
                     {{ $t('researchHero.button') }}
                     <ArrowRight class="size-4" />
                   </RouterLink>
+                </Button>
+                <Button
+                  as-child
+                  size="lg"
+                  variant="outline"
+                  class="w-full rounded-full border-primary/20 bg-white/65 text-primary shadow-sm hover:bg-white/85"
+                >
+                  <a
+                    href="/TrustAI_governancePlaybook.pdf"
+                    download="TrustAI_governancePlaybook.pdf"
+                  >
+                    {{ $t('researchHero.governancePlaybookButton') }}
+                    <Download class="size-4" />
+                  </a>
                 </Button>
               </div>
             </div>
