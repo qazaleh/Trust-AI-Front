@@ -1,8 +1,9 @@
 <script setup>
-import { AlertTriangle, Eye, FileSearch, LineChart, Scale, ShieldCheck } from 'lucide-vue-next'
+import { AlertTriangle, Download, Eye, FileSearch, LineChart, Scale, ShieldCheck } from 'lucide-vue-next'
 
 import FeatureHero from '@/components/FeatureHero.vue'
 import SectionHeading from '@/components/SectionHeading.vue'
+import { Button } from '@/components/ui/button'
 import {
   Card,
   CardContent,
@@ -56,7 +57,26 @@ const pillarCards = [
       :label="$t('aiGovernancePage.hero.label')"
       :title="$t('aiGovernancePage.hero.title')"
       :description="$t('aiGovernancePage.hero.subtitle')"
-    />
+    >
+      <template #actions>
+        <div class="flex w-full max-w-[18rem] flex-col gap-3">
+          <Button
+            as-child
+            size="lg"
+            variant="outline"
+            class="w-full rounded-full border-primary/20 bg-white/65 text-primary shadow-sm hover:bg-white/85"
+          >
+            <a
+              href="/TrustAI_governancePlaybook.pdf"
+              download="TrustAI_governancePlaybook.pdf"
+            >
+              {{ $t('researchHero.governancePlaybookButton') }}
+              <Download class="size-4" />
+            </a>
+          </Button>
+        </div>
+      </template>
+    </FeatureHero>
 
     <section v-reveal="{ delay: 120 }" class="grid gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
       <Card class="content-card">
