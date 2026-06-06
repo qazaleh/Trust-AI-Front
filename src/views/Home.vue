@@ -7,7 +7,7 @@ import {
   BrainCircuit,
   ChartColumnBig,
   Database,
-  Download,
+  ExternalLink,
   FileSearch,
   FileText,
   MessageSquareText,
@@ -20,6 +20,7 @@ import {
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
 
+import governancePlaybookUrl from '@/assets/TrustAI_governancePlaybook.pdf?url'
 import dashboardCardHtmlSource from '@/components/imageComponents/dashboard-card.html?raw'
 import diagramcHtmlSource from '@/components/imageComponents/diagramc.html?raw'
 import { Button } from '@/components/ui/button'
@@ -312,11 +313,12 @@ onBeforeUnmount(() => {
                   class="w-full rounded-full border-primary/20 bg-white/65 text-primary shadow-sm hover:bg-white/85"
                 >
                   <a
-                    href="/TrustAI_governancePlaybook.pdf"
-                    download="TrustAI_governancePlaybook.pdf"
+                    :href="governancePlaybookUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     {{ $t('researchHero.governancePlaybookButton') }}
-                    <Download class="size-4" />
+                    <ExternalLink class="size-4" />
                   </a>
                 </Button>
               </div>

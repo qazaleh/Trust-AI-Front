@@ -1,6 +1,7 @@
 <script setup>
-import { AlertTriangle, Download, Eye, FileSearch, LineChart, Scale, ShieldCheck } from 'lucide-vue-next'
+import { AlertTriangle, ExternalLink, Eye, FileSearch, LineChart, Scale, ShieldCheck } from 'lucide-vue-next'
 
+import governancePlaybookUrl from '@/assets/TrustAI_governancePlaybook.pdf?url'
 import FeatureHero from '@/components/FeatureHero.vue'
 import SectionHeading from '@/components/SectionHeading.vue'
 import { Button } from '@/components/ui/button'
@@ -67,11 +68,12 @@ const pillarCards = [
             class="w-full rounded-full border-primary/20 bg-white/65 text-primary shadow-sm hover:bg-white/85"
           >
             <a
-              href="/TrustAI_governancePlaybook.pdf"
-              download="TrustAI_governancePlaybook.pdf"
+              :href="governancePlaybookUrl"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               {{ $t('researchHero.governancePlaybookButton') }}
-              <Download class="size-4" />
+              <ExternalLink class="size-4" />
             </a>
           </Button>
         </div>
