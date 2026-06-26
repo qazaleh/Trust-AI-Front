@@ -12,6 +12,21 @@ export default defineConfig({
     vueDevTools(),
     tailwindcss(),
   ],
+  build: {
+    rollupOptions: {
+      onwarn(warning, defaultHandler) {
+        const isRekaPureAnnotationWarning =
+          warning.id?.includes('node_modules/reka-ui/dist/shared/createContext.js') &&
+          warning.message.includes('contains an annotation')
+
+        if (isRekaPureAnnotationWarning) {
+          return
+        }
+
+        defaultHandler(warning)
+      },
+    },
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))

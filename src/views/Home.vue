@@ -7,7 +7,7 @@ import {
   BrainCircuit,
   ChartColumnBig,
   Database,
-  ExternalLink,
+  Download,
   FileSearch,
   FileText,
   MessageSquareText,
@@ -20,7 +20,6 @@ import {
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
 
-import governancePlaybookUrl from '@/assets/TrustAI_governancePlaybook.pdf?url'
 import dashboardCardHtmlSource from '@/components/imageComponents/dashboard-card.html?raw'
 import diagramcHtmlSource from '@/components/imageComponents/diagramc.html?raw'
 import { Button } from '@/components/ui/button'
@@ -30,6 +29,7 @@ import { normalizeLocale } from '@/lib/site'
 const route = useRoute()
 const { t, tm } = useI18n()
 const locale = computed(() => normalizeLocale(route.params.locale))
+const governancePlaybookUrl = `${import.meta.env.BASE_URL}TrustAI_governancePlaybook.pdf`
 
 const createEmbeddedHtml = (source, styles) => source.replace('</head>', `<style>${styles}</style></head>`)
 
@@ -314,11 +314,10 @@ onBeforeUnmount(() => {
                 >
                   <a
                     :href="governancePlaybookUrl"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    download="TrustAI_governancePlaybook.pdf"
                   >
                     {{ $t('researchHero.governancePlaybookButton') }}
-                    <ExternalLink class="size-4" />
+                    <Download class="size-4" />
                   </a>
                 </Button>
               </div>
