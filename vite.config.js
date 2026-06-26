@@ -12,6 +12,11 @@ export default defineConfig({
     vueDevTools(),
     tailwindcss(),
   ],
+  define: {
+    __INTLIFY_DROP_MESSAGE_COMPILER__: true,
+    __INTLIFY_JIT_COMPILATION__: false,
+    __VUE_I18N_LEGACY_API__: false,
+  },
   build: {
     rollupOptions: {
       onwarn(warning, defaultHandler) {
@@ -29,7 +34,8 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      'vue-i18n': 'vue-i18n/dist/vue-i18n.runtime.esm-bundler.js',
     },
   },
 })

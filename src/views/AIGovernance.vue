@@ -11,6 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { downloadGovernancePlaybook } from '@/lib/downloads'
 
 const riskCards = [
   {
@@ -48,7 +49,6 @@ const pillarCards = [
   },
 ]
 
-const governancePlaybookUrl = `${import.meta.env.BASE_URL}TrustAI_governancePlaybook.pdf`
 </script>
 
 <template>
@@ -63,18 +63,14 @@ const governancePlaybookUrl = `${import.meta.env.BASE_URL}TrustAI_governancePlay
       <template #actions>
         <div class="flex w-full max-w-[18rem] flex-col gap-3">
           <Button
-            as-child
+            type="button"
             size="lg"
             variant="outline"
             class="w-full rounded-full border-primary/20 bg-white/65 text-primary shadow-sm hover:bg-white/85"
+            @click="downloadGovernancePlaybook"
           >
-            <a
-              :href="governancePlaybookUrl"
-              download="TrustAI_governancePlaybook.pdf"
-            >
-              {{ $t('researchHero.governancePlaybookButton') }}
-              <Download class="size-4" />
-            </a>
+            {{ $t('researchHero.governancePlaybookButton') }}
+            <Download class="size-4" />
           </Button>
         </div>
       </template>

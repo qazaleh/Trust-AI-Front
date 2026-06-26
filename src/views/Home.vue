@@ -24,12 +24,12 @@ import dashboardCardHtmlSource from '@/components/imageComponents/dashboard-card
 import diagramcHtmlSource from '@/components/imageComponents/diagramc.html?raw'
 import { Button } from '@/components/ui/button'
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { downloadGovernancePlaybook } from '@/lib/downloads'
 import { normalizeLocale } from '@/lib/site'
 
 const route = useRoute()
 const { t, tm } = useI18n()
 const locale = computed(() => normalizeLocale(route.params.locale))
-const governancePlaybookUrl = `${import.meta.env.BASE_URL}TrustAI_governancePlaybook.pdf`
 
 const createEmbeddedHtml = (source, styles) => source.replace('</head>', `<style>${styles}</style></head>`)
 
@@ -307,18 +307,14 @@ onBeforeUnmount(() => {
                   </RouterLink>
                 </Button>
                 <Button
-                  as-child
+                  type="button"
                   size="lg"
                   variant="outline"
                   class="w-full rounded-full border-primary/20 bg-white/65 text-primary shadow-sm hover:bg-white/85"
+                  @click="downloadGovernancePlaybook"
                 >
-                  <a
-                    :href="governancePlaybookUrl"
-                    download="TrustAI_governancePlaybook.pdf"
-                  >
-                    {{ $t('researchHero.governancePlaybookButton') }}
-                    <Download class="size-4" />
-                  </a>
+                  {{ $t('researchHero.governancePlaybookButton') }}
+                  <Download class="size-4" />
                 </Button>
               </div>
             </div>

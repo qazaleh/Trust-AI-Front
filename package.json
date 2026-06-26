@@ -4,8 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "compile:i18n": "node scripts/compile-i18n.mjs",
+    "predev": "npm run compile:i18n",
     "dev": "vite",
+    "prebuild": "npm run compile:i18n",
     "build": "vite build",
+    "prepreview": "npm run compile:i18n",
     "preview": "vite preview"
   },
   "dependencies": {
