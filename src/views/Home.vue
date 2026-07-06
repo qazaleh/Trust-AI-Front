@@ -310,7 +310,7 @@ onBeforeUnmount(() => {
                   type="button"
                   size="lg"
                   variant="outline"
-                  class="w-full rounded-full border-primary/20 bg-white/65 text-primary shadow-sm hover:bg-white/85"
+                  class="w-full rounded-full border-primary/20 bg-white/65 text-primary shadow-sm hover:bg-white/85 cursor-pointer"
                   @click="openGovernancePlaybook"
                 >
                   {{ $t('researchHero.governancePlaybookButton') }}
