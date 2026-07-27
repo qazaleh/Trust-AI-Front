@@ -17,6 +17,8 @@ coverage
 # Editor directories and files
 .vscode/*
 Nuxt/*
+ # Ignore the nested Nuxt application
+ Nuxt/
 !.vscode/extensions.json
 .idea
 *.suo
