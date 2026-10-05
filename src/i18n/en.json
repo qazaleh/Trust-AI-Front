@@ -87,7 +87,8 @@
     "title": "AI model conformity assesment",
     "description": "TrustAI helps organizations evaluate, monitor, and govern AI systems across industries - from traditional machine learning models to LLM applications and AI agents.",
     "button": "Explore Our Research",
-    "governancePlaybookButton": "AI Governance playbook"
+    "governancePlaybookButton": "AI Governance playbook",
+    "agenticGovernancePlaybookButton": "Agentic Governance playbook"
   },
   "homePage": {
     "focusAreas": "What We Evaluate",

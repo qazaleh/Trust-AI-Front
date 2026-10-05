@@ -11,7 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { openGovernancePlaybook } from '@/lib/downloads'
+import { openAgenticGovernancePlaybook, openGovernancePlaybook } from '@/lib/downloads'
 
 const riskCards = [
   {
@@ -70,6 +70,16 @@ const pillarCards = [
             @click="openGovernancePlaybook"
           >
             {{ $t('researchHero.governancePlaybookButton') }}
+            <Download class="size-4" />
+          </Button>
+          <Button
+            type="button"
+            size="lg"
+            variant="outline"
+            class="w-full rounded-full border-primary/20 bg-white/65 text-primary shadow-sm hover:bg-white/85 cursor-pointer"
+            @click="openAgenticGovernancePlaybook"
+          >
+            {{ $t('researchHero.agenticGovernancePlaybookButton') }}
             <Download class="size-4" />
           </Button>
         </div>

@@ -87,7 +87,8 @@
     "title": "AI model conformity assesment",
     "description": "TrustAI, kuruluşların yapay zeka sistemlerini sektörler genelinde değerlendirmesine, izlemesine ve yönetmesine yardımcı olur - geleneksel makine öğrenmesi modellerinden LLM uygulamalarına ve yapay zeka ajanlarına kadar.",
     "button": "Araştırmalarımızı Keşfedin",
-    "governancePlaybookButton": "AI Governance playbook"
+    "governancePlaybookButton": "AI Governance playbook",
+    "agenticGovernancePlaybookButton": "Agentic Governance playbook"
   },
   "homePage": {
     "focusAreas": "Neleri Değerlendiriyoruz",
