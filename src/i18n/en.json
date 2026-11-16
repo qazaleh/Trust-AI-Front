@@ -599,6 +599,82 @@
         ],
         "reportingTitle": "Clear findings for shared decisions",
         "reportingDescription": "Bring explanation, fairness, and security findings into readable evaluation reports that help model owners, business teams, and governance reviewers decide what to investigate next."
+      },
+      "llmEvaluation": {
+        "label": "LLM Evaluation",
+        "title": "Check answers. Understand behavior. Challenge boundaries.",
+        "description": "Evaluate large language models and the applications built around them, from answers grounded in your documents to consistency, trustworthiness, and resilience under adversarial testing.",
+        "modules": [
+          {
+            "title": "Hallucination & Grounding",
+            "description": "Check how well an answer is supported by the source material you provide.",
+            "details": [
+              "Identify unsupported claims and inspect supporting or conflicting source passages.",
+              "Optionally assess whether an answer stays faithful to the sources and addresses the question."
+            ]
+          },
+          {
+            "title": "Behavioral Explainability",
+            "description": "Understand how a model's responses change when its input changes or the same question is asked again.",
+            "details": [
+              "See which parts of a prompt most influence the response when removed.",
+              "Check how consistent the meaning of repeated answers remains."
+            ]
+          },
+          {
+            "title": "Reasoning Support",
+            "description": "Explore different ways of asking a model to work through a task.",
+            "details": [
+              "Break complex requests into smaller questions or ask for a careful reread.",
+              "Review model-generated explanations and self-checks alongside the final answer."
+            ]
+          },
+          {
+            "title": "Trustworthiness Benchmarking",
+            "description": "Evaluate behavior across truthfulness, safety, privacy, fairness, ethics, and robustness.",
+            "details": [
+              "Run repeatable tests to compare detailed results across models or releases.",
+              "Use standard evaluation sets or your own prepared test cases."
+            ]
+          },
+          {
+            "title": "Automated Red Teaming",
+            "description": "Probe for weaknesses with prompts designed to challenge a model's safety boundaries.",
+            "details": [
+              "Explore jailbreak attempts that adapt as the model responds.",
+              "Review observed attack outcomes to identify gaps and prioritize further testing."
+            ]
+          },
+          {
+            "title": "Scorecards & Reporting",
+            "description": "Turn benchmark and red-team findings into clear evidence for review.",
+            "details": [
+              "Inspect detailed benchmark results and separate red-team reports.",
+              "Export structured summaries to share with product and governance teams."
+            ]
+          }
+        ],
+        "useCasesTitle": "LLM evaluation in practice",
+        "useCases": [
+          {
+            "title": "Finance & Banking",
+            "description": "Check whether a banking assistant's answers match supplied product and policy documents, and test its responses to attempts to disclose sensitive information."
+          },
+          {
+            "title": "Insurance",
+            "description": "Evaluate coverage explanations and claims guidance against policy wording. Identify unsupported statements and check whether repeated answers remain consistent."
+          },
+          {
+            "title": "Healthcare",
+            "description": "Check whether document summaries and answers stay grounded in the supplied clinical material, helping specialists focus their review on unsupported claims."
+          },
+          {
+            "title": "Enterprise Knowledge Assistants",
+            "description": "Evaluate answers against internal reference documents, compare behavior across model updates, and challenge safety boundaries with automated red-team tests."
+          }
+        ],
+        "reportingTitle": "Evidence for deployment reviews",
+        "reportingDescription": "Use detailed findings to identify gaps, prioritize improvements, and support human review before deploying or updating an LLM application."
       }
     },
     "trustaiUX": {

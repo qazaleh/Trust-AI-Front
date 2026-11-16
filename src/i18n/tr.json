@@ -599,6 +599,82 @@
         ],
         "reportingTitle": "Ortak kararlar için anlaşılır bulgular",
         "reportingDescription": "Açıklanabilirlik, adillik ve güvenlik bulgularını; model sahiplerinin, iş ekiplerinin ve yönetişim uzmanlarının sonraki inceleme adımlarını belirlemesine yardımcı olan anlaşılır değerlendirme raporlarında bir araya getirin."
+      },
+      "llmEvaluation": {
+        "label": "LLM Değerlendirmesi",
+        "title": "Yanıtları kontrol edin. Davranışı anlayın. Sınırları sınayın.",
+        "description": "Büyük dil modellerini ve bu modeller üzerine kurulan uygulamaları; yanıtların belgelerinize dayanmasından tutarlılık, güvenilirlik ve saldırı testleri karşısındaki dayanıklılığa kadar değerlendirin.",
+        "modules": [
+          {
+            "title": "Halüsinasyon ve Kaynaklara Dayanma",
+            "description": "Bir yanıtın sağladığınız kaynak materyalle ne kadar desteklendiğini kontrol edin.",
+            "details": [
+              "Desteklenmeyen iddiaları belirleyin ve destekleyici ya da çelişen kaynak bölümlerini inceleyin.",
+              "İsteğe bağlı olarak yanıtın kaynaklara sadakatini ve soruyu ne ölçüde karşıladığını değerlendirin."
+            ]
+          },
+          {
+            "title": "Davranışsal Açıklanabilirlik",
+            "description": "Girdi değiştiğinde veya aynı soru tekrar sorulduğunda model yanıtlarının nasıl değiştiğini anlayın.",
+            "details": [
+              "Bir istemin hangi bölümleri çıkarıldığında yanıtın en çok etkilendiğini görün.",
+              "Tekrarlanan yanıtların anlam bakımından ne kadar tutarlı kaldığını kontrol edin."
+            ]
+          },
+          {
+            "title": "Akıl Yürütme Desteği",
+            "description": "Bir modelden bir görevi ele almasını istemenin farklı yollarını keşfedin.",
+            "details": [
+              "Karmaşık istekleri daha küçük sorulara ayırın veya modelden dikkatli bir yeniden okuma isteyin.",
+              "Modelin ürettiği açıklamaları ve öz değerlendirmeleri nihai yanıtla birlikte inceleyin."
+            ]
+          },
+          {
+            "title": "Güvenilirlik Karşılaştırmaları",
+            "description": "Davranışı doğruluk, güvenlik, gizlilik, adillik, etik ve dayanıklılık boyutlarında değerlendirin.",
+            "details": [
+              "Modeller veya sürümler arasındaki ayrıntılı sonuçları karşılaştırmak için tekrarlanabilir testler çalıştırın.",
+              "Standart değerlendirme kümelerini veya hazırladığınız kendi test senaryolarınızı kullanın."
+            ]
+          },
+          {
+            "title": "Otomatik Red Team Testleri",
+            "description": "Modelin güvenlik sınırlarını zorlamak için tasarlanmış istemlerle zayıflıkları araştırın.",
+            "details": [
+              "Model yanıtlarına göre uyarlanan güvenlik kısıtlamalarını aşma girişimlerini inceleyin.",
+              "Eksikleri belirlemek ve sonraki testleri önceliklendirmek için gözlemlenen saldırı sonuçlarını değerlendirin."
+            ]
+          },
+          {
+            "title": "Değerlendirme Kartları ve Raporlama",
+            "description": "Karşılaştırma ve red team bulgularını incelemeler için anlaşılır kanıtlara dönüştürün.",
+            "details": [
+              "Ayrıntılı karşılaştırma sonuçlarını ve ayrı red team raporlarını inceleyin.",
+              "Ürün ve yönetişim ekipleriyle paylaşmak için yapılandırılmış özetleri dışa aktarın."
+            ]
+          }
+        ],
+        "useCasesTitle": "Uygulamada LLM değerlendirmesi",
+        "useCases": [
+          {
+            "title": "Finans ve Bankacılık",
+            "description": "Bir bankacılık asistanının yanıtlarının sağlanan ürün ve politika belgeleriyle uyumunu kontrol edin; hassas bilgileri açığa çıkarma girişimlerine verdiği yanıtları test edin."
+          },
+          {
+            "title": "Sigortacılık",
+            "description": "Teminat açıklamalarını ve hasar yönlendirmelerini poliçe metinleriyle karşılaştırın. Desteklenmeyen ifadeleri belirleyin ve tekrarlanan yanıtların tutarlılığını kontrol edin."
+          },
+          {
+            "title": "Sağlık",
+            "description": "Belge özetlerinin ve yanıtların sağlanan klinik materyale dayanıp dayanmadığını kontrol ederek uzmanların incelemelerini desteklenmeyen iddialara odaklamasına yardımcı olun."
+          },
+          {
+            "title": "Kurumsal Bilgi Asistanları",
+            "description": "Yanıtları kurum içi referans belgeleriyle karşılaştırın, model güncellemeleri arasındaki davranışları değerlendirin ve otomatik red team testleriyle güvenlik sınırlarını sınayın."
+          }
+        ],
+        "reportingTitle": "Devreye alma incelemeleri için kanıtlar",
+        "reportingDescription": "Bir LLM uygulamasını devreye almadan veya güncellemeden önce eksikleri belirlemek, iyileştirmeleri önceliklendirmek ve insan denetimini desteklemek için ayrıntılı bulguları kullanın."
       }
     },
     "trustaiUX": {
