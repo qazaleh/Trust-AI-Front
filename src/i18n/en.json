@@ -547,7 +547,59 @@
         "Consistent, business-focused evaluation standards",
         "Clear reporting for governance and audit teams",
         "Faster readiness for responsible deployment"
-      ]
+      ],
+      "mlEvaluation": {
+        "label": "ML Evaluation",
+        "title": "Understand decisions. Spot bias. Test resilience.",
+        "description": "Explore three connected modules for evaluating machine learning models that use structured data, such as customer records, transactions, or vehicle measurements.",
+        "modules": [
+          {
+            "title": "Explainability",
+            "description": "Understand why a model made a prediction and which factors influenced the result.",
+            "details": [
+              "Explain individual decisions and see the factors that matter across many predictions.",
+              "Counterfactual (CF) generation: explore what would need to change for a different outcome, while keeping chosen factors fixed."
+            ]
+          },
+          {
+            "title": "Fairness & Bias Evaluation",
+            "description": "Identify differences in how data and model predictions treat different groups.",
+            "details": [
+              "Check training data for unequal outcomes before a model is trained.",
+              "Compare decisions, scores, and prediction errors across groups after training."
+            ]
+          },
+          {
+            "title": "Security & Robustness",
+            "description": "Explore how vulnerable a model is to manipulated inputs and attempts to uncover sensitive information.",
+            "details": [
+              "Stress-test predictions with altered inputs and compare performance before and after an attack.",
+              "Assess privacy exposure and compare supported defenses against input manipulation."
+            ]
+          }
+        ],
+        "useCasesTitle": "ML evaluation in practice",
+        "useCases": [
+          {
+            "title": "Finance & Banking",
+            "description": "Explain credit decisions, compare lending outcomes across customer groups, and use CF generation to explore changes that could lead to a different model decision."
+          },
+          {
+            "title": "Autonomous Cars & Mobility",
+            "description": "Evaluate models using structured vehicle and driving measurements. Understand risk predictions and test how altered inputs affect model decisions."
+          },
+          {
+            "title": "Insurance",
+            "description": "Understand the factors behind pricing and claims decisions, check for unequal outcomes across policyholder groups, and test resilience to manipulated application data."
+          },
+          {
+            "title": "Healthcare",
+            "description": "Explain patient-risk predictions from structured clinical records and compare model outcomes across patient groups to support human review."
+          }
+        ],
+        "reportingTitle": "Clear findings for shared decisions",
+        "reportingDescription": "Bring explanation, fairness, and security findings into readable evaluation reports that help model owners, business teams, and governance reviewers decide what to investigate next."
+      }
     },
     "trustaiUX": {
       "name": "TrustAI_UX",

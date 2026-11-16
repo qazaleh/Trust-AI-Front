@@ -547,7 +547,59 @@
         "Tutarlı değerlendirme standartları",
         "Daha güçlü şeffaflık ve hesap verebilirlik",
         "Sorumlu devreye alma için daha yüksek hazırlık"
-      ]
+      ],
+      "mlEvaluation": {
+        "label": "ML Değerlendirmesi",
+        "title": "Kararları anlayın. Yanlılığı belirleyin. Dayanıklılığı test edin.",
+        "description": "Müşteri kayıtları, işlemler veya araç ölçümleri gibi yapılandırılmış verileri kullanan makine öğrenmesi modellerini değerlendirmek için birbirini tamamlayan üç modülü keşfedin.",
+        "modules": [
+          {
+            "title": "Açıklanabilirlik",
+            "description": "Bir modelin neden belirli bir tahminde bulunduğunu ve sonucu hangi faktörlerin etkilediğini anlayın.",
+            "details": [
+              "Tekil kararları açıklayın ve çok sayıda tahminde öne çıkan faktörleri görün.",
+              "Karşı olgusal (CF) üretimi: seçilen faktörleri sabit tutarak farklı bir sonuç için nelerin değişmesi gerektiğini keşfedin."
+            ]
+          },
+          {
+            "title": "Adillik ve Yanlılık Değerlendirmesi",
+            "description": "Verilerin ve model tahminlerinin farklı gruplara yönelik sonuçlarındaki farklılıkları belirleyin.",
+            "details": [
+              "Model eğitilmeden önce eğitim verilerindeki eşitsiz sonuçları inceleyin.",
+              "Eğitimden sonra kararları, puanları ve tahmin hatalarını gruplar arasında karşılaştırın."
+            ]
+          },
+          {
+            "title": "Güvenlik ve Dayanıklılık",
+            "description": "Bir modelin değiştirilmiş girdilere ve hassas bilgileri açığa çıkarma girişimlerine karşı ne kadar savunmasız olduğunu inceleyin.",
+            "details": [
+              "Değiştirilmiş girdilerle tahminleri zorlayın ve saldırı öncesi ile sonrası performansı karşılaştırın.",
+              "Gizlilik risklerini değerlendirin ve girdi manipülasyonuna karşı desteklenen savunmaları karşılaştırın."
+            ]
+          }
+        ],
+        "useCasesTitle": "Uygulamada ML değerlendirmesi",
+        "useCases": [
+          {
+            "title": "Finans ve Bankacılık",
+            "description": "Kredi kararlarını açıklayın, müşteri grupları arasındaki kredi sonuçlarını karşılaştırın ve farklı bir model kararına yol açabilecek değişiklikleri CF üretimiyle keşfedin."
+          },
+          {
+            "title": "Otonom Araçlar ve Mobilite",
+            "description": "Yapılandırılmış araç ve sürüş ölçümlerini kullanan modelleri değerlendirin. Risk tahminlerini anlayın ve değiştirilmiş girdilerin model kararlarını nasıl etkilediğini test edin."
+          },
+          {
+            "title": "Sigortacılık",
+            "description": "Fiyatlandırma ve hasar kararlarını etkileyen faktörleri anlayın, sigortalı grupları arasındaki eşitsiz sonuçları inceleyin ve değiştirilmiş başvuru verilerine karşı dayanıklılığı test edin."
+          },
+          {
+            "title": "Sağlık",
+            "description": "Yapılandırılmış klinik kayıtlardan üretilen hasta riski tahminlerini açıklayın ve uzman incelemesini desteklemek için model sonuçlarını hasta grupları arasında karşılaştırın."
+          }
+        ],
+        "reportingTitle": "Ortak kararlar için anlaşılır bulgular",
+        "reportingDescription": "Açıklanabilirlik, adillik ve güvenlik bulgularını; model sahiplerinin, iş ekiplerinin ve yönetişim uzmanlarının sonraki inceleme adımlarını belirlemesine yardımcı olan anlaşılır değerlendirme raporlarında bir araya getirin."
+      }
     },
     "trustaiUX": {
       "name": "TrustAI_UX",
