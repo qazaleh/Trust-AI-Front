@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { FlaskConical, Scale, GitBranch, ShieldCheck, ChartNoAxesColumnIncreasing, Activity, ChevronDown } from 'lucide-vue-next'
+import { FlaskConical, Scale, GitBranch, ChartNoAxesColumnIncreasing, Activity, ChevronDown } from 'lucide-vue-next'
 
 import PageHero from '@/components/PageHero.vue'
 import { Button } from '@/components/ui/button'
@@ -21,10 +21,14 @@ const percent = value => new Intl.NumberFormat(language.value, {
 }).format(value)
 const metricValue = (key, value) => ['accuracy', 'recall'].includes(key)
   ? percent(value) : number(value, ['mae', 'rmse'].includes(key) ? 2 : 3)
+const displayedTestCounts = labScenarios.reduce((counts, scenario) => ({
+  passed: counts.passed + scenario.passed,
+  skipped: counts.skipped + scenario.skipped,
+}), { passed: 0, skipped: 0 })
 const adult = labScenarios.find(scenario => scenario.id === 'adult')
 const adultTotal = Object.values(adult.evidence.groups).reduce((sum, n) => sum + n, 0)
 const alternativeScenarios = labScenarios.filter(scenario => ['german_credit', 'insurance'].includes(scenario.id))
-const icons = { adult: Scale, german_credit: GitBranch, diabetes: ShieldCheck, telco_churn: ChartNoAxesColumnIncreasing, insurance: Activity }
+const icons = { adult: Scale, german_credit: GitBranch, telco_churn: ChartNoAxesColumnIncreasing, insurance: Activity }
 const readingKeys = ['attribution', 'alternatives', 'provenance', 'scope']
 const copy = (scenario, key) => t(`lab.scenarios.${scenario.id}.${key}`)
 </script>
@@ -89,8 +93,8 @@ const copy = (scenario, key) => t(`lab.scenarios.${scenario.id}.${key}`)
         <p class="max-w-4xl text-base leading-7">{{ t('lab.runDescription') }}</p>
       </div>
       <div class="flex shrink-0 flex-wrap gap-3">
-        <div class="run-stat"><strong>{{ evaluationRun.passed }}</strong><span>{{ t('lab.pass') }}</span></div>
-        <div class="run-stat run-stat--skipped"><strong>{{ evaluationRun.skipped }}</strong><span>{{ t('lab.skipped') }}</span></div>
+        <div class="run-stat"><strong>{{ displayedTestCounts.passed }}</strong><span>{{ t('lab.pass') }}</span></div>
+        <div v-if="displayedTestCounts.skipped" class="run-stat run-stat--skipped"><strong>{{ displayedTestCounts.skipped }}</strong><span>{{ t('lab.skipped') }}</span></div>
       </div>
     </section>
 
@@ -146,7 +150,7 @@ const copy = (scenario, key) => t(`lab.scenarios.${scenario.id}.${key}`)
             </div>
 
             <div class="result-panel space-y-5">
-              <p class="lab-label">{{ t(scenario.id === 'diabetes' ? 'lab.trainingLabel' : 'lab.serviceResults') }}</p>
+              <p class="lab-label">{{ t('lab.serviceResults') }}</p>
 
               <template v-if="scenario.id === 'adult'">
                 <div>
@@ -185,21 +189,6 @@ const copy = (scenario, key) => t(`lab.scenarios.${scenario.id}.${key}`)
                 </figure>
                 <p class="text-base leading-7">{{ t('lab.germanExample') }}</p>
                 <p class="text-sm leading-6">{{ t('lab.alternativeNote') }}</p>
-              </template>
-
-              <template v-else-if="scenario.id === 'diabetes'">
-                <div class="rounded-2xl border border-[#a37727]/35 bg-secondary/55 p-4">
-                  <p class="font-bold text-primary">{{ t('lab.notRun') }}</p>
-                  <p class="mt-2 text-base leading-7">{{ t('lab.diabetesWarning', { count: scenario.skipped }) }}</p>
-                </div>
-                <figure>
-                  <figcaption class="mb-3 text-base font-bold text-primary">{{ t('lab.diabetesChart') }}</figcaption>
-                  <div v-for="(value, key) in scenario.training" :key="key" class="mb-4">
-                    <div class="mb-1 flex justify-between gap-3 text-sm"><span>{{ t(`lab.${key}`) }}</span><strong>{{ metricValue(key, value) }}</strong></div>
-                    <div class="bar-track" aria-hidden="true"><div class="bar-fill" :style="{ width: `${value * 100}%` }" /></div>
-                  </div>
-                  <p class="text-sm">{{ t('lab.records', { count: number(scenario.split.test) }) }} · {{ t('lab.heldout') }}</p>
-                </figure>
               </template>
 
               <template v-else-if="scenario.id === 'telco_churn'">

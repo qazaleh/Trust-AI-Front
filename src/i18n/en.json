@@ -869,15 +869,15 @@
   },
   "lab": {
     "title": "ML Evaluation Lab",
-    "description": "Five public datasets. Five decision questions. Explore what recorded evaluations reveal about fairness, model attribution and hypothetical alternatives—and where the evidence stops.",
-    "metaDescription": "Explore verified lab evaluations on five public ML datasets: fairness, SHAP attribution, counterfactuals, training results and transparent test limitations.",
+    "description": "Four public datasets. Four decision questions. Explore what recorded evaluations reveal about fairness, model attribution and hypothetical alternatives—and where the evidence stops.",
+    "metaDescription": "Explore verified lab evaluations on four public ML datasets: fairness, SHAP attribution, counterfactuals, training results and transparent test limitations.",
     "eyebrow": "Research in practice",
     "explore": "Explore the scenarios",
     "methodLink": "How to read the evidence",
     "evidenceTitle": "Evidence, with context",
     "evidenceSubtitle": "Selected results from the recorded service run",
     "evaluated": "Evaluated {date}",
-    "runTitle": "A recorded run, an explicit boundary",
+    "runTitle": "Recorded checks for the scenarios shown",
     "runDescription": "These are lab evaluations on public datasets, not customer deployments or clinical validation. PASS means the saved response passed the test’s output checks. It does not certify fairness, security or suitability for use.",
     "pass": "PASS",
     "skipped": "SKIPPED",
@@ -954,8 +954,6 @@
     "r2": "R²",
     "noValidation": "No separate validation split",
     "trainingSplit": "Fit / validation / test: {fit} / {validation} / {test}",
-    "diabetesChart": "Measured training-workflow performance",
-    "diabetesWarning": "All {count} service tests were not run: TensorFlow was unavailable in the service. There are no recorded attack, defense, privacy or SHAP outcomes for this model.",
     "readingTitle": "Read the result and its boundary together",
     "reading": {
       "attributionTitle": "Attribution explains the model",
@@ -973,13 +971,6 @@
       "shap_global": "Global SHAP",
       "lime_local": "Local LIME",
       "dice_classification": "DiCE classification",
-      "pgd_attack": "PGD attack",
-      "hopskipjump": "HopSkipJump attack",
-      "zeroth_order": "Zeroth-order attack",
-      "feature_squeezing": "Feature-squeezing defense",
-      "membership_inference": "Membership inference",
-      "attribute_inference": "Attribute inference",
-      "shap_fallback_auto": "SHAP automatic fallback",
       "shap_local": "Local SHAP",
       "dice_regression": "DiCE regression",
       "fairness_regression": "Regression fairness"
@@ -1002,15 +993,6 @@
         "interpretation": "DiCE generated four alternatives for one selected query, and all four bad-to-good prediction changes were verified against the reloaded model. They illustrate a decision boundary, not a promise of credit approval.",
         "limitations": "One deliberately selected query cannot represent all applicants. Feature changes may be impractical or incompatible with real lending policy. The model’s good/bad labels are historical dataset labels, not a recommendation about a person.",
         "methodology": "A random forest with 300 trees, maximum depth 6 and minimum leaf size 20 is evaluated on 200 held-out samples. Genetic DiCE requested four opposite-class alternatives, allowed credit amount, duration, savings category and purpose to vary, and held age and sex immutable. Global Tree SHAP explained all 200 test samples with 50 background samples; LIME explained three samples with 1,000 perturbations each. The recorded source is the Kaggle version containing Risk labels; the originally configured source did not include them."
-      },
-      "diabetes": {
-        "title": "Pima Diabetes",
-        "topic": "Security & privacy · service tests not run",
-        "question": "How should robustness and privacy be evaluated for a diabetes classification model?",
-        "methods": "Planned: PGD, HopSkipJump, zeroth-order attack, feature squeezing, membership and attribute inference, SHAP and an automatic SHAP fallback.",
-        "interpretation": "The training workflow measured predictive performance on a held-out test set. The service could not load the Keras model, so this run provides no evidence about its attack resistance, defenses, privacy leakage or service explanations.",
-        "limitations": "The test set contains only 79 samples. Complete-case filtering removes rows with zero-coded missing clinical measurements and can introduce selection bias. This is a public dataset experiment, not clinical validation or a diagnostic tool.",
-        "methodology": "The Keras MLP has 32- and 16-unit hidden layers, dropout 0.3 and L2 regularization 0.001. Normalization is adapted on the fit split only. The 392 complete cases are separated into 250 fit, 63 validation and 79 test samples. Early stopping restored the best weights. The recorded Kaggle mirror replaced an inaccessible original source. All eight service entries are SKIPPED because TensorFlow was unavailable; skipped tests have no evaluated sample count. Membership-inference configuration also lacks supported true-membership labels, so it would require additional evidence before any privacy conclusion."
       },
       "telco_churn": {
         "title": "Telco Churn",

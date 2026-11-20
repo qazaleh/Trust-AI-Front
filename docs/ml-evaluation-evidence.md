@@ -7,7 +7,7 @@ Source: `ML-Components-Test-Usecases`, recorded run `20261107T140657_553288Z` (7
 
 ## Service evidence
 
-Each of the 21 individual test JSON files was checked for status and response contents. The latest summary records **13 PASS, 8 SKIPPED**. All eight skipped entries belong to Diabetes and state that TensorFlow is unavailable. Skipped entries contain no evaluated sample count or attack result.
+Each of the 21 individual test JSON files was checked for status and response contents. The latest summary records **13 PASS, 8 SKIPPED**. The public page now covers only the four displayed scenarios and their 13 PASS checks. The omitted scenario and its skipped tests are excluded from the public data module, translations, cards, scenario links and training table. These displayed counts are not presented as totals for the full historical run.
 
 | Public claim | Saved response | Field / scope |
 |---|---|---|
@@ -32,17 +32,16 @@ All attempted historical run/report retrievals returned HTTP 404 (26 retrieval r
 
 ## Training evidence
 
-Training values and split counts were cross-checked between `artifacts_manifest.json`, `reports/training/summary.md` and the five per-scenario training JSON files. Separate split reports and notebook preprocessing were inspected for context.
+Training values and split counts were cross-checked between `artifacts_manifest.json`, `reports/training/summary.md` and the four displayed scenarios’ training JSON files. Separate split reports and notebook preprocessing were inspected for context.
 
 | Scenario | Fit / validation / test | Displayed held-out results (rounded) |
 |---|---|---|
 | Adult | 24,092 / none / 6,023 | Accuracy 80.7%; recall 83.9%; ROC AUC 0.904 |
 | German | 800 / none / 200 | Accuracy 70.0%; recall 81.7%; ROC AUC 0.782 |
-| Diabetes | 250 / 63 / 79 | Accuracy 82.3%; recall 88.5%; ROC AUC 0.899 |
 | Telco | 4,453 / 1,114 / 1,392 | Accuracy 75.6%; recall 79.0%; ROC AUC 0.846 |
 | Insurance | 852 / 213 / 267 | MAE 2,411.44; RMSE 4,141.95; R² 0.876 |
 
-Diabetes complete-case filtering removes rows with zero-coded missing clinical measurements. Its held-out training results do not imply service robustness, privacy protection or clinical validity. The German labeled dataset and Diabetes mirror are the recorded replacement sources; their public Kaggle links are included.
+The German labeled dataset is the recorded replacement source; its public Kaggle link is included. Pima Diabetes data is omitted from the website at the user’s request; original evidence remains in the separate lab checkout.
 
 ## Website verification
 

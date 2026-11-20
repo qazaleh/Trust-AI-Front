@@ -2,7 +2,7 @@
 // Audited against saved per-test response bodies and training reports.
 // PASS describes test execution/checks; it is not a model quality certification.
 // Keep records, response payloads, artifacts and environment details out of this module.
-export const evaluationRun = { date: '2026-11-07', passed: 13, skipped: 8 }
+export const evaluationRun = { date: '2026-11-07' }
 
 export const labScenarios = [
   {
@@ -50,31 +50,6 @@ export const labScenarios = [
       queryCount: 1,
       changedFeatures: [ 'creditAmount', 'duration', 'purpose' ]
     }
-  },
-  {
-    id: 'diabetes',
-    dataset: 'Pima Indians Diabetes',
-    sourceUrl: 'https://www.kaggle.com/datasets/saurabh00007/diabetescsv',
-    model: 'Keras MLP',
-    split: { training: 250, validation: 63, test: 79 },
-    training: {
-      accuracy: 0.8227848101265823,
-      recall: 0.8846153846153846,
-      roc_auc: 0.8991291727140784
-    },
-    passed: 0,
-    skipped: 8,
-    tests: [
-      { id: 'pgd_attack', status: 'SKIPPED', samples: null },
-      { id: 'hopskipjump', status: 'SKIPPED', samples: null },
-      { id: 'zeroth_order', status: 'SKIPPED', samples: null },
-      { id: 'feature_squeezing', status: 'SKIPPED', samples: null },
-      { id: 'membership_inference', status: 'SKIPPED', samples: null },
-      { id: 'attribute_inference', status: 'SKIPPED', samples: null },
-      { id: 'shap_global', status: 'SKIPPED', samples: null },
-      { id: 'shap_fallback_auto', status: 'SKIPPED', samples: null }
-    ],
-    evidence: null
   },
   {
     id: 'telco_churn',

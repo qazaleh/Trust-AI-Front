@@ -869,15 +869,15 @@
   },
   "lab": {
     "title": "ML Değerlendirme Laboratuvarı",
-    "description": "Beş açık veri kümesi, beş karar sorusu. Kayıtlı değerlendirmelerin adalet, model atıfları ve varsayımsal alternatifler hakkında ne gösterdiğini ve kanıtların nerede sınırlı kaldığını inceleyin.",
-    "metaDescription": "Beş açık ML veri kümesinde doğrulanmış laboratuvar değerlendirmeleri: adalet, SHAP atıfları, karşı olgusal örnekler, eğitim sonuçları ve test sınırlılıkları.",
+    "description": "Dört açık veri kümesi, dört karar sorusu. Kayıtlı değerlendirmelerin adalet, model atıfları ve varsayımsal alternatifler hakkında ne gösterdiğini ve kanıtların nerede sınırlı kaldığını inceleyin.",
+    "metaDescription": "Dört açık ML veri kümesinde doğrulanmış laboratuvar değerlendirmeleri: adalet, SHAP atıfları, karşı olgusal örnekler, eğitim sonuçları ve test sınırlılıkları.",
     "eyebrow": "Araştırmadan uygulamaya",
     "explore": "Senaryoları inceleyin",
     "methodLink": "Kanıtları nasıl okumalı?",
     "evidenceTitle": "Bağlamıyla birlikte kanıt",
     "evidenceSubtitle": "Kayıtlı servis çalıştırmasından seçilmiş sonuçlar",
     "evaluated": "Değerlendirme: {date}",
-    "runTitle": "Kayıtlı bir çalışma, belirli sınırlar",
+    "runTitle": "Gösterilen senaryoların kayıtlı testleri",
     "runDescription": "Bunlar açık veri kümeleri üzerinde laboratuvar değerlendirmeleridir; müşteri uygulaması veya klinik doğrulama değildir. PASS, kaydedilen yanıtın testteki çıktı kontrollerini geçtiğini belirtir. Adalet, güvenlik ya da kullanıma uygunluk onayı anlamına gelmez.",
     "pass": "PASS · Geçti",
     "skipped": "SKIPPED · Atlandı",
@@ -954,8 +954,6 @@
     "r2": "R²",
     "noValidation": "Ayrı doğrulama bölümü yok",
     "trainingSplit": "Eğitim / doğrulama / test: {fit} / {validation} / {test}",
-    "diabetesChart": "Eğitim sürecinde ölçülen performans",
-    "diabetesWarning": "Serviste TensorFlow bulunmadığı için {count} servis testinin tamamı çalıştırılmadı. Bu model için kayıtlı saldırı, savunma, gizlilik veya SHAP sonucu yoktur.",
     "readingTitle": "Sonucu sınırlarıyla birlikte okuyun",
     "reading": {
       "attributionTitle": "Atıflar modeli açıklar",
@@ -973,13 +971,6 @@
       "shap_global": "Genel SHAP",
       "lime_local": "Yerel LIME",
       "dice_classification": "DiCE sınıflandırma",
-      "pgd_attack": "PGD saldırısı",
-      "hopskipjump": "HopSkipJump saldırısı",
-      "zeroth_order": "Sıfırıncı derece saldırı",
-      "feature_squeezing": "Özellik sıkıştırma savunması",
-      "membership_inference": "Üyelik çıkarımı",
-      "attribute_inference": "Öznitelik çıkarımı",
-      "shap_fallback_auto": "SHAP otomatik alternatif",
       "shap_local": "Yerel SHAP",
       "dice_regression": "DiCE regresyon",
       "fairness_regression": "Regresyon adaleti"
@@ -1002,15 +993,6 @@
         "interpretation": "DiCE, seçilmiş tek bir sorgu için dört alternatif üretti. Dördündeki bad → good tahmin değişimi de yeniden yüklenen modelle doğrulandı. Bunlar karar sınırını örnekler; kredi onayı vaadi değildir.",
         "limitations": "Özellikle seçilmiş tek bir sorgu tüm başvuru sahiplerini temsil edemez. Özellik değişiklikleri gerçek hayatta uygulanamaz veya kredi politikalarıyla uyumsuz olabilir. Modelin good/bad sınıfları geçmiş veri kümesinin etiketleridir; bir kişi hakkında öneri değildir.",
         "methodology": "300 ağaçlı, en fazla 6 derinlikli ve yaprak başına en az 20 örnekli rastgele orman, ayrılmış 200 test örneği üzerinde değerlendirilir. Genetik DiCE karşı sınıftan dört alternatif istedi; kredi tutarı, vade, birikim kategorisi ve kredi amacının değişmesine izin verdi; yaş ve cinsiyeti sabit tuttu. Genel Tree SHAP, 50 arka plan örneğiyle 200 test örneğinin tamamını; LIME ise her biri için 1.000 pertürbasyonla üç örneği açıkladı. Kayıtlı kaynak, Risk etiketlerini içeren Kaggle sürümüdür; başlangıçta yapılandırılan kaynak bu etiketleri içermiyordu."
-      },
-      "diabetes": {
-        "title": "Pima Diyabet",
-        "topic": "Güvenlik ve gizlilik · servis testleri çalıştırılmadı",
-        "question": "Bir diyabet sınıflandırma modelinin dayanıklılığı ve gizliliği nasıl değerlendirilmelidir?",
-        "methods": "Planlanan: PGD, HopSkipJump, sıfırıncı derece saldırı, özellik sıkıştırma, üyelik ve öznitelik çıkarımı, SHAP ve otomatik SHAP alternatifi.",
-        "interpretation": "Eğitim sürecinde ayrılmış test kümesi üzerinde tahmin performansı ölçüldü. Servis Keras modelini yükleyemediği için bu çalışma; saldırı direnci, savunmalar, gizlilik sızıntısı veya servis açıklamaları hakkında kanıt sunmaz.",
-        "limitations": "Test kümesi yalnızca 79 örnek içerir. Tam kayıt filtrelemesi, eksik klinik ölçümlerin sıfırla kodlandığı satırları çıkarır ve seçilim yanlılığı oluşturabilir. Bu, açık veri kümesi üzerinde bir deneydir; klinik doğrulama veya tanı aracı değildir.",
-        "methodology": "Keras MLP, 32 ve 16 birimli gizli katmanlar, 0,3 dropout ve 0,001 L2 düzenlileştirmesi kullanır. Normalizasyon yalnızca eğitim bölümüne uyarlanır. 392 tam kayıt; 250 eğitim, 63 doğrulama ve 79 test örneğine ayrılır. Erken durdurma en iyi ağırlıkları geri yükledi. Kayıtlı Kaggle kopyası, erişilemeyen özgün kaynağın yerini aldı. Serviste TensorFlow bulunmadığı için sekiz servis girdisinin tamamı SKIPPED durumundadır; atlanan testlerin değerlendirilmiş örnek sayısı yoktur. Üyelik çıkarımı yapılandırmasında desteklenen gerçek üyelik etiketleri de bulunmadığından, gizlilik yorumu için ek kanıt gerekir."
       },
       "telco_churn": {
         "title": "Telco Müşteri Kaybı",
