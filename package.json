@@ -10,7 +10,8 @@
     "prebuild": "npm run compile:i18n",
     "build": "vite build",
     "prepreview": "npm run compile:i18n",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "postbuild": "node scripts/build-localized-pages.mjs"
   },
   "dependencies": {
     "@vueuse/core": "^14.2.1",

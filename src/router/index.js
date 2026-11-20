@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import i18n from '../i18n'
 import { getSavedLocale, normalizeLocale, supportedLocales } from '../lib/site'
+import { updatePageMetadata } from '../lib/pageMetadata'
 import About from '../views/About.vue'
 import AIGovernance from '../views/AIGovernance.vue'
 import Home from '../views/Home.vue'
@@ -9,6 +10,7 @@ import LocaleLayout from '../views/LocaleLayout.vue'
 import ProductTrustAIX from '../views/ProductTrustAIX.vue'
 import ProductTrustAIUX from '../views/ProductTrustAIUX.vue'
 import Research from '../views/Research.vue'
+import UseCases from '../views/UseCases.vue'
 import SolutionReadinessCompliance from '../views/SolutionReadinessCompliance.vue'
 import SolutionRemediationAssurance from '../views/SolutionRemediationAssurance.vue'
 
@@ -51,6 +53,11 @@ const routes = [
         path: 'research-insights',
         name: 'research-insights',
         component: Research,
+      },
+      {
+        path: 'use-cases',
+        name: 'use-cases',
+        component: UseCases,
       },
       {
         path: 'about',
@@ -137,6 +144,17 @@ router.beforeEach((to) => {
   localStorage.setItem('locale', validLocale)
 
   return true
+})
+
+router.afterEach((to, from, failure) => {
+  if (failure) return
+
+  updatePageMetadata({
+    locale: normalizeLocale(to.params.locale),
+    path: to.path,
+    title: to.name === 'use-cases' ? `${i18n.global.t('lab.title')} | TrustAI` : i18n.global.t('pageMetadata.title'),
+    description: i18n.global.t(to.name === 'use-cases' ? 'lab.metaDescription' : 'pageMetadata.description'),
+  })
 })
 
 export default router

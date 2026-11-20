@@ -4,7 +4,7 @@ import { ChevronDown, Globe, Mail, Menu } from 'lucide-vue-next'
 import { RouterLink, useRoute } from 'vue-router'
 
 import { Button } from '@/components/ui/button'
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from '@/components/ui/sheet'
 import { navigationItems, normalizeLocale } from '@/lib/site'
 import { cn } from '@/lib/utils'
 
@@ -86,7 +86,7 @@ function toggleMobileGroup(key) {
         />
       </RouterLink>
 
-      <nav class="hidden items-center gap-1 xl:flex">
+      <nav class="hidden items-center gap-1 xl:flex" :aria-label="$t('common.navigation')">
         <template
           v-for="item in navigationItems"
           :key="item.key"
@@ -96,7 +96,7 @@ function toggleMobileGroup(key) {
             :to="localizeTarget(item.to)"
             :class="
               cn(
-                'inline-flex h-[3.15rem] items-center rounded-full px-4 text-[1.1rem] leading-none font-semibold transition',
+                'inline-flex h-[3.15rem] items-center rounded-full px-3 text-[0.95rem] leading-none font-semibold transition',
                 isItemActive(item)
                   ? 'bg-white text-primary shadow-[0_10px_26px_-20px_rgba(17,33,43,0.22)]'
                   : 'text-white/84 hover:bg-white/12 hover:text-white'
@@ -111,12 +111,17 @@ function toggleMobileGroup(key) {
             class="relative"
             @mouseenter="desktopOpenGroup = item.key"
             @mouseleave="desktopOpenGroup = null"
+            @keydown.esc="desktopOpenGroup = null"
+            @focusout="!$event.currentTarget.contains($event.relatedTarget) && (desktopOpenGroup = null)"
           >
             <button
               type="button"
+              :aria-expanded="desktopOpenGroup === item.key"
+              :aria-controls="`nav-${item.key}`"
+              @click="desktopOpenGroup = desktopOpenGroup === item.key ? null : item.key"
               :class="
                 cn(
-                  'inline-flex h-[3.15rem] items-center gap-2 rounded-full px-4 text-[1.1rem] leading-none font-semibold transition',
+                  'inline-flex h-[3.15rem] items-center gap-2 rounded-full px-3 text-[0.95rem] leading-none font-semibold transition',
                   isItemActive(item) || desktopOpenGroup === item.key
                     ? 'bg-white text-primary shadow-[0_10px_26px_-20px_rgba(17,33,43,0.22)]'
                     : 'text-white/84 hover:bg-white/12 hover:text-white'
@@ -129,6 +134,7 @@ function toggleMobileGroup(key) {
 
             <div
               v-if="desktopOpenGroup === item.key"
+              :id="`nav-${item.key}`"
               class="absolute left-0 top-full z-50 pt-3"
             >
               <div class="min-w-80 rounded-[1.35rem] border border-border/70 bg-card p-2 shadow-[0_26px_50px_-30px_rgba(17,33,43,0.38)]">
@@ -155,7 +161,7 @@ function toggleMobileGroup(key) {
 
       <div class="hidden items-center gap-2 xl:flex">
         <Button as-child variant="outline" class="h-[3.15rem] rounded-full border-white/18 bg-white/8 px-4 text-[0.95rem] font-semibold text-white hover:bg-white/14 hover:text-white">
-          <RouterLink :to="switchLocaleTarget">
+          <RouterLink :to="switchLocaleTarget" :aria-label="$t('common.switchLanguage', { locale: nextLocale.toUpperCase() })">
             <Globe class="size-4" />
             {{ locale.toUpperCase() }}
           </RouterLink>
@@ -178,12 +184,14 @@ function toggleMobileGroup(key) {
 
         <Sheet v-model:open="mobileOpen">
           <SheetTrigger as-child>
-            <Button variant="outline" size="icon" class="rounded-full border-white/18 bg-white/8 text-white hover:bg-white/14 hover:text-white">
+            <Button :aria-label="$t('common.openMenu')" variant="outline" size="icon" class="rounded-full border-white/18 bg-white/8 text-white hover:bg-white/14 hover:text-white">
               <Menu class="size-4" />
             </Button>
           </SheetTrigger>
 
-          <SheetContent side="right" class="w-[310px] border-l border-border bg-card px-0">
+          <SheetContent side="right" class="w-[310px] overflow-y-auto border-l border-border bg-card px-0">
+            <SheetTitle class="sr-only">{{ $t('common.navigation') }}</SheetTitle>
+            <SheetDescription class="sr-only">{{ $t('footer.tagline') }}</SheetDescription>
             <div class="flex h-full flex-col">
               <div class="px-6 pb-4 pt-8">
                 <p class="text-sm font-black uppercase tracking-[0.28em] text-primary">TrustAI</p>
@@ -218,6 +226,8 @@ function toggleMobileGroup(key) {
                   >
                     <button
                       type="button"
+                      :aria-expanded="mobileOpenGroup === item.key"
+                      :aria-controls="`mobile-nav-${item.key}`"
                       class="flex w-full items-center justify-between px-4 py-3 text-sm font-semibold text-foreground"
                       @click="toggleMobileGroup(item.key)"
                     >
@@ -232,6 +242,7 @@ function toggleMobileGroup(key) {
 
                     <div
                       v-if="mobileOpenGroup === item.key"
+                      :id="`mobile-nav-${item.key}`"
                       class="grid gap-1 px-2 pb-2"
                     >
                       <RouterLink

@@ -56,6 +56,12 @@ export const navigationItems = [
   },
   {
     type: 'link',
+    key: 'use-cases',
+    labelKey: 'navbar.useCases',
+    to: { name: 'use-cases' },
+  },
+  {
+    type: 'link',
     key: 'about',
     labelKey: 'navbar.about',
     to: { name: 'about' },
@@ -82,6 +88,7 @@ export const footerNavigationItems = [
     labelKey: 'navbar.researchInsights',
     to: { name: 'research-insights' },
   },
+  { key: 'use-cases', labelKey: 'navbar.useCases', to: { name: 'use-cases' } },
   { key: 'about', labelKey: 'navbar.about', to: { name: 'about' } },
 ]
 
